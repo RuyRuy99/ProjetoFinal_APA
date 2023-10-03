@@ -45,7 +45,7 @@ int main(void){
     }
 
 
-    cout <<" Teste Github Julyanna" <<endl;
+    cout <<" Teste Github" <<endl;
 
     return 0;
 }
