@@ -1,4 +1,6 @@
 Ideia do Algoritmo Guloso
+Alunos: Ruy de Morais e Silva
+        Julyanna Azevedo
 
 função (matriz de custo, demanda, peso, L, n){
 
