@@ -7,8 +7,12 @@ using namespace std;
 
 
 int main(void){
-    //Colocar as variaveis int para cada Q, k ,L ,r
-    vector<int> dados; // Utilizar ponteiro
+    int n;// Número de clientes
+    int k; // Quantidade de veículos
+    int Q; // Quantidade máxima de cada veículo
+    int L; // Quantidade mínima de entrega sem terceirização
+    int r; // Custo de cada veículo
+    vector<int> dados;
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
@@ -20,7 +24,7 @@ int main(void){
 
     //swap(&dados[0], dados.size()); //passando vector por referencia
     //cout <<"Primeiro e ultimo elemento do vetor: " << dados[0] << " " << dados[dados.size()-1] << endl;
-    alguma_coisa(&dados[0], d, p, c);
+    alguma_coisa(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
 
     //print do vetor d
     cout << "VECTOR D FORA DA FUNÇÃO: ";
@@ -45,7 +49,15 @@ int main(void){
     }
 
 
-    cout <<" Teste Github" <<endl;
+    //print das variaveis após a função
+    cout << "n = " << n << endl;
+    cout << "k = " << k << endl;
+    cout << "Q = " << Q << endl;
+    cout << "L = " << L << endl;
+    cout << "r = " << r << endl;
+    
+
+
 
     return 0;
 }

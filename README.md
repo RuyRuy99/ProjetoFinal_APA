@@ -6,8 +6,8 @@ função VRP com Terceirização(matriz de custo, demanda, peso, L, n){
 
     Iniciar uma lista de rotas vazia
     Iniciar uma lista de clientes não atendidos
-
-    for(houver veículos disponiveis):
+    
+    for(houver veículos disponiveis): 
         while(houver capacidade do veiculo):
             Encontre o vizinho mais próximo
             if(a demanda não ultrapassar a capacidade):
