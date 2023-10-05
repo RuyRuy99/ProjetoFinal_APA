@@ -91,13 +91,6 @@ void extrai_dados(int *dados,int* n,int* k, int*Q, int* L, int* r,vector<int>&d,
     */
 }
 
-
-void swap(int *arr, int size){ // AJEITAR O TIPO DO ARGUMENTO DA FUNÇÃO.
-    int aux = arr[0];
-    arr[0] = arr[size-1];
-    arr[size-1] = aux;
-}
-
 void print_array(int *arr, int size){
     for (int i = 0; i < size; i++){
         cout << arr[i] << " ";
