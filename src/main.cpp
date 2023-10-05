@@ -22,15 +22,15 @@ int main(void){
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
 
     //print do vetor d
-    cout << "VECTOR D FORA DA FUNÇÃO: ";
+    cout << "VECTOR D FORA DA FUNCAO: ";
     print_array(&d[0], d.size());
 
     //print do vetor p
-    cout << "VECTOR P FORA DA FUNÇÃO: ";
+    cout << "VECTOR P FORA DA FUNCAO: ";
     print_array(&p[0], p.size());
 
     //print da matriz c
-    cout << "MATRIZ C FORA DA FUNÇÃO: " << endl;
+    cout << "MATRIZ C FORA DA FUNCAO: " << endl;
     for (int i = 0; i < c.size(); i++){
         print_array(&c[i][0], c[i].size());
     }
@@ -42,8 +42,5 @@ int main(void){
     cout << "L = " << L << endl;
     cout << "r = " << r << endl;
     
-
-
-
     return 0;
 }
