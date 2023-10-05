@@ -22,7 +22,7 @@ while(carros tiverem disponíveis):
 			atualiza o result com o custo da aresta(vertice_atual,vizinho mais proximo)
 			remove o cliente da lista de cliente não atendidos
 		SENÃO(a deanda ultrapassar a capaciade atual do carro):
-			adiciona 0 na solução (voltar para o deposito)
+			adiciona 0 na solução (voltar para o deposito)\
 			break(para não ficar em loop)	
 	decrementa um carro
     SE(carro_uso = 1)
