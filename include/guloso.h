@@ -3,6 +3,6 @@
 
 using namespace std;
 
-int guloso(int i, int n, vector<vector<int>> c);
+int guloso(int inicio, int n, vector<vector<int>> c);
 
 #endif

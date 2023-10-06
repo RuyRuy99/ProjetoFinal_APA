@@ -5,15 +5,15 @@
 
 using namespace std;
 
-int guloso(int i, int n, vector<vector<int>> c){
+int guloso(int inicio, int n, vector<vector<int>> c){
+    //começa de 1 pra pular o depósito
+    int viz_prox = c[inicio][1];
 
-    int aux = c[i][0];
-    int viz_prox = 0;
-    
-    for(int j=1; j<n; j++){
-        if(c[i][j] < aux){
-            aux = c[i][j];
-            viz_prox = j;
-    }}
+    for (int i = 1; i < n; i++){
+        if (c[inicio][i] < viz_prox and i != inicio){ //não pode i == inicio pq é 0
+            viz_prox = c[inicio][i];
+        }
+    }
+
     return viz_prox;
 }
