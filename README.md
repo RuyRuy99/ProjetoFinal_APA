@@ -2,28 +2,54 @@ Ideia do Algoritmo Guloso
 Alunos: Ruy de Morais e Silva
         Julyanna Azevedo
 
-Outra alternativa:
+Algoritmo Guloso para Roteamento de Veículos
+O algoritmo apresentado é uma abordagem gulosa para resolver o problema de roteamento de veículos. A ideia principal do algoritmo é sempre escolher o vizinho mais próximo do vértice atual até que todos os vértices sejam visitados ou as condições preestabelecidas sejam atingidas.
 
-solução vazia
-lista com clientes não atendidos(0,0,0,1)
-int atendidos
-result = 0
-vertice_atual = 0(deposito)
-uso_carro = 0
-while(carros tiverem disponíveis):
-	vertice_atual = 0
-	while(lista de clientes não atendidos diferente de vazia):
-		calcula o vizinho mais proximo do vertice atual
-		SE(a demanda não ultrapassar a capacidade do carro):
-            uso_carro = 1
-			adiciona o cliente na rota
-			atualiza capacidade do veículo
-			atualiza o vertice_atual
-			atualiza o result com o custo da aresta(vertice_atual,vizinho mais proximo)
-			remove o cliente da lista de cliente não atendidos
-		SENÃO(a deanda ultrapassar a capaciade atual do carro):
-			adiciona 0 na solução (voltar para o deposito)\
-			break(para não ficar em loop)	
-	decrementa um carro
-    SE(carro_uso = 1)
-	    adiciona o custo do uso do carro(só se o carro foi usado)
+Algoritmo Principal
+O primeiro passo é encontrar o vizinho mais próximo do vértice de início usando a matriz de custos. O pseudocódigo a seguir ilustra este processo:
+
+algoritmo_guloso(inicio, tamanho, matriz):
+	vizinho_maisprox = primeiro do vetor
+
+	for i in range(tamanho):
+		//procura o MENOR PESO (ignora o deposito e ignora i = inicio).
+		if (matriz[inicio][i] < viz_prox and i != inicio ):
+			viz_prox = matriz[inicio][i]
+
+	return viz_prox
+
+Construção da Solução
+Após identificar o vizinho mais próximo, o próximo passo é construir a solução, determinando as rotas que os carros irão seguir. O pseudocódigo abaixo ilustra a construção da solução:
+
+
+buildSolution(inicio, viz_prox, matriz, demanda, k_carros):
+	//Inicio é o deposito
+	//Vizinho mais proximo calculado
+	//Matriz de custo
+	//vetor de demanda
+
+	Solução = []
+	result = 0
+
+	WHILE (k_carros > 0): 
+		rota = [inicio] //rota começa no deposito
+
+		WHILE (capacidade do carro > 0):
+			//verifica a demanda do vizinho mais proximo vetor[demanda[i]]
+			if (demanda[viz_prox] <= capacidade do carro):
+				rota.append(viz_prox)
+				capacidade do carro -= demanda[viz_prox]
+				result += matriz[inicio][viz_prox]
+
+			ELSE: //a demanda do cliente ULTRAPASSAR a capacidade do carro
+				rota.append(inicio)
+				Solução.append(rota)
+				break 
+
+	k_carros -= 1
+
+	return Solução, result
+Nota: As capacidades dos carros devem ser definidas no método buildSolution.
+
+Considerações
+O algoritmo é baseado em uma abordagem gulosa, que pode não garantir a solução ótima em todos os casos. No entanto, é uma estratégia eficaz para obter soluções aproximadas rapidamente.
