@@ -14,6 +14,6 @@ int guloso(int inicio, int n, vector<vector<int>> c){
             viz_prox = c[inicio][i];
         }
     }
-
+    
     return viz_prox;
 }
