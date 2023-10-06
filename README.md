@@ -3,7 +3,7 @@ Alunos: Ruy de Morais e Silva
         Julyanna Azevedo
 
 Algoritmo Guloso para Roteamento de Veículos
-O algoritmo apresentado é uma abordagem gulosa para resolver o problema de roteamento de veículos. A ideia principal do algoritmo é sempre escolher o vizinho mais próximo do vértice atual até que todos os vértices sejam visitados ou as condições preestabelecidas sejam atingidas.
+O algoritmo apresentado é uma abordagem gulosa para resolver o problema de roteamento de veículos com terceirização. A ideia principal do algoritmo é sempre escolher o vizinho mais próximo do vértice atual, ou seja, a aresta de menor valor, até que todos os vértices sejam visitados ou as condições preestabelecidas sejam atingidas.
 
 Algoritmo Principal
 O primeiro passo é encontrar o vizinho mais próximo do vértice de início usando a matriz de custos. O pseudocódigo a seguir ilustra este processo:

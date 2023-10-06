@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int algoritmo_guloso(int n, int k, int r, int Q, vector<vector<int>> c, vector<int> d){
+int buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector<int> d){
 
     vector<int> solucao;
     vector<int> rotas;
@@ -22,7 +22,7 @@ int algoritmo_guloso(int n, int k, int r, int Q, vector<vector<int>> c, vector<i
         int cliente_atual = 0;
         uso_carro = 1;
         while(lst_clientes.empty() == false){
-            //viz_prox = vizinho_prox(cliente_atual,n,c);
+            viz_prox = guloso();
             // Verificar se o cliente está na lista de não atendidos
             if(dem_atual + d[viz_prox] <= Q){
                 solucao.push_back(cliente_atual);
