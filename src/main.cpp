@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "readfile.h"
+#include "guloso.h"
 using namespace std;
 
 
@@ -41,6 +42,12 @@ int main(void){
     cout << "Q = " << Q << endl;
     cout << "L = " << L << endl;
     cout << "r = " << r << endl;
+
+
+    //Teste do guloso em relação ao deposito inicio = 0, n = 6 , c = c
+    int nearest = guloso(0, n, c);
+
+    cout << "O indice do vizinho mais proximo do deposito eh: " << nearest << endl;
     
     return 0;
 }

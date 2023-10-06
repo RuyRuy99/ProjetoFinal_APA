@@ -40,5 +40,5 @@ int algoritmo_guloso(int n, int k, int r, int Q, vector<vector<int>> c, vector<i
 
     // Adicionar a terceirização aqui ou não ??
 
-    return;
+    return 0;
 }
