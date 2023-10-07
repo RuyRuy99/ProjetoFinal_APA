@@ -49,7 +49,22 @@ buildSolution(inicio, viz_prox, matriz, demanda, k_carros):
 	k_carros -= 1
 
 	return Solução, result
+
 Nota: As capacidades dos carros devem ser definidas no método buildSolution.
 
 Considerações
 O algoritmo é baseado em uma abordagem gulosa, que pode não garantir a solução ótima em todos os casos. No entanto, é uma estratégia eficaz para obter soluções aproximadas rapidamente.
+
+BUSCA EXAUSTIVA
+
+Testar todas as possibilidades das estruturas de vizinhança e verificar qual é a melhor
+
+ESTRUTURAS DE VIZINHANÇA
+
+> A primeira deve realizar movimentos envolvendo uma única rota
+
+Swap(Troca de clientes): Consiste em trocar clientes de posição na mesma rota e recalcular o custo
+
+> A segunda deve realizar movimenos envolvedo múltiplas rotas
+
+> A terceira deve ser capaz de lidar com entregas terceirizadas
