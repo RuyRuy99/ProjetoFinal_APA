@@ -3,16 +3,22 @@
 #include <vector>
 #include <string>
 #include "readfile.h"
-#include "guloso.h"
+#include "construtor.h"
 using namespace std;
 
+struct Solution{
+    vector<vector<int>> routes;
+    int totalCost;
+    };
 
-int main(void){
+int main(){
+
     int n;// Número de clientes
     int k; // Quantidade de veículos
     int Q; // Quantidade máxima de cada veículo
     int L; // Quantidade mínima de entrega sem terceirização
     int r; // Custo de cada veículo
+
     vector<int> dados;
     vector<int> d;
     vector<int> p;
@@ -36,6 +42,7 @@ int main(void){
         print_array(&c[i][0], c[i].size());
     }
     cout << endl;
+
     //print das variaveis após a função
     cout << "n = " << n << endl;
     cout << "k = " << k << endl;
@@ -43,11 +50,16 @@ int main(void){
     cout << "L = " << L << endl;
     cout << "r = " << r << endl;
 
-
-    //Teste do guloso em relação ao deposito inicio = 0, n = 6 , c = c
-    int nearest = guloso(0, n, c);
-
-    cout << "O indice do vizinho mais proximo do deposito eh: " << nearest << endl;
+    cout << endl;
     
+    Solution result = buildSolution(n, k, r, Q, c, d, p);
+    cout << "Custo total: " << result.totalCost << endl;
+
+    cout << "Rotas: " << endl;
+    for (int i = 0; i < result.routes.size(); i++){
+        print_array(&result.routes[i][0], result.routes[i].size());
+    }
+    cout << endl;
+
     return 0;
 }

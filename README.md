@@ -2,7 +2,9 @@ Ideia do Algoritmo Guloso
 Alunos: Ruy de Morais e Silva
         Julyanna Azevedo
 
-Algoritmo Guloso para Roteamento de Veículos
+OBS(MAKRFILE): mingw32-make run
+
+Algoritmo Guloso para Roteamento de Veículos com Terceirização
 O algoritmo apresentado é uma abordagem gulosa para resolver o problema de roteamento de veículos com terceirização. A ideia principal do algoritmo é sempre escolher o vizinho mais próximo do vértice atual, ou seja, a aresta de menor valor, até que todos os vértices sejam visitados ou as condições preestabelecidas sejam atingidas.
 
 Algoritmo Principal
@@ -31,8 +33,8 @@ buildSolution(inicio, viz_prox, matriz, demanda, k_carros):
 	Solução = []
 	result = 0
 
-	WHILE (k_carros > 0): 
-		rota = [inicio] //rota começa no deposito
+	for(int k=0;k_carros > 0;k--){
+		rota.append(0); //rota começa no deposito
 
 		WHILE (capacidade do carro > 0):
 			//verifica a demanda do vizinho mais proximo vetor[demanda[i]]
@@ -45,8 +47,7 @@ buildSolution(inicio, viz_prox, matriz, demanda, k_carros):
 				rota.append(inicio)
 				Solução.append(rota)
 				break 
-
-	k_carros -= 1
+	}
 
 	return Solução, result
 
