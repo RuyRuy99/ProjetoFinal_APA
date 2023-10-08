@@ -9,4 +9,4 @@ void extrai_dados(int *dados,int* n,int* k, int*Q, int* L, int* r,vector<int>&d,
 
 void print_array(int *arr, int size);
 
-#endif 
+#endif

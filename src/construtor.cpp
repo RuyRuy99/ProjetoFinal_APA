@@ -5,6 +5,7 @@
 #include <utility>
 #include <tuple>
 #include "guloso.h"
+#include "readfile.h"
 #include "terceirizacao.h"
 
 using namespace std;
@@ -13,8 +14,6 @@ struct Solution{
     vector<vector<int>> routes;
     int totalCost;
 };
-
-
 
 Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector<int> d, vector<int> p) {
     
@@ -33,20 +32,14 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
     
     vector<int> rotas;
 
-    for(;k > 0 or list_clientes.empty() == true ;k--){
+    while(k > 0 and list_clientes.empty() == false){
 
         cout << "k: " << k << endl;
         cout << "Clientes lista: ";
-        for (int i = 0; i < list_clientes.size(); i++){
-            cout << list_clientes[i] << " ";
-        }
-        cout << endl;
+        print_array(&list_clientes[0], list_clientes.size());
 
         cout << "Rota: ";
-        for (int i = 0; i < rotas.size(); i++){
-            cout << rotas[i] << " ";
-        }
-        cout << endl;
+        print_array(&rotas[0], rotas.size());
 
         int capacidade_carro = 0;
         //inicia a rota no deposito
@@ -62,27 +55,19 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
                 rotas.push_back(viz_prox);
                 capacidade_carro += d[viz_prox-1];
                 cliente_atual = viz_prox;
-                // tamanho da lista de clientes
-                cout << "Tamanho da lista de clientes: " << list_clientes.size() << endl;
+                //tamanho da lista de clientes
+                //cout << "Tamanho da lista de clientes: " << list_clientes.size() << endl;
 
                 cout << "Clientes lista: ";
-                for (int i = 0; i < list_clientes.size(); i++){
-                    cout << list_clientes[i] << " ";
-                }
-
+                print_array(&list_clientes[0], list_clientes.size());
 
                 //remove o cliente visitado
-                list_clientes.erase(list_clientes.begin() + viz_idx);
                 //cout << "Removendo indice " << viz_idx << " da lista de clientes" << endl;
-                //show lista clientes
-                cout << "Clientes lista: ";
-                for (int i = 0; i < list_clientes.size(); i++){
-                    cout << list_clientes[i] << " ";
-                }
-                cout << endl;
+                list_clientes.erase(list_clientes.begin() + viz_idx);
                 clintes_att++;
                 
-            }else{
+            }
+            else{
                 break;
             }
         }
@@ -93,78 +78,21 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
         bestSolution.routes.push_back(rotas);
         //limpa a rota
         rotas.clear();
+        k--;
     }
 
     //bestSolution size
     cout << "BestSolution size: " << bestSolution.routes.size() << endl;
 
     int rotaNumber = 1; // contador para identificar o número da rota
-    for (int i = 0; i < bestSolution.routes.size()   ;bestSolution.routes) {
+    for (int i = 0; i < bestSolution.routes.size();i++) {
         cout << "Rota " << rotaNumber << ": ";
-        for (int point : rota) {
-            cout << point << " ";
-        }
+        print_array(&bestSolution.routes[i][0], bestSolution.routes[i].size());
         cout << endl;
         rotaNumber++;
     }
     
-
     //mostra lista clientes
     cout << "Clientes lista: ";
-    for (int i = 0; i < list_clientes.size(); i++){
-        cout << list_clientes[i] << " ";
-    }
-    cout << endl;
+    print_array(&list_clientes[0], list_clientes.size());
 }
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-
-        while(lst_clientes.empty() == false){ //ERRO: lst não tá vazia nunca vai ser true
-            int viz_prox = guloso(cliente_atual, n, c);
-            cout << "viz_prox: " << viz_prox << endl;
-
-            // Verificar se o cliente já foi atendido e a demanda não ultrapassa a capacidade
-            if(lst_clientes[viz_prox-1] == 0 && dem_atual + d[viz_prox-1] <= cap_carro){
-                solucao.push_back(viz_prox); //add cliente na solução
-                bestSolution.totalCost += c[cliente_atual][viz_prox+1];
-                cap_carro -= d[viz_prox-1];
-                cliente_atual = viz_prox;
-                lst_clientes[cliente_atual-1] = 1; // Atualizar a lst de clientes
-                dem_atual += d[viz_prox-1];
-            }else{
-                solucao.push_back(0);
-                bestSolution.totalCost += c[cliente_atual][0];
-                uso_carro = 1;
-                bestSolution.totalCost += dem_atual;
-                break; // Sair do loop
-            }
-        }
-
-        if (uso_carro == 1) {
-            bestSolution.totalCost += r; // só se o carro foi usado
-        }
-
-        cout << "custo: " << bestSolution.totalCost << endl;
-        bestSolution.routes.push_back(solucao);
-    }
-
-    //ERRO: Rever como verificar se o cliente já foi atendido
-    // Adicionar a terceirização aqui
-    int terc = terceirizacao(lst_clientes,bestSolution.totalCost,p);
-    bestSolution.totalCost += terc;
-
-    
-
-
-*/
