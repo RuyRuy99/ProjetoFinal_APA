@@ -56,15 +56,8 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
             //procura o vizinho mais proximo do cliente atual
 
             cout << "cliente_atual: " << cliente_atual << endl;
-
-
-
             
             tie(viz_prox, viz_idx) = guloso(cliente_atual, c, list_clientes);
-
-            
-
-
 
             cout << "viz_prox: " << viz_prox << endl;
             cout << "viz_idx: " << viz_idx << endl;
@@ -95,6 +88,7 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
                 }
                 cout << endl;
                 clintes_att++;
+                
             }else{
                 rotas.push_back(0);
                 cliente_atual = 0;

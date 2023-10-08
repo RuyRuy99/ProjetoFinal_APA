@@ -23,13 +23,13 @@ pair<int, int> guloso(int cliente_atual, vector<vector<int>> c, vector<int> list
     for (int i = 0 ; i < list_clientes.size(); i++){
         cout << "Custo do vertice " << cliente_atual << " para o vertice " << list_clientes[i] << " = " << c[cliente_atual][list_clientes[i]] << endl;
         if (c[cliente_atual][list_clientes[i]] < custo){
-            cout << "Custo do vertice " << cliente_atual << " para o vertice " << list_clientes[i] << " = " << c[cliente_atual][list_clientes[i]] << endl;
             custo = c[cliente_atual][list_clientes[i]];
             viz_prox = list_clientes[i];
             index = i;
-        }
-        else{
-            
+        }else{
+            custo = c[cliente_atual][list_clientes[0]];
+            viz_prox = list_clientes[i];
+            index = i;
         }
     }
 
