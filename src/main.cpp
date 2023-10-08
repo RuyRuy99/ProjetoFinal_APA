@@ -4,6 +4,7 @@
 #include <string>
 #include "readfile.h"
 #include "construtor.h"
+#include "guloso.h"
 using namespace std;
 
 struct Solution{
@@ -53,13 +54,8 @@ int main(){
     cout << endl;
     
     Solution result = buildSolution(n, k, r, Q, c, d, p);
-    cout << "Custo total: " << result.totalCost << endl;
+    //guloso
 
-    cout << "Rotas: " << endl;
-    for (int i = 0; i < result.routes.size(); i++){
-        print_array(&result.routes[i][0], result.routes[i].size());
-    }
-    cout << endl;
 
     return 0;
 }

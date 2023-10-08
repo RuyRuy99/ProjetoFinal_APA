@@ -3,6 +3,6 @@
 
 using namespace std;
 
-int guloso(int cliente_atual, int n, vector<vector<int>> c);
+pair<int, int> guloso(int cliente_atual, int n, vector<vector<int>> c, vector<int> list_clientes);
 
 #endif
