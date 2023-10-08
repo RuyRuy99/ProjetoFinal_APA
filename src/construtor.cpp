@@ -30,7 +30,7 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
     int clintes_att = 0;
     int uso_carro = 0;
     int cliente_atual = 0;
-    int viz_prox,viz_idx;
+    
     vector<int> rotas;
 
     for(;k > 0 or list_clientes.empty() == true ;k--){
@@ -53,17 +53,10 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
         rotas.push_back(0);
 
         while (list_clientes.empty() == false && capacidade_carro <= Q){ //capacidade_carro <= Q
-            //procura o vizinho mais proximo do cliente atual
-
-            cout << "cliente_atual: " << cliente_atual << endl;
             
+            int viz_prox,viz_idx;
             tie(viz_prox, viz_idx) = guloso(cliente_atual, c, list_clientes);
 
-            cout << "viz_prox: " << viz_prox << endl;
-            cout << "viz_idx: " << viz_idx << endl;
-            
-            //cout do if
-            cout << "capacidade_carro + d[viz_prox-1] <= Q: " << capacidade_carro + d[viz_prox-1] << " <= " << Q << endl;
             if(capacidade_carro + d[viz_prox-1] <= Q){
                 cout << "Fui do cliente " << cliente_atual << " para o cliente " << viz_prox << "  demanda: " << d[viz_prox-1] << " Posicao no array " << viz_idx<<endl;
                 rotas.push_back(viz_prox);
@@ -80,7 +73,7 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
 
                 //remove o cliente visitado
                 list_clientes.erase(list_clientes.begin() + viz_idx);
-                cout << "Removendo indice " << viz_idx << " da lista de clientes" << endl;
+                //cout << "Removendo indice " << viz_idx << " da lista de clientes" << endl;
                 //show lista clientes
                 cout << "Clientes lista: ";
                 for (int i = 0; i < list_clientes.size(); i++){
@@ -90,13 +83,38 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
                 clintes_att++;
                 
             }else{
-                rotas.push_back(0);
-                cliente_atual = 0;
-                capacidade_carro = 0;
                 break;
             }
         }
+        rotas.push_back(0);
+        cliente_atual = 0;
+        capacidade_carro = 0;
+        //adiciona a rota na bestSolution
+        bestSolution.routes.push_back(rotas);
+        //limpa a rota
+        rotas.clear();
     }
+
+    //bestSolution size
+    cout << "BestSolution size: " << bestSolution.routes.size() << endl;
+
+    int rotaNumber = 1; // contador para identificar o número da rota
+    for (int i = 0; i < bestSolution.routes.size()   ;bestSolution.routes) {
+        cout << "Rota " << rotaNumber << ": ";
+        for (int point : rota) {
+            cout << point << " ";
+        }
+        cout << endl;
+        rotaNumber++;
+    }
+    
+
+    //mostra lista clientes
+    cout << "Clientes lista: ";
+    for (int i = 0; i < list_clientes.size(); i++){
+        cout << list_clientes[i] << " ";
+    }
+    cout << endl;
 }
 
 

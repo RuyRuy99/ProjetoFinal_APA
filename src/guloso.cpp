@@ -9,11 +9,11 @@ using namespace std;
 pair<int, int> guloso(int cliente_atual, vector<vector<int>> c, vector<int> list_clientes){
     
     int custo = c[cliente_atual][list_clientes[0]];
-    int viz_prox;
-    int index;
-    cout << "Entrou no guloso" << endl;
-    cout << "Tamanho da lista de clientes: " << list_clientes.size() << endl;
-    cout << "Custo atual = " << custo << endl;
+    int viz_prox = list_clientes[0];
+    int index = 0;
+    //cout << "Entrou no guloso" << endl;
+    //cout << "Tamanho da lista de clientes: " << list_clientes.size() << endl;
+    //cout << "Custo atual = " << custo << endl;
 
 
     //   0 ->[1,2,5,6]
@@ -26,10 +26,6 @@ pair<int, int> guloso(int cliente_atual, vector<vector<int>> c, vector<int> list
             custo = c[cliente_atual][list_clientes[i]];
             viz_prox = list_clientes[i];
             index = i;
-        }else{
-            custo = c[cliente_atual][list_clientes[0]];
-            viz_prox = list_clientes[i];
-            index = i;
         }
     }
 
@@ -37,3 +33,13 @@ pair<int, int> guloso(int cliente_atual, vector<vector<int>> c, vector<int> list
 
     return make_pair(viz_prox, index);
 }
+
+
+
+
+//[0,4,3,0]
+//[0,1,5,6,0]
+
+//solucao = [0,4,3,0,0,1,5,6,0]
+//ou
+//solucao = [0,4,3,0]
