@@ -32,7 +32,7 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
     int cliente_atual = 0;
     vector<int> rotas;
 
-    while (k > 0){
+    for(;k > 0;k--){
 
         cout << "k: " << k << endl;
         cout << "Clientes lista: ";
@@ -67,13 +67,11 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
                 list_clientes.erase(list_clientes.begin() + viz_idx);
                 clintes_att++;
             }else{
+                rotas.push_back(0);
+                cliente_atual = 0;
                 break;
             }
         }
-        
-        rotas.push_back(0);
-        cliente_atual = 0;
-        k --;
     }
 }
 
