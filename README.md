@@ -1,4 +1,4 @@
-Ideia do Algoritmo Guloso
+Projeto Final - APA
 Alunos: Ruy de Morais e Silva
         Julyanna Azevedo
 

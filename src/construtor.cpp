@@ -27,17 +27,14 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
         list_clientes.push_back(i);
     }
 
-
-
-
     int clintes_att = 0;
     int uso_carro = 0;
     int cliente_atual = 0;
     vector<int> rotas;
 
-
     while (k > 0){
 
+        cout << "k: " << k << endl;
         cout << "Clientes lista: ";
         for (int i = 0; i < list_clientes.size(); i++){
             cout << list_clientes[i] << " ";
@@ -50,15 +47,11 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
         }
         cout << endl;
 
-
-
-
-
         int capacidade_carro = 0;
         //inicia a rota no deposito
         rotas.push_back(0);
 
-        while (list_clientes.empty() == false){ //capacidade_carro <= Q
+        while (list_clientes.empty() == false && capacidade_carro <= Q){ //capacidade_carro <= Q
             //procura o vizinho mais proximo do cliente atual
             int viz_prox,viz_idx;
             tie(viz_prox, viz_idx) = guloso(cliente_atual, n, c, list_clientes);
@@ -73,10 +66,12 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
                 //remove o cliente visitado
                 list_clientes.erase(list_clientes.begin() + viz_idx);
                 clintes_att++;
+            }else{
+                break;
             }
         }
-        rotas.push_back(0);
         
+        rotas.push_back(0);
         cliente_atual = 0;
         k --;
     }
