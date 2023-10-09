@@ -24,7 +24,7 @@ int main(){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance1.txt");
+    dados = read_file("instance4.txt");
     cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -54,7 +54,6 @@ int main(){
     cout << endl;
     
     Solution result = buildSolution(n, k, r, Q, c, d, p);
-    //guloso
 
 
     return 0;

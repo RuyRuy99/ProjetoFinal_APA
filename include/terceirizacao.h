@@ -3,6 +3,6 @@
 
 using namespace std;
 
-int terceirizacao(vector<int> lst_clientes, int result, vector<int> p);
+int terceirizacao(vector<int> lst_clientes, vector<int> p);
 
 #endif
