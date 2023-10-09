@@ -5,9 +5,11 @@
 
 using namespace std;
 
-int terceirizacao(vector<int> lst_clientes, int result, vector<int> p){
+int terceirizacao(vector<int> lst_clientes, vector<int> p){
 
-    for(int i=0; i<sizeof(lst_clientes); i++){
+    int result = 0;
+
+    for(int i=0; i<lst_clientes.size(); i++){
         result += p[i];
     }
     

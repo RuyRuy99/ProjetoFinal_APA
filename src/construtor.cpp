@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <limits>
 #include <utility>
 #include <tuple>
 #include "guloso.h"
@@ -12,13 +11,12 @@ using namespace std;
 
 struct Solution{
     vector<vector<int>> routes;
-    int totalCost;
+    int totalCost = 0;
 };
 
 Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector<int> d, vector<int> p) {
     
     Solution bestSolution;
-    bestSolution.totalCost = 0;
 
     vector<int> list_clientes;
     //Cria lista de clientes não atendidos
@@ -27,25 +25,18 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
     }
 
     int clintes_att = 0;
-    int uso_carro = 0;
+    bool uso_carro = false;
     int cliente_atual = 0;
     
     vector<int> rotas;
 
     while(k > 0 and list_clientes.empty() == false){
 
-        cout << "k: " << k << endl;
-        cout << "Clientes lista: ";
-        print_array(&list_clientes[0], list_clientes.size());
-
-        cout << "Rota: ";
-        print_array(&rotas[0], rotas.size());
-
         int capacidade_carro = 0;
         //inicia a rota no deposito
         rotas.push_back(0);
 
-        while (list_clientes.empty() == false && capacidade_carro <= Q){ //capacidade_carro <= Q
+        while(list_clientes.empty() == false && capacidade_carro <= Q){ //capacidade_carro <= Q
             
             int viz_prox,viz_idx;
             tie(viz_prox, viz_idx) = guloso(cliente_atual, c, list_clientes);
@@ -53,16 +44,18 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
             if(capacidade_carro + d[viz_prox-1] <= Q){
                 cout << "Fui do cliente " << cliente_atual << " para o cliente " << viz_prox << "  demanda: " << d[viz_prox-1] << " Posicao no array " << viz_idx<<endl;
                 rotas.push_back(viz_prox);
+                bestSolution.totalCost += d[viz_prox-1]; 
+                cout << "best: " << bestSolution.totalCost << "+ demanda: " << d[viz_prox-1];
                 capacidade_carro += d[viz_prox-1];
                 cliente_atual = viz_prox;
+                uso_carro = 1;
+
                 //tamanho da lista de clientes
                 //cout << "Tamanho da lista de clientes: " << list_clientes.size() << endl;
-
                 cout << "Clientes lista: ";
                 print_array(&list_clientes[0], list_clientes.size());
 
                 //remove o cliente visitado
-                //cout << "Removendo indice " << viz_idx << " da lista de clientes" << endl;
                 list_clientes.erase(list_clientes.begin() + viz_idx);
                 clintes_att++;
                 
@@ -71,6 +64,14 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
                 break;
             }
         }
+
+        if(uso_carro == true){
+            bestSolution.totalCost += r;
+            cout << "best+carro: " << bestSolution.totalCost << endl;
+            cout << "r: " << r << endl;
+        }
+
+        bestSolution.totalCost += d[cliente_atual]; 
         rotas.push_back(0);
         cliente_atual = 0;
         capacidade_carro = 0;
@@ -79,6 +80,7 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
         //limpa a rota
         rotas.clear();
         k--;
+        uso_carro = false;
     }
 
     //bestSolution size
@@ -95,4 +97,6 @@ Solution buildSolution(int n, int k, int r, int Q, vector<vector<int>> c, vector
     //mostra lista clientes
     cout << "Clientes lista: ";
     print_array(&list_clientes[0], list_clientes.size());
+
+    cout << "Custo total: " << bestSolution.totalCost << endl;
 }

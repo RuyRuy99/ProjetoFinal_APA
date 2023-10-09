@@ -24,7 +24,7 @@ int main(){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance4.txt");
+    dados = read_file("instance1.txt");
     cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
