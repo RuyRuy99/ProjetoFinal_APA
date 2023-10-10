@@ -69,3 +69,15 @@ Swap(Troca de clientes): Consiste em trocar clientes de posição na mesma rota 
 > A segunda deve realizar movimenos envolvedo múltiplas rotas
 
 > A terceira deve ser capaz de lidar com entregas terceirizadas
+
+Função Upgrade_Routes():
+    Para cada cliente não atendido:
+        Se cliente não atendido[custo] > CustoTerceirizacao:
+            Para cada rota:
+                Para cada cliente na rota:
+                    Se (cliente não atendido[custo] <= CapacidadeRestante(Rota)) and (CustoRota(ClienteRota, ClienteNaoAtendido) < CustoRotaAtual(Rota)):
+                        Troque cliente na rota com cliente não atendido
+                        Atualize a capacidade e o custo da rota
+                        Adicione cliente rota a clientes não atendidos
+                        Remova cliente não atendido de clientes não atendidos
+                        break
