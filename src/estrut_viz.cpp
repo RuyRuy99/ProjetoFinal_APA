@@ -15,3 +15,11 @@ vector<int> swap(){
     // Trocar cliente x por y (x!=y e x!=0 e y!=0)
     return ;
 }
+
+vector<int> buscaExaustiva(){
+    // Um loop de quantidades de trocas possíveis:
+        // Chamar a função swap
+        // Comparar com a anterior e caso tenha melhorada
+        // A nova rota é retornada
+    return; 
+}
