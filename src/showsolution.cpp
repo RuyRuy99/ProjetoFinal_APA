@@ -25,8 +25,4 @@ void printSolution(Solution solucao){
     }
 
     cout << "Custo total: " << solucao.totalCost << endl;
-
-
-
-
 }

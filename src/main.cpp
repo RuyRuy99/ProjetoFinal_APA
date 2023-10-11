@@ -58,8 +58,17 @@ int main(){
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
     printSolution(result);
 
-    
+    /*
+    cout << "Rota 1: ";
+    print_array(&result.routes[0][0], result.routes[0].size());
 
+    swapInside(&result.totalCost,c,result.routes[0], 1, 2);
+    cout << "Depois do swap: ";
+    print_array(&result.routes[0][0], result.routes[0].size());
+    cout<< "Custo atualizado = " << result.totalCost << endl;
+    */
+
+    
     cout << "Rota 2: ";
     print_array(&result.routes[1][0], result.routes[1].size());
 
@@ -67,11 +76,8 @@ int main(){
     cout << "Depois do swap: ";
     print_array(&result.routes[1][0], result.routes[1].size());
     cout<< "Custo atualizado = " << result.totalCost << endl;
-
-    cout << "Rota 1: ";
-    print_array(&result.routes[0][0], result.routes[0].size());
-
-
+    
+    
 
 
     return 0;

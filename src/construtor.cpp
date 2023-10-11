@@ -97,16 +97,12 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
         //update bestSolution
         bestSolution.totalCost += custo_terceirizacao;
         }
-
     //printSolution(bestSolution);
     return bestSolution;
 }
 
 
 /*
-
-
-
 
 int custoRota(){
 
