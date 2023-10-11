@@ -6,6 +6,7 @@
 #include "guloso.h"
 #include "readfile.h"
 #include "terceirizacao.h"
+#include "showsolution.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ struct Solution{
     int totalCost = 0;
 };
 
-Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c, vector<int> d, vector<int> p) {
+Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c, vector<int> d, vector<int> p){
     
     Solution bestSolution;
 
@@ -42,7 +43,7 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
             tie(viz_prox, viz_idx) = guloso(cliente_atual, c, list_clientes);
 
             if(capacidade_carro + d[viz_prox-1] <= Q){
-                cout << "Fui do cliente " << cliente_atual << " para o cliente " << viz_prox << "  demanda: " << d[viz_prox-1] << " Custo:" <<   c[cliente_atual][viz_prox]  << endl;
+                //cout << "Fui do cliente " << cliente_atual << " para o cliente " << viz_prox << "  demanda: " << d[viz_prox-1] << " Custo:" <<   c[cliente_atual][viz_prox]  << endl;
                 rotas.push_back(viz_prox);
 
                 bestSolution.totalCost += c[cliente_atual][viz_prox];
@@ -68,12 +69,12 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
 
         if(uso_carro == 1){
             bestSolution.totalCost += r;
-            cout << "best + carro: " << bestSolution.totalCost << endl;
+            //cout << "best + carro: " << bestSolution.totalCost << endl;
         }
-        cout << "cliente atual: " << cliente_atual << endl;
-        cout << "custo de retorno ao deposito: " << c[cliente_atual][0] << endl;
+        //cout << "cliente atual: " << cliente_atual << endl;
+        //cout << "custo de retorno ao deposito: " << c[cliente_atual][0] << endl;
         bestSolution.totalCost += c[cliente_atual][0];
-        cout << "Custo total da rota: " << bestSolution.totalCost << endl;
+        //cout << "Custo total da rota: " << bestSolution.totalCost << endl;
         rotas.push_back(0);
         cliente_atual = 0;
         capacidade_carro = 0;
@@ -84,21 +85,10 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
         k--;
         uso_carro = 0;
     }
-
-    //bestSolution size
-    cout << "BestSolution size: " << bestSolution.routes.size() << endl;
-
-    int rotaNumber = 1; // contador para identificar o número da rota
-    for (int i = 0; i < bestSolution.routes.size();i++) {
-        cout << "Rota " << rotaNumber << ": ";
-        print_array(&bestSolution.routes[i][0], bestSolution.routes[i].size());
-        cout << endl;
-        rotaNumber++;
-    }
-    
+  
     //mostra lista clientes
-    cout << "Clientes lista: ";
-    print_array(&list_clientes[0], list_clientes.size());
+    //cout << "Clientes lista: ";
+    //print_array(&list_clientes[0], list_clientes.size());
 
     // Verificar se o minimo de entregas foi realizados para poder terceirizar as restantes
     if(clintes_att >= L){
@@ -108,10 +98,15 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
         bestSolution.totalCost += custo_terceirizacao;
         }
 
-    cout << "Custo total: " << bestSolution.totalCost << endl;
-
-    //return bestSolution.totalCost, bestSolution.routes;
+    //printSolution(bestSolution);
+    return bestSolution;
 }
+
+
+/*
+
+
+
 
 int custoRota(){
 
@@ -134,4 +129,6 @@ void Upgrade_Routes(vector<int> lst_clientes, vector<vector<int>> routes, vector
                         Remova cliente não atendido de clientes não atendidos
                         break;
     }
-}}}}}                        
+}}}}}                       
+
+*/
