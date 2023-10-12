@@ -100,31 +100,3 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
     //printSolution(bestSolution);
     return bestSolution;
 }
-
-
-/*
-
-int custoRota(){
-
-}
-
-void Upgrade_Routes(vector<int> lst_clientes, vector<vector<int>> routes, vector<vector<int>> c, vector<int> d, vector<int> p){
-
-    int anterior;
-    int sucessor;
-
-    while(i < lst_clientes.size()){
-        //if(c[lst_clientes[i]][] > p[i]){ // Se cliente não atendido[custo] > CustoTerceirizacao
-        for(int j=0; j < routes.size();j++){ // Percorrendo o vetor de rotas
-            for(int k=0; k < routes[j].size();k++){ // Percorrendo o vetor dentro de rotas
-                if(){ 
-                    if(){
-                        Troque cliente na rota com cliente não atendido
-                        Atualize a capacidade e o custo da rota
-                        Adicione cliente rota a clientes não atendidos
-                        Remova cliente não atendido de clientes não atendidos
-                        break;
-    }
-}}}}}                       
-
-*/

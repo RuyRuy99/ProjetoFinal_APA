@@ -46,7 +46,5 @@ void swapInside(int *total_cost,vector<vector<int>> c,vector<int> &v, int i, int
         int aux = v[i];
         v[i] = v[j];
         v[j] = aux;
-        
-        //cout << "Custo atualizado = " << *total_cost << endl;
     }
 }
