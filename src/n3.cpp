@@ -42,10 +42,13 @@ void Upgrade_Routes(int *total_cost, int cap_atual, int Q, vector<int> lst_clien
 
                 cout << "Custo total depois da adicao: " << *total_cost << endl;
 
-                //swap no vetor
+                //swap no vetor de rotas
                 int aux = v[i];
-                v[i] = cliente_atual;
+                v[i] = cliente_atual; 
+                //swap na lista de clientes não atendidos
                 lst_clientes[j] = aux;
+                cout << "tamanho: " << lst_clientes.size() << endl;
+                cout << "nova lista de clientes: " << lst_clientes[0] << endl;
                 break;
                    
             }
