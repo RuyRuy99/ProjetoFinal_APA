@@ -1,54 +1,54 @@
 #include <iostream>
 #include <vector>
 #include "construtor.h"
-#include "showsolution.h"
 
 using namespace std;
 
-void Upgrade_Routes(int *total_cost, int cap_atual, int Q, vector<int> lst_clientes,vector<int> d,vector<vector<int>> c,vector<int> p, vector<int> &v, int i, int j){
+void Upgrade_Routes(int *total_cost, int cap_atual, int Q, vector<int> lst_clientes,vector<int> d,vector<vector<int>> c,vector<int> p, vector<int> &v, int i){
 
     int ant_i = v[i-1];
     int prox_i = v[i+1];
-    int ant_j = v[j-1];
-    int prox_j = v[j+1];
 
-    for(int k=0; k < lst_clientes.size(); k++){ // Percorrendo a lista de clientes não atendidos
+    for(int j=0; j < lst_clientes.size(); j++){ // Percorrendo a lista de clientes não atendidos
 
-        int cliente_atual = lst_clientes[k];
+        int cliente_atual = lst_clientes[j]; // Cliente da lista de não atendidos
+        cout << "cliente atual: " << cliente_atual << endl;
+        cout << "v[i]: " << v[i] << endl;
+        cout << "d:v[i]: " << d[v[i-1]] << " > p:v[i]: " << p[v[i-1]] << endl;
+        if(d[v[i-1]] > p[v[i-1]]){ // Custo de ida e volta menor que a terceirização
+            
+            cap_atual -= d[v[i-1]];
+            cout << "cap_atual:" << cap_atual + d[cliente_atual-1] << endl;
 
-        if(d[v[i]] < p[v[i]]){ // Custo de ida e volta menor que a terceirização
-            cap_atual -= d[v[i]];
-            if(cap_atual + d[cliente_atual] <= Q){ // Verificando se não ultrapassou a capacidade do carro
+            if(cap_atual + d[cliente_atual-1] <= Q){ // Verificando se não ultrapassou a capacidade do carro
 
-                if (i != j){
+                cout << "Custo total antes de tudo: " << *total_cost << endl;
 
-                    //remove o custo de quem estava ligado em i
-                    *total_cost -= c[ant_i][v[i]];
-                    *total_cost -= c[v[i]][prox_i];
-                    
-                    //remove o custo de quem estava ligado em j
-                    *total_cost -= c[ant_j][v[j]];
-                    *total_cost -= c[v[j]][prox_j];
+                //remove o custo de quem estava ligado em i
+                cout << "Removendo:" << endl;
+                *total_cost -= c[ant_i][v[i]];
+                cout << "De " << ant_i << " para " << v[i] << " -> custo: " << c[ant_i][v[i]] << endl;
+                *total_cost -= c[v[i]][prox_i];
+                cout << "De " << v[i] << " para " << prox_i << " -> custo: " << c[v[i]][prox_i] << endl;
 
-                    //adiciona o novo custo em relação a troca de j
-                    *total_cost += c[ant_i][cliente_atual];
-                    *total_cost += c[cliente_atual][prox_i];
+                cout << "Custo total depois da remocao: " << *total_cost << endl;
 
-                    //adiciona o novo custo em relação a troca de i
-                    *total_cost += c[ant_j][cliente_atual];
-                    *total_cost += c[cliente_atual][prox_j];
+                //adiciona o novo custo em relação a troca de j
+                cout << "Adicionando:" << endl;
+                *total_cost += c[ant_i][cliente_atual];
+                cout << "De " << ant_i << " para " << cliente_atual << " -> custo: " << c[ant_i][cliente_atual] << endl;
+                *total_cost += c[cliente_atual][prox_i];
+                cout << "De " << cliente_atual << " para " << prox_i << " -> custo: " << c[cliente_atual][prox_i] << endl;
 
-                    //se a diferença de J e I == 1 então ele removeu 2 arestas iguais
-                    if (j - i == 1){
-                        *total_cost += c[v[i]][prox_i];
-                    }
+                cout << "Custo total depois da adicao: " << *total_cost << endl;
 
-                    cout << "Custo total = " << *total_cost << endl;
-
-                    //swap no vetor
-                    int aux = v[i];
-                    v[i] = cliente_atual;
-                    lst_clientes[k] = aux;
-                    break;
-        }}
-}}}     
+                //swap no vetor
+                int aux = v[i];
+                v[i] = cliente_atual;
+                lst_clientes[j] = aux;
+                break;
+                   
+            }
+        }
+    }
+}     

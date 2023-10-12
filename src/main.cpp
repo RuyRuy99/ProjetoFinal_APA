@@ -7,6 +7,7 @@
 #include "guloso.h"
 #include "showsolution.h"
 #include "n1.h"
+#include "n3.h"
 using namespace std;
 
 struct Solution{
@@ -66,7 +67,7 @@ int main(){
     cout << "Depois do swap: ";
     print_array(&result.routes[0][0], result.routes[0].size());
     cout<< "Custo atualizado = " << result.totalCost << endl;
-    */
+   
 
     
     cout << "Rota 2: ";
@@ -76,9 +77,20 @@ int main(){
     cout << "Depois do swap: ";
     print_array(&result.routes[1][0], result.routes[1].size());
     cout<< "Custo atualizado = " << result.totalCost << endl;
-    
-    
 
+     */
+
+    vector<int> lst_clientes;
+    lst_clientes.push_back(2);
+
+    cout << "Rota 2: ";
+    print_array(&result.routes[1][0], result.routes[1].size());
+
+    Upgrade_Routes(&result.totalCost, 8, Q, lst_clientes, d, c, p, result.routes[1], 3);
+    cout << "Depois do swap da terceirização: ";
+
+    print_array(&result.routes[1][0], result.routes[1].size());
+    cout<< "Custo atualizado = " << result.totalCost << endl;
 
     return 0;
 }
