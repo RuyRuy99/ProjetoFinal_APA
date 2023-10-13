@@ -3,13 +3,10 @@
 #include "readfile.h"
 #include "construtor.h"
 #include "showsolution.h"
+#include "datatype.h"
 
 using namespace std;
 
-struct Solution{
-    vector<vector<int>> routes;
-    int totalCost = 0;
-};
 
 void swapInside(int *total_cost,vector<vector<int>> c,vector<int> &v, int i, int j){
 

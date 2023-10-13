@@ -3,13 +3,9 @@
 #include "readfile.h"
 #include "construtor.h"
 #include "showsolution.h"
+#include "datatype.h"
 
 using namespace std;
-
-struct Solution{
-    vector<vector<int>> routes;
-    int totalCost;
-};
 
 
 void printSolution(Solution solucao){

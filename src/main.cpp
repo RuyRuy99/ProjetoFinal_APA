@@ -8,14 +8,11 @@
 #include "showsolution.h"
 #include "n1.h"
 #include "n3.h"
+#include "datatype.h"
 using namespace std;
 
-struct Solution{
-    vector<vector<int>> routes;
-    int totalCost;
-};
 
-int main(){
+int main(void){
 
     int n;// Número de clientes
     int k; // Quantidade de veículos

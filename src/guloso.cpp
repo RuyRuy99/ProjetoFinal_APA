@@ -3,6 +3,7 @@
 #include <string>
 #include <utility>
 #include "guloso.h"
+#include "datatype.h"
 
 using namespace std;
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "construtor.h"
+#include "datatype.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ void Swap_Routes(int *total_cost, int cap_atual, int Q, vector<int> lst_clientes
         
         // Define: ant_i, ant_j, prox_i e prox_j
         // Recalcula o custo da solução:
-
+        /*
         *total_cost -= c[ant_i][v[i]];
         *total_cost -= c[v[i]][prox_i];
 
@@ -34,6 +35,6 @@ void Swap_Routes(int *total_cost, int cap_atual, int Q, vector<int> lst_clientes
         int aux2 = v[j];
         v[i] = aux1;
         v[j] = aux2;
-
+        */
 }
 

@@ -7,13 +7,9 @@
 #include "readfile.h"
 #include "terceirizacao.h"
 #include "showsolution.h"
+#include "datatype.h"
 
 using namespace std;
-
-struct Solution{
-    vector<vector<int>> routes;
-    int totalCost = 0;
-};
 
 Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c, vector<int> d, vector<int> p){
     

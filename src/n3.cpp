@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "construtor.h"
+#include "datatype.h"
 
 using namespace std;
 

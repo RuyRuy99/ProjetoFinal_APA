@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "terceirizacao.h"
+#include "datatype.h"
 
 using namespace std;
 
