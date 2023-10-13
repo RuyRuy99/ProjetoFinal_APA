@@ -14,6 +14,8 @@ using namespace std;
 Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c, vector<int> d, vector<int> p){
     
     Solution bestSolution;
+    bestSolution.totalCost = 0;
+
 
     vector<int> list_clientes;
     //Cria lista de clientes não atendidos
@@ -62,6 +64,7 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
                 break;
             }
         }
+        
 
         if(uso_carro == 1){
             bestSolution.totalCost += r;
@@ -81,10 +84,13 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
         k--;
         uso_carro = 0;
     }
-  
-    //mostra lista clientes
-    //cout << "Clientes lista: ";
-    //print_array(&list_clientes[0], list_clientes.size());
+
+
+    //PERCORRE A LISTA DE CLIENTES DANDO PUSH na solução em terceirizados
+    for(int i=0; i<list_clientes.size(); i++){
+        bestSolution.terceirizados.push_back(list_clientes[i]);
+    }
+
 
     // Verificar se o minimo de entregas foi realizados para poder terceirizar as restantes
     if(clintes_att >= L){
@@ -92,7 +98,10 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
         int custo_terceirizacao = terceirizacao(list_clientes, p);
         //update bestSolution
         bestSolution.totalCost += custo_terceirizacao;
-        }
+    }
     //printSolution(bestSolution);
     return bestSolution;
 }
+
+
+

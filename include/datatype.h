@@ -9,7 +9,7 @@ using namespace std;
 
 struct Solution{
     vector<vector<int>> routes;
-    //vector<int> terceirizados;
+    vector<int> terceirizados;
     int totalCost;
 };
 

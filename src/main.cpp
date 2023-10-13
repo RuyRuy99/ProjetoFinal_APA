@@ -24,7 +24,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance1.txt");
+    dados = read_file("instance4.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -75,8 +75,9 @@ int main(void){
     print_array(&result.routes[1][0], result.routes[1].size());
     cout<< "Custo atualizado = " << result.totalCost << endl;
 
-     */
+    */
 
+    /*
     vector<int> lst_clientes;
     lst_clientes.push_back(2);
 

@@ -20,5 +20,8 @@ void printSolution(Solution solucao){
         rotaNumber++;
     }
 
+    cout << "Terceirizados: ";
+    print_array(&solucao.terceirizados[0], solucao.terceirizados.size());
+
     cout << "Custo total: " << solucao.totalCost << endl;
 }
