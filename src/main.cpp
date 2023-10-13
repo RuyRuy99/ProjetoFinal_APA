@@ -87,10 +87,17 @@ int main(){
     print_array(&result.routes[1][0], result.routes[1].size());
 
     Upgrade_Routes(&result.totalCost, 8, Q, lst_clientes, d, c, p, result.routes[1], 3);
-    cout << "Depois do swap da terceirização: ";
+    cout << "Depois do swap da terceirizacaoo: ";
 
     print_array(&result.routes[1][0], result.routes[1].size());
     cout<< "Custo atualizado = " << result.totalCost << endl;
+    /*
+    Precisamos alterar a struct pra incluir:
+        int com numero de rotas
+        vetor com o tamanho de cada rota pra não precisar calcular size toda hora
+        vetor com a demanda total de cada rota pra facilitar no N3
+
+    */
 
     return 0;
 }
