@@ -31,8 +31,9 @@ int main(void){
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
 
     //print do vetor d
-    //cout << "VECTOR D FORA DA FUNCAO: ";
-    //print_array(&d[0], d.size());
+    cout << "\n" << endl;
+    cout << "VECTOR D FORA DA FUNCAO: ";
+    print_array(&d[0], d.size());
 
     //print do vetor p
     //cout << "VECTOR P FORA DA FUNCAO: ";
@@ -99,13 +100,10 @@ int main(void){
     */
     cout<< "\n";
 
-    Swap_Routes(&result.totalCost, 0, Q, d, c, p, result.routes[0],result.routes[1]);
+    Swap_Routes(&result.totalCost, Q, d, c, p, result.routes[0], result.routes[1], result.rota_dem);
     printSolution(result);
 
-    Swap_Routes(&result.totalCost, 0, Q, d, c, p, result.routes[0],result.routes[1]);
-    printSolution(result);
-
-    Swap_Routes(&result.totalCost, 0, Q, d, c, p, result.routes[0],result.routes[1]);
+    Swap_Routes(&result.totalCost, Q, d, c, p, result.routes[0], result.routes[1], result.rota_dem);
     printSolution(result);
 
     return 0;
