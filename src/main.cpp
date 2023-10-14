@@ -9,6 +9,7 @@
 #include "n1.h"
 #include "n2.h"
 #include "n3.h"
+#include "n3_1.h"
 #include "datatype.h"
 using namespace std;
 
@@ -99,8 +100,8 @@ int main(void){
 
     */
     cout<< "\n";
-
-    Swap_Routes(&result.totalCost, Q, d, c, p, result.routes[1], result.routes[2], result.rota_dem);
+    /*
+    Swap_Routes(&result.totalCost, 0, Q, d, c, p, result.routes[0],result.routes[1]);
     printSolution(result);
 
     Swap_Routes(&result.totalCost, Q, d, c, p, result.routes[1], result.routes[0], result.rota_dem);
@@ -108,6 +109,11 @@ int main(void){
 
     Swap_Routes(&result.totalCost, Q, d, c, p, result.routes[0], result.routes[2], result.rota_dem);
     printSolution(result);
+    */
+   
+    melhora_rotas(Q, L, &result.total_clientes,&result.totalCost, d, p, c, result.routes[1], 3, result.terceirizados, &result.rota_dem[1]);
+    printSolution(result);
+
 
     return 0;
 }

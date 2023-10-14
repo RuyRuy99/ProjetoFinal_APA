@@ -45,3 +45,4 @@ void swapInside(int *total_cost, vector<vector<int>> c, vector<int> &v, int i, i
         v[j] = aux;
     }
 }
+

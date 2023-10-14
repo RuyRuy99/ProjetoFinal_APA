@@ -12,6 +12,9 @@ struct Solution{
     vector<int> terceirizados;
     vector<int> rota_dem;
     int totalCost;
+    int total_clientes;
 };
+
+
 
 #endif
