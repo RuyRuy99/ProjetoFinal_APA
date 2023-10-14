@@ -8,7 +8,7 @@
 using namespace std;
 
 
-void swapInside(int *total_cost,vector<vector<int>> c,vector<int> &v, int i, int j){
+void swapInside(int *total_cost, vector<vector<int>> c, vector<int> &v, int i, int j){
 
     int ant_i = v[i-1];
     int prox_i = v[i+1];
