@@ -7,15 +7,34 @@
 
 using namespace std;
 
-void Swap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<int>> c,vector<int> p, vector<int> &v1, vector<int> &v2, vector<int> &d_routs){
+int findMaxCostVertex(vector<int> &rota, vector<vector<int>> c){
+    int vertice;
+    int cost = 0;
+    for (int i = 1; i < rota.size()-1; i++){
+        //cout << "Custo da aresta: (" << rota[i-1] << ","<< rota[i] << ")" << " = " << c[rota[i-1]][rota[i]] << endl;
+        //cout << "Custo da aresta: (" << rota[i] << ","<< rota[i+1] << ")" << " = " << c[rota[i]][rota[i+1]] << endl;
 
+        if(c[rota[i-1]][rota[i]] + c[rota[i]][rota[i+1]] > cost){
+            cost = c[rota[i-1]][rota[i]] + c[rota[i]][rota[i+1]];
+            vertice = i;
+        }
+    }
+
+    cout << "FINAL DA CHAMDA\n" << endl;
+    return vertice;
+};
+
+void Swap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<int>> c,vector<int> p, vector<int> &v1, vector<int> &v2, vector<int> &d_routs){
+    
+    /*
     auto seed = chrono::system_clock::now().time_since_epoch().count();
     mt19937 generator(seed);
     uniform_int_distribution<int> distribution1(1, v1.size() - 2);
     uniform_int_distribution<int> distribution2(1, v2.size() - 2);
-    
-    int n1 = distribution1(generator);
-    int n2 = distribution2(generator);
+    */
+
+    int n1 = findMaxCostVertex(v1, c);
+    int n2 = findMaxCostVertex(v2, c);
 
     int cliente1 = v1[n1];
     int cliente2 = v2[n2];
@@ -23,6 +42,10 @@ void Swap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<int>> c,vec
     int prox_i = v1[n1+1];
     int ant_j = v2[n2-1];
     int prox_j = v2[n2+1];
+
+    cout << "\n" << endl;
+    cout << "O cliente mais caro da rota 1 eh: " << cliente1 << endl;
+    cout << "O cliente mais caro da rota 2 eh: " << cliente2 << endl;
 
     cout << "\n" << endl;
     cout << "A DEMANDA DE CADA CARRO EH: " << Q << endl;
@@ -83,6 +106,7 @@ void Swap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<int>> c,vec
         cout << "FAZENDO SWAP DO " << cliente1 << " COM O CLIENTE: " << cliente2 << endl;
         cout << "O CUSTO ANTES DO SWAP EH: " << *total_cost << endl;
         
+        /*
         cout << "\n" << endl;
         cout << "Custo da aresta (" << ant_i << "," << cliente1 << ") = " << c[ant_i][cliente1] << endl;
         cout << "Custo da aresta (" << cliente1 << "," << prox_i << ") = " << c[cliente1][prox_i] << endl;
@@ -98,7 +122,7 @@ void Swap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<int>> c,vec
         cout << "\n" << endl;
         cout << "Custo da nova aresta (" << ant_j << "," << cliente1 << ") = " << c[ant_j][cliente1] << endl;
         cout << "Custo da nova aresta (" << cliente1 << "," << prox_j << ") = " << c[cliente1][prox_j] << endl;
-
+        */
         *total_cost -= c[ant_i][cliente1];
         *total_cost -= c[cliente1][prox_i];
 
@@ -129,5 +153,4 @@ void Swap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<int>> c,vec
     else{
         return;
     }
-
 }

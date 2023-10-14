@@ -25,7 +25,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance1.txt");
+    dados = read_file("instance2.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -100,10 +100,13 @@ int main(void){
     */
     cout<< "\n";
 
-    Swap_Routes(&result.totalCost, Q, d, c, p, result.routes[0], result.routes[1], result.rota_dem);
+    Swap_Routes(&result.totalCost, Q, d, c, p, result.routes[1], result.routes[2], result.rota_dem);
     printSolution(result);
 
-    Swap_Routes(&result.totalCost, Q, d, c, p, result.routes[0], result.routes[1], result.rota_dem);
+    Swap_Routes(&result.totalCost, Q, d, c, p, result.routes[1], result.routes[0], result.rota_dem);
+    printSolution(result);
+
+    Swap_Routes(&result.totalCost, Q, d, c, p, result.routes[0], result.routes[2], result.rota_dem);
     printSolution(result);
 
     return 0;
