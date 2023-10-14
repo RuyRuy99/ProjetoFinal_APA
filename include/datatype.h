@@ -14,4 +14,6 @@ struct Solution{
     int totalCost;
 };
 
+
+
 #endif
