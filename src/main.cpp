@@ -7,6 +7,7 @@
 #include "guloso.h"
 #include "showsolution.h"
 #include "n1.h"
+#include "n2.h"
 #include "n3.h"
 #include "datatype.h"
 using namespace std;
@@ -24,7 +25,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance4.txt");
+    dados = read_file("instance2.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -96,6 +97,16 @@ int main(void){
         vetor com a demanda total de cada rota pra facilitar no N3
 
     */
+    cout<< "\n\n\n"<< endl;
+
+    Swap_Routes(&result.totalCost, 0, Q, d, c, p, result.routes[0],result.routes[1]);
+    printSolution(result);
+
+    Swap_Routes(&result.totalCost, 0, Q, d, c, p, result.routes[0],result.routes[1]);
+    printSolution(result);
+
+    Swap_Routes(&result.totalCost, 0, Q, d, c, p, result.routes[0],result.routes[1]);
+    printSolution(result);
 
     return 0;
 }
