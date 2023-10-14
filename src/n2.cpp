@@ -21,7 +21,7 @@ void Swap_Routes(int *total_cost, int cap_atual, int Q, vector<int> d,vector<vec
     int cliente1 = v1[n1];
     int cliente2 = v2[n2];
 
-    /* Imprimir o número aleatório e o elemento selecionado
+    /* Imprimir o nï¿½mero aleatï¿½rio e o elemento selecionado
     cout << "Index aleatorio 1: " << n1 << endl;
     cout << "Cliente Selecionado 1: " << cliente1 << endl;
     cout << "\n" << endl;
@@ -42,23 +42,23 @@ void Swap_Routes(int *total_cost, int cap_atual, int Q, vector<int> d,vector<vec
     cout << "O Cliente proximo a " << cliente2 << " eh: " << prox_j << endl;
     */
 
-    cout << "\n" << endl;
+    cout << "\n";
     cout << "FAZENDO SWAP DO " << cliente1 << " COM O CLIENTE: " << cliente2 << endl;
     cout << "O CUSTO ANTES DO SWAP EH: " << *total_cost << endl;
     
-    cout << "\n" << endl;
+    cout << "\n";
     cout << "Custo da aresta (" << ant_i << "," << cliente1 << ") = " << c[ant_i][cliente1] << endl;
     cout << "Custo da aresta (" << cliente1 << "," << prox_i << ") = " << c[cliente1][prox_i] << endl;
 
-    cout << "\n" << endl;
+    cout << "\n";
     cout << "Custo da aresta (" << ant_j << "," << cliente2 << ") = " << c[ant_j][cliente2] << endl;
     cout << "Custo da aresta (" << cliente2 << "," << prox_j << ") = " << c[cliente2][prox_j] << endl;
     
-    cout << "\n" << endl;
+    cout << "\n";
     cout << "Custo da nova aresta (" << ant_i << "," << cliente2 << ") = " << c[ant_i][cliente2] << endl;
     cout << "Custo da nova aresta (" << cliente2 << "," << prox_i << ") = " << c[cliente2][prox_i] << endl;
 
-    cout << "\n" << endl;
+    cout << "\n";
     cout << "Custo da nova aresta (" << ant_j << "," << cliente1 << ") = " << c[ant_j][cliente1] << endl;
     cout << "Custo da nova aresta (" << cliente1 << "," << prox_j << ") = " << c[cliente1][prox_j] << endl;
 
@@ -79,9 +79,9 @@ void Swap_Routes(int *total_cost, int cap_atual, int Q, vector<int> d,vector<vec
     v1[n1] = aux2;
     v2[n2] = aux1;
 
-    cout << "\n" << endl;
+    cout << "\n";
     cout << "O CUSTO DEPOIS DO SWAP EH: " << *total_cost << endl;
-    cout << "\n" << endl;
+    cout << "\n";
     // i Ã© o vertice correspondente ao routes[0][i]
     // j Ã© o vertice correspondente ao routes[1][j]
 

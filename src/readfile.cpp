@@ -28,45 +28,26 @@ vector<int> read_file(const char* file){
 }
 
 void extrai_dados(int *dados,int* n,int* k, int*Q, int* L, int* r,vector<int>&d, vector<int>&p, vector<vector<int>> &c){ // Se não colocar o "&" não passa o vector por referencia e ele n aplica as alteraçõoes no vetor d.
+    
     *n = dados[0]; // Número de clientes
     *k = dados[1]; // Quantidade de veículos
     *Q = dados[2]; // Quantidade máxima de cada veículo
     *L = dados[3]; // Quantidade mínima de entrega sem terceirização
     *r = dados[4]; // Custo de cada veículo
 
+    int aux = 5;
 
     // Array de demandas de cada cliente
-    int aux = 5;
-    //Neste caso vamos passar o vector por referencia e preencher
     for (int i = 0; i < *n; i++){
         d.push_back(dados[aux]);
         aux++;
     }
-
-    /*
-    //show the vector d
-    cout << "VETOR D DENTRO DA FUNÇÃO: ";
-    for (int i = 0; i < d.size(); i++){
-        cout << d[i] << " ";
-    }
-    cout << endl;
-    */
-
-
 
     // Array de custo da terceirização
     for (int i = 0; i < (*n); i++){
         p.push_back(dados[aux]);
         aux++;
     }
-    /*
-    //show the vector p
-    cout << "VETOR P DENTRO DA FUNÇÃO: ";
-    for (int i = 0; i < p.size(); i++){
-        cout << p[i] << " ";
-    }
-    cout << endl;
-    */
 
     // Matriz de custo das arestas
     for (int i = 0; i < (*n)+1; i++){
@@ -74,26 +55,12 @@ void extrai_dados(int *dados,int* n,int* k, int*Q, int* L, int* r,vector<int>&d,
         for (int j = 0; j < (*n)+1; j++){
             linha.push_back(dados[aux]);
             aux++;
-        }
-        c.push_back(linha);
+        }c.push_back(linha);
     }
-
-    /*
-    //Matriz dentro da função
-    cout << "MATRIZ C DENTRO DA FUNÇÃO: " << endl;
-    for (int i = 0; i < c.size(); i++){
-        for (int j = 0; j < c[i].size(); j++){
-            cout << c[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << endl;
-    */
 }
 
 void print_array(int *arr, int size){
     for (int i = 0; i < size; i++){
         cout << arr[i] << " ";
-    }
-    cout << endl;
+    }cout << endl;
 }

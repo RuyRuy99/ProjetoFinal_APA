@@ -25,7 +25,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance2.txt");
+    dados = read_file("instance1.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -97,7 +97,7 @@ int main(void){
         vetor com a demanda total de cada rota pra facilitar no N3
 
     */
-    cout<< "\n\n\n"<< endl;
+    cout<< "\n";
 
     Swap_Routes(&result.totalCost, 0, Q, d, c, p, result.routes[0],result.routes[1]);
     printSolution(result);

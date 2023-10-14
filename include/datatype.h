@@ -1,4 +1,3 @@
-// datatype.h
 #ifndef DATATYPE_H
 #define DATATYPE_H
 
@@ -7,6 +6,7 @@
 
 using namespace std;
 
+// Definição da struct
 struct Solution{
     vector<vector<int>> routes;
     vector<int> terceirizados;
@@ -14,4 +14,4 @@ struct Solution{
     int totalCost;
 };
 
-#endif // DATATYPE_H
+#endif
