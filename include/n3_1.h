@@ -4,5 +4,7 @@
 
 using namespace std;
 
-void melhora_rotas(int Q , int *total_cost, vector<int> d, vector<int> p, vector<vector<int>> c, vector<int> &v, int i, vector<int> &terc,int rota_demanda);
+void melhora_rotas(int Q ,int L, int *clientes_att,int *total_cost, vector<int> d, vector<int> p, vector<vector<int>> c, vector<int> &v, int i, vector<int> &terc,int *rota_demanda);
+
+
 #endif

@@ -9,6 +9,7 @@
 #include "n1.h"
 #include "n2.h"
 #include "n3.h"
+#include "n3_1.h"
 #include "datatype.h"
 using namespace std;
 
@@ -25,7 +26,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance1.txt");
+    dados = read_file("instance2.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -97,8 +98,7 @@ int main(void){
         vetor com a demanda total de cada rota pra facilitar no N3
 
     */
-    cout<< "\n";
-
+    /*
     Swap_Routes(&result.totalCost, 0, Q, d, c, p, result.routes[0],result.routes[1]);
     printSolution(result);
 
@@ -107,6 +107,11 @@ int main(void){
 
     Swap_Routes(&result.totalCost, 0, Q, d, c, p, result.routes[0],result.routes[1]);
     printSolution(result);
+    */
+   
+    melhora_rotas(Q, L, &result.total_clientes,&result.totalCost, d, p, c, result.routes[1], 3, result.terceirizados, &result.rota_dem[1]);
+    printSolution(result);
+
 
     return 0;
 }
