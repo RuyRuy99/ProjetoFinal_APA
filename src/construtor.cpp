@@ -24,14 +24,15 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
     }
 
     int clintes_att = 0;
-    int uso_carro = 0;
     int cliente_atual = 0;
+    int uso_carro = 0;
     
     vector<int> rotas;
 
     while(k > 0 and list_clientes.empty() == false){
 
         int capacidade_carro = 0;
+        int demanda_rota = 0;
         //inicia a rota no deposito
         rotas.push_back(0);
 
@@ -49,7 +50,7 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
                 capacidade_carro += d[viz_prox-1];
                 cliente_atual = viz_prox;
                 uso_carro = 1;
-
+                demanda_rota += d[viz_prox-1];
                 //tamanho da lista de clientes
                 //cout << "Tamanho da lista de clientes: " << list_clientes.size() << endl;
                 //cout << "Clientes lista: ";
@@ -65,6 +66,7 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
             }
         }
         
+        bestSolution.rota_dem.push_back(demanda_rota);
 
         if(uso_carro == 1){
             bestSolution.totalCost += r;
