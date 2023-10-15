@@ -26,14 +26,13 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance2.txt");
+    dados = read_file("instance1.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
 
     //print do vetor d
-    cout << "\n" << endl;
-    cout << "VECTOR D FORA DA FUNCAO: ";
+    //cout << "VECTOR D FORA DA FUNCAO: ";
     print_array(&d[0], d.size());
 
     //print do vetor p
@@ -104,7 +103,7 @@ int main(void){
     //printSolution(result);
     
     
-    melhora_rotas(Q, L, &result.terc_size ,&result.total_clientes,&result.totalCost, d, p, c, result.routes[1], 3, result.terceirizados, &result.rota_dem[1]);
+    melhora_rotas(Q, L , d, p , c, result.routes[1], result.terceirizados, 3, &result.terc_size, &result.total_clientes, &result.totalCost, &result.rota_dem[1]);
     printSolution(result);
     
 
