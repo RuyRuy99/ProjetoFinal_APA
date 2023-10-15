@@ -76,6 +76,11 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
     //adiciona a quantidade total de clientes atendidos na solução
     bestSolution.total_clientes = clintes_att;
 
+    //adiciona o tamanho do vetor de terceirizados
+    int terc_size = n - clintes_att;
+    cout << "Tamanho da lista de tercerizados = " << terc_size << endl;
+    bestSolution.terc_size = terc_size;
+
     // Percorre a lista de clientes não atendidos e dá push na solução em terceirizados
     for(int i=0; i<list_clientes.size(); i++){
         bestSolution.terceirizados.push_back(list_clientes[i]);
@@ -83,7 +88,7 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
 
 
 
-
+    //   -- TERCEIRIZAÇÃO --
     // Verificar se o minimo de entregas foi realizados para poder terceirizar as restantes
     if(clintes_att >= L){
 

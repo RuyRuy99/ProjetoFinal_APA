@@ -25,6 +25,8 @@ void printSolution(Solution solucao){
 
     cout <<"Total de clientes atendidos: " << solucao.total_clientes << endl;
 
+    //cout <<"Tamanho da lista de tercerizados: " << solucao.terc_size << endl;
+
     cout << "Custo total: " << solucao.totalCost << endl;
     cout <<endl;
 }

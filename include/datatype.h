@@ -13,6 +13,7 @@ struct Solution{
     vector<int> rota_dem;
     int totalCost;
     int total_clientes;
+    int terc_size;
 };
 
 
