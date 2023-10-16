@@ -33,7 +33,7 @@ int main(void){
 
     //print do vetor d
     //cout << "VECTOR D FORA DA FUNCAO: ";
-    print_array(&d[0], d.size());
+    //print_array(&d[0], d.size());
 
     //print do vetor p
     //cout << "VECTOR P FORA DA FUNCAO: ";
@@ -56,19 +56,30 @@ int main(void){
     //cout << endl;
     
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
+    //printSolution(result);
+
+
+
+
+    //PERTURBANDOA  ROTA 1 PARA TESTAR
+    cout << "Custo inicial = " << result.totalCost << endl;
+    int custo_aux = custoSwap(&result.totalCost, c, result.routes[0], 2, 1);
+    result.totalCost = custo_aux;
+    //faz o swap
+    swapInside(result.routes[0], 2, 1);
+    cout << "Custo auxiliar = " << custo_aux << endl;
     printSolution(result);
 
-    /*
-    cout << "Rota 1: ";
-    print_array(&result.routes[0][0], result.routes[0].size());
 
-    swapInside(&result.totalCost,c,result.routes[0], 1, 2);
-    cout << "Depois do swap: ";
-    print_array(&result.routes[0][0], result.routes[0].size());
-    cout<< "Custo atualizado = " << result.totalCost << endl;
-   
 
     
+    //busca exaustiva N1 para cada rota
+    buscaExaustivaN1(c, result.routes, &result.totalCost);
+    printSolution(result);
+    
+   
+
+    /*
     cout << "Rota 2: ";
     print_array(&result.routes[1][0], result.routes[1].size());
 
@@ -76,8 +87,8 @@ int main(void){
     cout << "Depois do swap: ";
     print_array(&result.routes[1][0], result.routes[1].size());
     cout<< "Custo atualizado = " << result.totalCost << endl;
-
     */
+
 
     /*
     vector<int> lst_clientes;
@@ -103,8 +114,8 @@ int main(void){
     //printSolution(result);
     
     
-    melhora_rotas(Q, L , d, p , c, result.routes[1], result.terceirizados, 3, &result.terc_size, &result.total_clientes, &result.totalCost, &result.rota_dem[1]);
-    printSolution(result);
+    //melhora_rotas(Q, L , d, p , c, result.routes[1], result.terceirizados, 3, &result.terc_size, &result.total_clientes, &result.totalCost, &result.rota_dem[1]);
+    //printSolution(result);
     
 
     return 0;

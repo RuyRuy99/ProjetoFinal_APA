@@ -16,7 +16,7 @@ void printSolution(Solution solucao){
     for (int i = 0; i < solucao.routes.size();i++) {
         cout << "Rota " << rotaNumber << ": ";
         print_array(&solucao.routes[i][0], solucao.routes[i].size());
-        cout << "Demanda da rota: " << solucao.rota_dem[i] << endl;
+        //cout << "Demanda da rota: " << solucao.rota_dem[i] << endl;
         rotaNumber++;
     }
 

@@ -78,7 +78,6 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
 
     //adiciona o tamanho do vetor de terceirizados
     int terc_size = n - clintes_att;
-    cout << "Tamanho da lista de tercerizados = " << terc_size << endl;
     bestSolution.terc_size = terc_size;
 
     // Percorre a lista de clientes não atendidos e dá push na solução em terceirizados
