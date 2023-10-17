@@ -9,7 +9,6 @@
 #include "n1.h"
 #include "n2.h"
 #include "n3.h"
-#include "n3_1.h"
 #include "datatype.h"
 using namespace std;
 
@@ -26,7 +25,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance4.txt");
+    dados = read_file("instance1.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -110,6 +109,7 @@ int main(void){
 
     */
     
+    /*
     printSolution(result);
 
     for (int i = 0; i < result.rota_dem.size(); i++){
@@ -123,9 +123,11 @@ int main(void){
     for (int i = 0; i < result.rota_dem.size(); i++){
         cout << "Rota " << i << " tem demanda " << result.rota_dem[i] << endl;
     }
+
+    */
     
-    //melhora_rotas(Q, L , d, p , c, result.routes[1], result.terceirizados, 3, &result.terc_size, &result.total_clientes, &result.totalCost, &result.rota_dem[1]);
-    //printSolution(result);
+    melhora_rotas(Q, L , d, p , c, result.routes[1], result.terceirizados, 3, &result.terc_size, &result.total_clientes, &result.totalCost, &result.rota_dem[1]);
+    printSolution(result);
 
     return 0;
 }

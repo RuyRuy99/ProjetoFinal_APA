@@ -1,10 +1,9 @@
-#ifndef N2_H_
-#define N2_H_
+#ifndef N3_1_H_
+#define N3_1_H_
 #include <vector>
 
 using namespace std;
 
-// Estutura de vizinhança para swap de clientes entre rota e terceirização
-void Upgrade_Routes(int *total_cost, int cap_atual, int Q, vector<int> lst_clientes,vector<int> d,vector<vector<int>> c,vector<int> p, vector<int> &v, int i);
+void melhora_rotas(int Q ,int L, vector<int> d,vector<int> p, vector<vector<int>> c, vector<int> &v, vector<int> &terc, int i, int *terc_size,int *clientes_att,int *total_cost,int *rota_demanda);
 
 #endif

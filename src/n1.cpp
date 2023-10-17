@@ -84,12 +84,10 @@ void buscaExaustivaN1(vector<vector<int>> c, vector<vector<int>> &rotas, int *to
     int num_rotas = rotas.size();
     cout << "Numero de rotas = " << num_rotas << endl;
 
-
     for (int k = 0; k < num_rotas; k++){
         cout << "ROTA " << k+1 << endl;
-        for (int i=1 ; i < rotas[k].size()-1; i++){
-
-            for (int j =1; j < rotas[k].size()-1; j++){
+        for (int i = 1 ; i < rotas[k].size()-1; i++){
+            for (int j = 1; j < rotas[k].size()-1; j++){
 
                 if (i == j){
                     continue;
@@ -101,7 +99,7 @@ void buscaExaustivaN1(vector<vector<int>> c, vector<vector<int>> &rotas, int *to
 
                 int novo_custo = custoSwap(&custo_atual, c, rotas[k], i, j);
                 cout << "Novo custo = " << novo_custo << endl;
-                cout <<endl;
+                cout << endl;
 
                 if (novo_custo < custo_atual){
                     swapInside(rotas[k], i, j);
