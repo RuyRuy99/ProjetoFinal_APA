@@ -73,3 +73,24 @@ void melhora_rotas(int Q ,int L, vector<int> d,vector<int> p, vector<vector<int>
         }
     }
 }
+
+void buscaExaustivaN3(int Q ,int L, int *total_cost, int *terc_size, int *total_clientes, vector<int> d, vector<int> p, vector<vector<int>> c, vector<vector<int>> &routes, vector<int> &terceirizados, vector<int> &rota_dem){
+    
+    int c = 0;
+    while(c < *terc_size){ // Percorre a lista de clientes não atendidos
+
+        for (int i = 0; i < routes.size(); i++){ // Percorrer os vetores da rota
+            for (int j = 0; j < routes[i].size(); j++){
+                if(i != j){
+
+                    melhora_rotas(Q, L, d, p, c, routes[i], terceirizados, j, terc_size, total_clientes, total_cost, &rota_dem[i]);
+
+                    cout << "\n";
+                    cout << "CUSTO ATUAL: " << *total_cost << endl;
+                }
+            }
+        }
+        c++;
+    }
+    
+}
