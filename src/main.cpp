@@ -126,7 +126,8 @@ int main(void){
 
     */
     
-    melhora_rotas(Q, L , d, p , c, result.routes[1], result.terceirizados, 3, &result.terc_size, &result.total_clientes, &result.totalCost, &result.rota_dem[1]);
+    //melhora_rotas(Q, L , d, p , c, result.routes[1], result.terceirizados, 3, &result.terc_size, &result.total_clientes, &result.totalCost, &result.rota_dem[1]);
+    buscaExaustivaN3(Q, L, &result.totalCost, &result.terc_size, &result.total_clientes, d, p, c, result.routes, result.terceirizados, result.rota_dem);
     printSolution(result);
 
     return 0;
