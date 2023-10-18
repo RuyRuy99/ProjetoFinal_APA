@@ -55,7 +55,7 @@ int main(void){
     //cout << endl;
     
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
-    //printSolution(result);
+    printSolution(result);
 
 
 

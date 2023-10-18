@@ -87,7 +87,7 @@ void buscaExaustivaN1(vector<vector<int>> c, vector<vector<int>> &rotas, int *to
     for (int k = 0; k < num_rotas; k++){
         cout << "ROTA " << k+1 << endl;
         for (int i = 1 ; i < rotas[k].size()-1; i++){
-            for (int j = 1; j < rotas[k].size()-1; j++){
+            for (int j = 1; j < rotas[k].size()-1; j++){ //Alteração de j = i
 
                 if (i == j){
                     continue;
