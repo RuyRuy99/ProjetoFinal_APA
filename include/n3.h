@@ -9,7 +9,7 @@ int melhora_rotas(int Q ,int L, vector<int> d, vector<vector<int>> c, vector<int
 
 void atualizaValores(vector<int> &v, int i,vector<int> &terc, int j, vector<int> d, int *rota_demanda);
 
-void buscaExaustivaN3(int Q ,int L, int *total_cost, int *terc_size, int *total_clientes, vector<int> d, vector<int> p, vector<vector<int>> c, vector<vector<int>> &routes, vector<int> &terceirizados, vector<int> &rota_dem);
+int buscaExaustivaN3(int Q ,int L, int *total_cost, int *terc_size, int *total_clientes, vector<int> d, vector<int> p, vector<vector<int>> c, vector<vector<int>> &routes, vector<int> &terceirizados, vector<int> &rota_dem);
 
 
 #endif

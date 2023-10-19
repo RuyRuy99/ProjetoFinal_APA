@@ -10,7 +10,7 @@ int custoSwap(int *custo_atual, vector<vector<int>> c, vector<int> &v, int i, in
 void swapInside(vector<int> &v, int i, int j);
 
 // Busca exaustiva para a estrutura de vizinhança N1
-void buscaExaustivaN1(vector<vector<int>> c, vector<vector<int>> &rotas, int *total_cost);
+int buscaExaustivaN1(vector<vector<int>> c, vector<vector<int>> &rotas, int *total_cost);
 
 
 #endif
