@@ -190,4 +190,6 @@ void buscaExaustivaN2(vector<vector<int>> &routes, int *total_cost, int Q, vecto
             }
         }
     }
+
+    return *total_cost;
 }

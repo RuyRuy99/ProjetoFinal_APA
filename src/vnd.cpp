@@ -1,62 +1,47 @@
 #include "datatype.h"
 #include "construtor.h"
-#include "n1"
-#include "n2"
-#include "n3"
-#include "n4"
-
-// Estrutura de vizinhança 1
-int best_neighbor_structure1(solution){
-    // Busca exaustiva pela melhor solução vizinha usando a estrutura de vizinhança 1
-    return;
-}
-
-// Estrutura de vizinhança 2
-int best_neighbor_structure2(solution){
-    // Busca exaustiva pela melhor solução vizinha usando a estrutura de vizinhança 2
-    return;
-}
-
-// Estrutura de vizinhança 3
-int best_neighbor_structure3(solution){
-    // Busca exaustiva pela melhor solução vizinha usando a estrutura de vizinhança 3
-    return;
-}
-
-// Estrutura de vizinhança 4
-int best_neighbor_structure4(solution){
-    // Busca pela melhor solução vizinha usando a estrutura de vizinhança 4
-    return;
-}
+#include "n1.h"
+#include "n2.h"
+#include "n3.h"
+#include "n4.h"
 
 // Comparar o custo da solution1 com o custo da solution2 e retornar quem é melhor (true)
-bool is_better(solution1, solution2){
-    return;
+bool is_better(int solution1, int solution2){
+
+    return cost(solution1) < cost(solution2)
 }
     
 // Retorna a melhor solução vizinha para uma das estruturas de vizinhança k
-int best_neighbor(solution, k){
+int best_neighbor(int solution, int k){
 
-    switch case{
-        case k == 1:
-            return; // best_neighbor_structure da primeira estrutura de vizinhança
-        case k == 2:
-            return; // best_neighbor_structure da segunda estrutura de vizinhança
-        case k == 3:
-            return; // best_neighbor_structure da terceira estrutura de vizinhança
-        case k == 4:
-            return; // best_neighbor_structure da quarta estrutura de vizinhança
+    switch case(k){
+
+        // best_neighbor_structure da primeira estrutura de vizinhança
+        case 1:
+            return buscaExaustivaN2(&routes, *total_cost, Q, d, c, p, &d_routs);
+
+        // best_neighbor_structure da segunda estrutura de vizinhança
+        case 2:
+            return buscaExaustivaN3(Q, L, *total_cost, *terc_size, *total_clientes, d, p, c, &routes, &terceirizados, &rota_dem); 
+
+        // best_neighbor_structure da terceira estrutura de vizinhança
+        case 3:
+            return buscaExaustivaN1(c, &rotas, *total_cost);
+        
+        // best_neighbor_structure da quarta estrutura de vizinhança
+        case 4:
+            return buscaExaustivaN4(L, *total_cost, *terc_size, *total_clientes, d, p, c, &routes, &terceirizados, &rota_demanda, &routes_size); // best_neighbor_structure da quarta estrutura de vizinhança
     }
 }
 
-int vnd(initial_solution){
+int vnd(int initial_solution){
 
-    k = 1;
-    k_max = 4;  // Quantidade de estruturas de vizinhança
-    current_solution = initial_solution;
+    int k = 1;
+    int k_max = 4;  // Quantidade de estruturas de vizinhança
+    int current_solution = initial_solution;
 
     while(k <= k_max){
-        neighbor = best_neighbor(current_solution, k);
+        int neighbor = best_neighbor(current_solution, k);
 
         // Se a solução vizinha é melhor, atualizamos a solução atual
         if(is_better(neighbor, current_solution)){
@@ -68,5 +53,5 @@ int vnd(initial_solution){
         }
     }
 
-    return current_solution
+    return current_solution;
 }
