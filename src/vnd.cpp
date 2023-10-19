@@ -1,3 +1,5 @@
+#include <iostream>
+#include <vector>
 #include "datatype.h"
 #include "construtor.h"
 #include "n1.h"
@@ -7,8 +9,7 @@
 
 // Comparar o custo da solution1 com o custo da solution2 e retornar quem é melhor (true)
 bool is_better(int solution1, int solution2){
-
-    return cost(solution1) < cost(solution2)
+    return solution1 < solution2;
 }
     
 // Retorna a melhor solução vizinha para uma das estruturas de vizinhança k
@@ -36,17 +37,17 @@ int best_neighbor(int solution, int k){
 
 int vnd(int initial_solution){
 
-    int k = 1;
+    int k = 1; // Contador de vizinhança
     int k_max = 4;  // Quantidade de estruturas de vizinhança
     int current_solution = initial_solution;
 
     while(k <= k_max){
         int neighbor = best_neighbor(current_solution, k);
 
-        // Se a solução vizinha é melhor, atualizamos a solução atual
+        // Se a solução vizinha é melhor, atualizamos a solução atual e resetamos o contador de vizinhança
         if(is_better(neighbor, current_solution)){
             current_solution = neighbor;
-            k = 1; // Para resetar o contador de vizinhança
+            k = 1;
 
         }else{
             k += 1; // Passamos para a próxima estrutura de vizinhança

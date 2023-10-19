@@ -167,7 +167,7 @@ void swapRoutes(vector<int> &v1, vector<int> &v2, int n1, int n2, vector<int> &d
 
 }
 
-void buscaExaustivaN2(vector<vector<int>> &routes, int *total_cost, int Q, vector<int> d,vector<vector<int>> c,vector<int> p, vector<int> &d_routs){
+int buscaExaustivaN2(vector<vector<int>> &routes, int *total_cost, int Q, vector<int> d,vector<vector<int>> c,vector<int> p, vector<int> &d_routs){
     //Realiza a busca exaustiva, fazendo trocas entre as rotas i e j
     cout << "QUANTIDADE DE ROTAS: " << routes.size() << endl;
     for (int i = 0; i < routes.size(); i++){//Itera sobre as rotas (i)
