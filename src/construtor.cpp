@@ -68,6 +68,11 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
         cliente_atual = 0;
         capacidade_carro = 0;
         bestSolution.routes.push_back(rotas);
+
+        // Adiciona o tamanho da rota no vetor
+        bestSolution.route_size.push_back(rotas.size());
+        //cout << "tam_rota: " << rotas.size() << endl;
+
         rotas.clear();
         k--;
         uso_carro = 0;
@@ -84,8 +89,6 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
     for(int i=0; i<list_clientes.size(); i++){
         bestSolution.terceirizados.push_back(list_clientes[i]);
     }
-
-
 
     //   -- TERCEIRIZAÇÃO --
     // Verificar se o minimo de entregas foi realizados para poder terceirizar as restantes

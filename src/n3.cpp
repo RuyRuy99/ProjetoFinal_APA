@@ -6,10 +6,6 @@
 
 using namespace std;
 
-
-
-
-
 int melhora_rotas(int Q ,int L, vector<int> d, vector<vector<int>> c, vector<int> &v, int i, vector<int> &terc, int j, int *terc_size, int *total_cost, int *rota_demanda){
 
     int ant_i = v[i-1];
