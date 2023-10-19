@@ -1,5 +1,9 @@
 #include "datatype.h"
 #include "construtor.h"
+#include "n1"
+#include "n2"
+#include "n3"
+#include "n4"
 
 // Estrutura de vizinhança 1
 int best_neighbor_structure1(solution){
