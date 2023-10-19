@@ -78,8 +78,4 @@ void buscaExaustivaN4(int L, int *total_cost, int *terc_size, int *total_cliente
 
     }
 
-    for(int g=0; g<*terc_size; g++){
-        cout << " lst_terc: " << terceirizados[g] << endl;
-    }
-
 }
