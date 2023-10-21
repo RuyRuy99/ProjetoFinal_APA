@@ -76,7 +76,7 @@ void buscaExaustivaN4(int L, int *total_cost, int *terc_size, int *total_cliente
                 min_rota_index = k;
                 min_cliente_index = i;
                 cout << "Terceirizar o cliente " << routes[k][i] << " melhora o custo" <<endl;
-                cout << "Custo atual = " << *total_cost << endl;
+                cout << "Novo custo = " << min_custo_global << endl;
             }
         }
     }
@@ -89,8 +89,9 @@ void buscaExaustivaN4(int L, int *total_cost, int *terc_size, int *total_cliente
         *total_cost = min_custo_global; // Atualizar o custo total para refletir essa mudança.
         *total_clientes -= 1;
         *terc_size += 1;
+        route_size[min_rota_index] -= 1;
     }
     else{
-        cout << "Nenhuma operação de terceirização vantajosa foi encontrada." << endl;
+        cout << "Nenhuma operação de terceirizacao vantajosa foi encontrada." << endl;
     }
 }
