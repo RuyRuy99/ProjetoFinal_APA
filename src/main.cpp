@@ -26,7 +26,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance4.txt");
+    dados = read_file("instance3.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -61,8 +61,9 @@ int main(void){
 
 
     //busca exaustiva N1 para cada rota
-    //buscaExaustivaN1(c, result.routes, &result.totalCost);
-    //printSolution(result);
+    cout << "EXECUTANDO N1" <<endl;
+    buscaExaustivaN1(c, result.routes, &result.totalCost);
+    printSolution(result);
     
    
 
@@ -91,12 +92,13 @@ int main(void){
     */
     
     //melhora_rotas(Q, L , d, p , c, result.routes[1], result.terceirizados, 3, &result.terc_size, &result.total_clientes, &result.totalCost, &result.rota_dem[1]);
+    cout << "EXECUTANDO N3" <<endl;
     buscaExaustivaN3(Q, L, &result.totalCost, &result.terc_size, &result.total_clientes, d, p, c, result.routes, result.terceirizados, result.rota_dem);
     printSolution(result);
 
 
-    
-    //buscaExaustivaN4(L, &result.totalCost, &result.terc_size, &result.total_clientes, d, p, c, result.routes, result.terceirizados, result.rota_dem, result.route_size);
-    //printSolution(result);
+    cout << "EXECUTANDO N4" <<endl;
+    buscaExaustivaN4(L, &result.totalCost, &result.terc_size, &result.total_clientes, d, p, c, result.routes, result.terceirizados, result.rota_dem, result.route_size);
+    printSolution(result);
     return 0;
 }

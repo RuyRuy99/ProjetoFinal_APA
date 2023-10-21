@@ -16,23 +16,21 @@ int calculaTerc(vector<int> &v, int i, vector<int> p, int L, int *clientes_att, 
     if (*clientes_att -1 >= L){
 
         int custo_manter_i = c[ant_i][v[i]] + c[v[i]][prox_i];
-        cout << "Custo de manter " << v[i] << " = " << custo_manter_i << endl;
+        //cout << "Custo de manter " << v[i] << " = " << custo_manter_i << endl;
 
         // Remove o custo de manter o cliente i do custo total
         novo_custo -= custo_manter_i;
-        cout << "Custo total sem ele = " << novo_custo << endl;
+        //cout << "Custo total sem ele = " << novo_custo << endl;
 
         // Adiciona o custo da aresta de ligação
         novo_custo += c[ant_i][prox_i];
-        cout << "Custo da ligacao sem i = " << c[ant_i][prox_i] << endl;
-        cout << "Custo total com i = " << novo_custo << endl;
+        //cout << "Custo da ligacao sem i = " << c[ant_i][prox_i] << endl;
+        //cout << "Custo total com i = " << novo_custo << endl;
 
         // Adiciona o custo de terceirizar o cliente i no custo total
         novo_custo += p[v[i]-1];
-        cout << "Custo total com i terceirizado = " << novo_custo << endl;
+        //cout << "Custo total com i terceirizado = " << novo_custo << endl;
     }
-
-    cout << endl;
     return novo_custo;
 }
 
@@ -60,22 +58,37 @@ void buscaExaustivaN4(int L, int *total_cost, int *terc_size, int *total_cliente
     int num_rotas = routes.size();
     cout << "Numero de rotas = " << num_rotas << endl;
 
+    // Inicializar variáveis para rastrear a melhor operação de terceirização.
+    int min_custo_global = *total_cost;
+    int min_rota_index = -1;
+    int min_cliente_index = -1;
+
     for (int k = 0; k < num_rotas; k++){
-        //int rota_atual_size = routes[k].size();
-        cout << "ROTA: " << k+1 <<endl;
-        for (int i = 1; i < route_size[k]; i++){
+        cout << "ROTA: " << k+1 << endl;
+        for (int i = 1; i < route_size[k]-1; i++){
 
-            int custo_atual = *total_cost;
-
+            // Calcular o custo potencial da terceirização deste cliente.
             int novo_custo = calculaTerc(routes[k], i, p, L, total_clientes, c, total_cost, terceirizados, terc_size, &rota_demanda[k]);
 
-            if (novo_custo < custo_atual){
-                cout << "Vou terceirizar o cliente " << routes[k][i] << endl;
-                updateRoutes(routes[k], i, d, total_clientes, terceirizados, &rota_demanda[k], terc_size);
-                *total_cost = novo_custo;
+            // Se esta terceirização reduz o custo, consideramos ela como a melhor até agora.
+            if (novo_custo < min_custo_global){
+                min_custo_global = novo_custo;
+                min_rota_index = k;
+                min_cliente_index = i;
+                cout << "Terceirizar o cliente " << routes[k][i] << " melhora o custo" <<endl;
+                cout << "Custo atual = " << *total_cost << endl;
             }
         }
-
     }
 
+
+    // Depois de verificar todos os clientes em todas as rotas, se uma terceirização benéfica foi encontrada, realizamos essa única operação.
+    if (min_rota_index != -1) {
+        cout << "Vou terceirizar o cliente " << routes[min_rota_index][min_cliente_index] << endl;
+        updateRoutes(routes[min_rota_index], min_cliente_index, d, total_clientes, terceirizados, &rota_demanda[min_rota_index], terc_size);
+        *total_cost = min_custo_global; // Atualizar o custo total para refletir essa mudança.
+    }
+    else{
+        cout << "Nenhuma operação de terceirização vantajosa foi encontrada." << endl;
+    }
 }
