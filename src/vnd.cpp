@@ -6,7 +6,7 @@
 #include "n2.h"
 #include "n3.h"
 #include "n4.h"
-/*
+
 // Comparar o custo da solution1 com o custo da solution2 e retornar quem é melhor (true)
 bool is_better(int solution1, int solution2){
     return solution1 < solution2;
@@ -18,23 +18,23 @@ int best_neighbor(int solution, int k){
     switch (k){
         // best_neighbor_structure da primeira estrutura de vizinhança
         case 1:
-            //return 0;
-            return buscaExaustivaN2(&routes, *total_cost, Q, d, c, p, &d_routs);
+            return 0;
+            //return buscaExaustivaN1;
 
         // best_neighbor_structure da segunda estrutura de vizinhança
         case 2:
-            //return 0;
-            return buscaExaustivaN3(Q, L, *total_cost, *terc_size, *total_clientes, d, p, c, &routes, &terceirizados, &rota_dem); 
+            return 0;
+            //return buscaExaustivaN3;
 
         // best_neighbor_structure da terceira estrutura de vizinhança
         case 3:
-            //return 0;
-            return buscaExaustivaN1(c, &rotas, *total_cost);
+            return 0;
+            //return buscaExaustivaN2;
         
         // best_neighbor_structure da quarta estrutura de vizinhança
         case 4:
-            //return 0;
-            return buscaExaustivaN4(L, *total_cost, *terc_size, *total_clientes, d, p, c, &routes, &terceirizados, &rota_demanda, &routes_size); // best_neighbor_structure da quarta estrutura de vizinhança
+            return 0;
+            //return buscaExaustivaN4; // best_neighbor_structure da quarta estrutura de vizinhança
         
         default:
             return 0;
@@ -62,4 +62,3 @@ int vnd(int initial_solution){
 
     return current_solution;
 }
-*/
