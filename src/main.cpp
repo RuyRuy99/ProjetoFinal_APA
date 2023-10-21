@@ -72,24 +72,8 @@ int main(void){
 
 
     
-    /*
-    printSolution(result);
-
-    for (int i = 0; i < result.rota_dem.size(); i++){
-        cout << "Rota " << i << " tem demanda " << result.rota_dem[i] << endl;
-    }
-    */
-
     //buscaExaustivaN2(result.routes, &result.totalCost, Q, d, c, p, result.rota_dem);
-
     //printSolution(result);
-
-    /*
-    for (int i = 0; i < result.rota_dem.size(); i++){
-        cout << "Rota " << i << " tem demanda " << result.rota_dem[i] << endl;
-    }
-
-    */
     
     //melhora_rotas(Q, L , d, p , c, result.routes[1], result.terceirizados, 3, &result.terc_size, &result.total_clientes, &result.totalCost, &result.rota_dem[1]);
     cout << "EXECUTANDO N3" <<endl;
