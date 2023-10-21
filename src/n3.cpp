@@ -22,8 +22,8 @@ int melhora_rotas(int Q ,int L, vector<int> d, vector<vector<int>> c, vector<int
         // Custo das arestas de ligação do cliente tercerizado
         int manter_terc_j = c[ant_i][terc[j]] + c[terc[j]][prox_i];
 
-        cout << "Custo de manter o cliente: " << v[i] << " = " << custo_manter_i << endl;
-        cout << "Custo de manter o terceirizado: " << terc[j] << " = "<< manter_terc_j <<endl;
+        //cout << "Custo de manter o cliente: " << v[i] << " = " << custo_manter_i << endl;
+        //cout << "Custo de manter o terceirizado: " << terc[j] << " = "<< manter_terc_j <<endl;
 
         // Verifica se quando diminuir a demanda do cliente i e depois adicionar o terceirizado, é <= que a capacidade do carro
         if ((*rota_demanda - d[v[i]-1]) + d[terc[j]-1] <= Q) {
@@ -61,26 +61,45 @@ void buscaExaustivaN3(int Q ,int L, int *total_cost, int *terc_size, int *total_
     int num_rotas = routes.size();
     cout << "Quantidade de rotas == " << num_rotas << endl;
 
+    int min_custo_global = *total_cost;
+    int min_rota_idx = -1;
+    int min_i = -1;
+    int min_j = -1;
+
     for (int k = 0; k < num_rotas; k++){ // Para cada rota
         int rota_atual_size = routes[k].size();
         cout << "Rota " << k+1 << endl;
+
         for (int i = 1; i < rota_atual_size-1; i++){ // Percorrer os vetores da rota
             for (int j = 0; j < *terc_size; j++){ //Percorre cada elemento terceirizado
 
-
-                int custo_atual = *total_cost;
-                cout << "Custo atual = " << custo_atual << endl;
-
+                //Calcula o novo custo.
                 int novo_custo = melhora_rotas(Q, L, d, c, routes[k], i, terceirizados, j, terc_size, total_cost, &rota_dem[k]);
-                cout << "Custo novo = " << novo_custo << endl;
+                //cout << "Custo novo = " << novo_custo << endl;
+                cout << "Visitei o cliente " << routes[k][i] << " e o terceirizado " << terceirizados[j] << endl;
 
-                if (novo_custo < custo_atual){
-                    atualizaValores(routes[k], i, terceirizados, j, d, &rota_dem[k]);
-                    *total_cost = novo_custo;
+                if (novo_custo < min_custo_global){
+                    min_custo_global = novo_custo;
+                    min_rota_idx = k;
+                    min_i = i;
+                    min_j = j;
+                    cout << "A aresta " << routes[k][i] << "-" << terceirizados[j] << " teve uma melhora" << endl;
+                    cout << "O novo custo eh: " << min_custo_global << endl;
                 }
-
             }
         }
     }
-    
+
+    // Se o custo global foi atualizado, então troca os clientes
+    if (min_rota_idx != -1){
+        cout << "O vertice " << routes[min_rota_idx][min_i] << " foi trocado com terceirizado " << terceirizados[min_j] << endl;
+        cout << "O custo global eh: " << min_custo_global << endl;
+        atualizaValores(routes[min_rota_idx], min_i, terceirizados, min_j, d, &rota_dem[min_rota_idx]);
+        *total_cost = min_custo_global;
+        *total_clientes -= 1;
+        *terc_size -= 1;
+    }
+    else{
+        cout << "Nao houve melhora" << endl;
+    }
 }

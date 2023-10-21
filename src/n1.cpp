@@ -95,11 +95,7 @@ void buscaExaustivaN1(vector<vector<int>> c, vector<vector<int>> &rotas, int *to
         for (int i = 1 ; i < rotas[k].size()-1; i++){
             for (int j = i+1; j < rotas[k].size()-1; j++){ //Alteração de j = i
 
-                //Custo atual, pode ser atualizado a cada troca
-                int custo_atual = *total_cost;
-                //cout << "Custo atual = " << custo_atual << endl;
-
-                int novo_custo = custoSwap(&custo_atual, c, rotas[k], i, j);
+                int novo_custo = custoSwap(total_cost, c, rotas[k], i, j);
                 //cout << "Novo custo = " << novo_custo << endl;
                 cout << "Visitei a aresta " << rotas[k][i] << "-" << rotas[k][j] << endl;
 
