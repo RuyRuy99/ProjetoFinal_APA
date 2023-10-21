@@ -59,7 +59,7 @@ int main(void){
     printSolution(result);
 
 
-
+    /*
     //busca exaustiva N1 para cada rota
     cout << "EXECUTANDO N1" <<endl;
     buscaExaustivaN1(c, result.routes, &result.totalCost);
@@ -74,8 +74,12 @@ int main(void){
     cout << "EXECUTANDO N3" <<endl;
     buscaExaustivaN3(Q, L, &result.totalCost, &result.terc_size, &result.total_clientes, d, p, c, result.routes, result.terceirizados, result.rota_dem);
     printSolution(result);
-
+    */
     cout << "EXECUTANDO N4" <<endl;
+    buscaExaustivaN4(L, &result.totalCost, &result.terc_size, &result.total_clientes, d, p, c, result.routes, result.terceirizados, result.rota_dem, result.route_size);
+    printSolution(result);
+
+    cout << "Executando N4 novamente"<<endl;
     buscaExaustivaN4(L, &result.totalCost, &result.terc_size, &result.total_clientes, d, p, c, result.routes, result.terceirizados, result.rota_dem, result.route_size);
     printSolution(result);
     return 0;
