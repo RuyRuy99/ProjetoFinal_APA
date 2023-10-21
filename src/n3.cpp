@@ -96,8 +96,6 @@ void buscaExaustivaN3(int Q ,int L, int *total_cost, int *terc_size, int *total_
         cout << "O custo global eh: " << min_custo_global << endl;
         atualizaValores(routes[min_rota_idx], min_i, terceirizados, min_j, d, &rota_dem[min_rota_idx]);
         *total_cost = min_custo_global;
-        *total_clientes -= 1;
-        *terc_size -= 1;
     }
     else{
         cout << "Nao houve melhora" << endl;
