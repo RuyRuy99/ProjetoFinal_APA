@@ -6,7 +6,7 @@
 #include "n2.h"
 #include "n3.h"
 #include "n4.h"
-
+/*
 // Comparar o custo da solution1 com o custo da solution2 e retornar quem é melhor (true)
 bool is_better(int solution1, int solution2){
     return solution1 < solution2;
@@ -62,3 +62,4 @@ int vnd(int initial_solution){
 
     return current_solution;
 }
+*/
