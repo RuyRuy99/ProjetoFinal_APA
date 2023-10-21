@@ -26,7 +26,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance3.txt");
+    dados = read_file("instance4.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -60,22 +60,9 @@ int main(void){
 
 
 
-
-    //PERTURBANDOA  ROTA 1 PARA TESTAR
-    //cout << "Custo inicial = " << result.totalCost << endl;
-    //int custo_aux = custoSwap(&result.totalCost, c, result.routes[0], 2, 1);
-    //result.totalCost = custo_aux;
-    //faz o swap
-    //swapInside(result.routes[0], 2, 1);
-    //cout << "Custo auxiliar = " << custo_aux << endl;
-    //printSolution(result);
-
-
-
-    
     //busca exaustiva N1 para cada rota
-    //buscaExaustivaN1(c, result.routes, &result.totalCost);
-    //printSolution(result);
+    buscaExaustivaN1(c, result.routes, &result.totalCost);
+    printSolution(result);
     
    
 
@@ -117,9 +104,11 @@ int main(void){
         cout << "Rota " << i << " tem demanda " << result.rota_dem[i] << endl;
     }
     */
-    buscaExaustivaN2(result.routes, &result.totalCost, Q, d, c, p, result.rota_dem);
 
-    printSolution(result);
+    //buscaExaustivaN2(result.routes, &result.totalCost, Q, d, c, p, result.rota_dem);
+
+    //printSolution(result);
+
     /*
     for (int i = 0; i < result.rota_dem.size(); i++){
         cout << "Rota " << i << " tem demanda " << result.rota_dem[i] << endl;

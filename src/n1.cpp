@@ -84,29 +84,46 @@ void buscaExaustivaN1(vector<vector<int>> c, vector<vector<int>> &rotas, int *to
     int num_rotas = rotas.size();
     cout << "Numero de rotas = " << num_rotas << endl;
 
+    int min_custo_global = *total_cost;
+    int min_rota_idx = -1;
+    int min_i_global = -1;
+    int min_j_global = -1;
+
+
     for (int k = 0; k < num_rotas; k++){
         cout << "ROTA " << k+1 << endl;
         for (int i = 1 ; i < rotas[k].size()-1; i++){
-            for (int j = 1; j < rotas[k].size()-1; j++){ //Alteração de j = i
-
-                if (i == j){
-                    continue;
-                }
+            for (int j = i+1; j < rotas[k].size()-1; j++){ //Alteração de j = i
 
                 //Custo atual, pode ser atualizado a cada troca
                 int custo_atual = *total_cost;
-                cout << "Custo atual = " << custo_atual << endl;
+                //cout << "Custo atual = " << custo_atual << endl;
 
                 int novo_custo = custoSwap(&custo_atual, c, rotas[k], i, j);
-                cout << "Novo custo = " << novo_custo << endl;
-                cout << endl;
+                //cout << "Novo custo = " << novo_custo << endl;
+                cout << "Visitei a aresta " << rotas[k][i] << "-" << rotas[k][j] << endl;
 
-                if (novo_custo < custo_atual){
-                    swapInside(rotas[k], i, j);
-                    *total_cost = novo_custo;
-                    print_array(&rotas[k][0], rotas[k].size());
-                }        
+                //Se o custo novo for menor que o minimo global, atualiza o minimo global
+                if (novo_custo < min_custo_global){
+                    min_custo_global = novo_custo;
+                    min_rota_idx = k;
+                    min_i_global = i;
+                    min_j_global = j;
+                    cout << "A aresta " << rotas[k][i] << "-" << rotas[k][j] << " teve uma melhora" << endl;
+                    cout << "O novo custo eh: " << min_custo_global << endl;
+                }
             }
         }
+    }
+
+    //Se o custo global foi atualizado, então troca os clientes
+    if (min_rota_idx != -1){
+        cout << "O vertice " << rotas[min_rota_idx][min_i_global] << " foi trocado com o vertice " << rotas[min_rota_idx][min_j_global] << endl;
+        cout << "O custo foi atualizado para " << min_custo_global << endl;
+        swapInside(rotas[min_rota_idx], min_i_global, min_j_global);
+        *total_cost = min_custo_global;
+    }
+    else{
+        cout << "NENHUMA MELHORA ENCONTRADA !!!" << endl;
     }
 }
