@@ -15,23 +15,29 @@ bool is_better(int solution1, int solution2){
 // Retorna a melhor solução vizinha para uma das estruturas de vizinhança k
 int best_neighbor(int solution, int k){
 
-    switch case(k){
-
+    switch (k){
         // best_neighbor_structure da primeira estrutura de vizinhança
         case 1:
+            //return 0;
             return buscaExaustivaN2(&routes, *total_cost, Q, d, c, p, &d_routs);
 
         // best_neighbor_structure da segunda estrutura de vizinhança
         case 2:
+            //return 0;
             return buscaExaustivaN3(Q, L, *total_cost, *terc_size, *total_clientes, d, p, c, &routes, &terceirizados, &rota_dem); 
 
         // best_neighbor_structure da terceira estrutura de vizinhança
         case 3:
+            //return 0;
             return buscaExaustivaN1(c, &rotas, *total_cost);
         
         // best_neighbor_structure da quarta estrutura de vizinhança
         case 4:
+            //return 0;
             return buscaExaustivaN4(L, *total_cost, *terc_size, *total_clientes, d, p, c, &routes, &terceirizados, &rota_demanda, &routes_size); // best_neighbor_structure da quarta estrutura de vizinhança
+        
+        default:
+            return 0;
     }
 }
 

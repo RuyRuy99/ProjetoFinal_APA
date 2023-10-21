@@ -32,7 +32,6 @@ int findMaxCostVertex(vector<int> &rota, vector<vector<int>> c){
     return vertice;
 };
 
-
 SwapResult custoSwap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<int>> c,vector<int> p, vector<int> &v1, vector<int> &v2, vector<int> &d_routs, int i, int j){
     // Calcula o custo para realizar a troca do cliente i com o cliente j e diz se a troca é viável ou não (se a demanda total da rota não ultrapassa a capacidade do carro)
     int n1 = findMaxCostVertex(v1, c); // Acha o vértice mais caro da rota 1
@@ -73,6 +72,7 @@ SwapResult custoSwap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<
     int d_att;
     
     if(d[cliente1-1] > d[cliente2-1]){//Quando a demanda do cliente 1 for maior o impacto mais consideravel é na demanda da rota 2
+        cout << "\n" << endl;
         cout << "Demanda do cliente " << cliente1 << " eh maior, ver como vai impactar na rota 2" << endl;
         //Demanda da rota j
         d_att = d_routs[j];
@@ -94,6 +94,7 @@ SwapResult custoSwap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<
         cout << "Pode fazer a troca? " << status << endl;
     }
     else if(d[cliente2-1] > d[cliente1-1]){//Quando a demanda do cliente 2 for maior o impacto mais consideravel é na demanda da rota 1
+        cout << "\n" << endl;
         cout << "Demanda do cliente " << cliente2 << " eh maior, ver como vai impactar na rota 1" << endl;
         //Demanda da rota i
         d_att = d_routs[i];
@@ -114,10 +115,12 @@ SwapResult custoSwap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<
         cout << "Pode fazer a troca? " << status << endl;
     }
     else{//Caso onde as demandas são iguais
+        cout << "\n" << endl;
         status = true;
         cout << "Demandas Iguais" << endl;
     }
     if(status){//Calcula o custo total da solução quando a troca é viável
+        cout << "\n" << endl;
         cout << "FAZENDO SWAP DO " << cliente1 << " COM O CLIENTE: " << cliente2 << endl;
         cout << "O CUSTO ANTES DO SWAP EH: " << result.total_cost << endl;
 
@@ -139,6 +142,7 @@ SwapResult custoSwap_Routes(int *total_cost, int Q, vector<int> d,vector<vector<
         return result;
     }
     else{//Caso onde a troca não é viável
+        cout << "\n" << endl;
         cout << "Não pode fazer a troca. Status: " << status << endl;
         result.total_cost = -1;
         return result;
@@ -168,28 +172,43 @@ void swapRoutes(vector<int> &v1, vector<int> &v2, int n1, int n2, vector<int> &d
 }
 
 int buscaExaustivaN2(vector<vector<int>> &routes, int *total_cost, int Q, vector<int> d,vector<vector<int>> c,vector<int> p, vector<int> &d_routs){
+    int index_vi;
+    int index_vj;
+    int rota_i;
+    int rota_j;
+    int custo_aux;
+    int custo_atual = *total_cost; // Define o custo atual
+
     //Realiza a busca exaustiva, fazendo trocas entre as rotas i e j
     cout << "QUANTIDADE DE ROTAS: " << routes.size() << endl;
     for (int i = 0; i < routes.size(); i++){//Itera sobre as rotas (i)
-        for (int j = i; j < routes.size(); j++){//Itera sobre as rotas (j), aqui estamos evitando olhar repetidamente (i com j e j com i)
-            if(i != j){
-                int custo_atual = *total_cost; // Define o custo atual
-                cout << "\n" << endl;
-                cout << "CUSTO ATUAL: " << custo_atual << endl;
-                cout << "SWAP DA ROTA " << i << " COM A ROTA "<< j << endl;
-               
-                //Calcula o custo do SWAP da rota i com a rota j
-                SwapResult resultado = custoSwap_Routes(&custo_atual, Q, d, c, p, routes[i], routes[j], d_routs, i, j);
-                cout << "NOVO CUSTO: " << resultado.total_cost << endl;
+        for (int j = i+1; j < routes.size(); j++){//Itera sobre as rotas (j), aqui estamos evitando olhar repetidamente (i com j e j com i)
+            cout << "\n" << endl;
+            cout << "CUSTO ATUAL: " << custo_atual << endl;
+            cout << "SWAP DA ROTA " << i << " COM A ROTA "<< j << endl;
+            
+            //Calcula o custo do SWAP da rota i com a rota j
+            SwapResult resultado = custoSwap_Routes(&custo_atual, Q, d, c, p, routes[i], routes[j], d_routs, i, j);
+            cout << "NOVO CUSTO: " << resultado.total_cost << endl;
 
-                //Se o novo custo for melhor que o atual, concretiza o swap de i com j
-                if(resultado.total_cost < custo_atual && resultado.total_cost != -1){
-                    swapRoutes(routes[i], routes[j], resultado.n1, resultado.n2, d_routs, d, i, j);
-                    *total_cost = resultado.total_cost;
-                }
+            //Se o novo custo for melhor que o atual, concretiza o swap de i com j
+            if(resultado.total_cost < custo_atual && resultado.total_cost != -1){
+                custo_aux = resultado.total_cost;
+                index_vi = resultado.n1;
+                index_vj = resultado.n2;
+                rota_i = i;
+                rota_j = j;
             }
+            
         }
     }
 
+    cout << "\n" << endl;
+    cout << "O SWAP COM MENOR CUSTO EH O DA ROTA " << rota_i << " COM A ROTA " << rota_j << endl;
+    cout << "FAZER O SWAP DO CLIENTE " << routes[rota_i][index_vi] << " COM O CLIENTE  " << routes[rota_j][index_vj] << endl;
+    cout << "O CUSTO DO SWAP EH: " << custo_aux << endl;
+
+    swapRoutes(routes[rota_i], routes[rota_j], index_vi, index_vj, d_routs, d, rota_i, rota_j);
+    *total_cost = custo_aux;
     return *total_cost;
 }
