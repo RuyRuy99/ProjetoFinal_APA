@@ -33,6 +33,27 @@ int findMaxCostVertex(vector<int> rota, vector<vector<int>> c){
     return vertice;
 }
 
+bool checkSwap(int Q, vector<int> d, vector<int> &v1, vector<int> &v2, vector<int> &d_routs, int i, int j, int cliente1, int cliente2){
+    int d1 = d[cliente1 - 1];
+    int d2 = d[cliente2 - 1];
+
+    int d_att_i = d_routs[i] - d1 + d2;
+    int d_att_j = d_routs[j] - d2 + d1;
+
+    if (d1 > d2) {
+        if (d_att_j > Q) {
+            return false;
+        }
+    }
+    else if (d2 > d1) {
+        if (d_att_i > Q) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 SwapResult custoSwapRoutes(int total_cost, int Q, vector<int> d, vector<int> p, vector<vector<int>> c, vector<int> &v1, vector<int> &v2, vector<int> &d_routs, int i, int j){
     //Calcula o custo para realizar a troca do cliente i com o cliente j e diz se a troca é viável ou não (se a demanda total da rota não ultrapassa a capacidade do carro)
     int n1 = findMaxCostVertex(v1, c); // Encontra o vértice de maior custo da rota 1
@@ -51,83 +72,11 @@ SwapResult custoSwapRoutes(int total_cost, int Q, vector<int> d, vector<int> p, 
     int prox_i = v1[n1+1];
     int ant_j = v2[n2-1];
     int prox_j = v2[n2+1];
-
-    /*
-    cout << "A DEMANDA DE CADA CARRO EH: " << Q << endl;
     
-    cout << "\n" << endl;
-    cout << "O cliente mais caro da rota 1 eh: " << cliente1 << endl;
-    cout << "O cliente mais caro da rota 2 eh: " << cliente2 << endl;
+    bool check_status_swap = checkSwap(Q, d, v1, v2, d_routs, i, j, cliente1, cliente2);
+    
 
-    cout << "\n" << endl;
-    cout << "A demanda do cliente " << cliente1 << " eh:  " << d[cliente1-1] << endl;
-    cout << "A demanda do cliente " << cliente2 << " eh:  " << d[cliente2-1] << endl;
-
-    cout << "\n" << endl;
-    cout << "A demanda da rota 1 eh: " << d_routs[i] << endl;
-    cout << "A demanda da rota 2 eh: " << d_routs[j] << endl;
-    */
-
-    //Variáveis auxiliares para analisar o impacto da troca de clientes na demanda da rota
-    //A variável status diz se a troca vai ser viável ou não
-    //A variável d_att contém o valor da demanda atualizado após a troca
-    bool status;
-    int d_att;
-
-    if(d[cliente1-1] > d[cliente2-1]){//Quando a demanda do cliente 1 for maior o impacto mais consideravel é na demanda da rota 2
-        //cout << "\n" << endl;
-        //cout << "Demanda do cliente " << cliente1 << " eh maior, ver como vai impactar na rota 2" << endl;
-        
-        //Demanda da rota j
-        d_att = d_routs[j];
-        //cout << "Demanda da rota 2 = " << d_att << endl;
-        //Demanda da rota j sem a demanda do cliente 2
-        d_att -= d[cliente2-1];
-        //cout << "Demanda da rota 2 - demanda do cliente 2 = " << d_att << endl;
-        //Demanda da rota j com a demanda do cliente 1
-        d_att += d[cliente1-1];
-        //cout << "Demanda da rota 2 + demanda do cliente 1 = " << d_att << endl;
-
-        if(d_att > Q){//Se após a troca a demanda ultrapassar a capacidade do carro a troca não é viável
-            status = false;
-        }
-        else{//Se após a troca a demanda não ultrapassar a capacidade do carro a troca é viável
-            status = true;
-        }
-
-        //cout << "Pode fazer a troca ?? " << status << endl;
-    }
-    else if (d[cliente2-1] > d[cliente1-1]){//Quando a demanda do cliente 2 for maior o impacto mais consideravel é na demanda da rota 1
-        //cout << "\n" << endl;
-
-        //cout << "Demanda do cliente " << cliente2 << " eh maior, ver como vai impactar na rota 1" << endl;
-        //Demanda da rota i
-        d_att = d_routs[i];
-        //cout << "Demanda da rota 1 = " << d_att << endl;
-        //Demanda da rota j sem a demanda do cliente 1
-        d_att -= d[cliente1-1];
-        //cout << "Demanda da rota 1 - demanda do cliente 1 = " << d_att << endl;
-        //Demanda da rota j com a demanda do cliente 2
-        d_att += d[cliente2-1];
-        //cout << "Demanda da rota 1 + demanda do cliente 2 = " << d_att << endl; 
-
-        if (d_att > Q){//Se após a troca a demanda ultrapassar a capacidade do carro a troca não é viável
-            status = false;
-        }
-        else{//Se após a troca a demanda não ultrapassar a capacidade do carro a troca é viável
-            status = true;
-        }
-
-        //cout << "Pode fazer a troca ?? " << status << endl;       
-    }
-
-    else{//Caso onde as demandas são iguais
-        //cout << "\n" << endl;
-        status = true;
-        //cout << "Demandas Iguais" << endl;
-    }
-
-    if(status){//Calcula o custo total da solução quando a troca é viável
+    if(check_status_swap){//Calcula o custo total da solução quando a troca é viável
         //cout << "\n" << endl;
         //cout << "FAZENDO SWAP DO " << cliente1 << " COM O CLIENTE: " << cliente2 << endl;
         //cout << "O CUSTO ANTES DO SWAP EH: " << result.total_cost << endl;
