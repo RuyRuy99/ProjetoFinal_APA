@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "readfile.h"
+#include "datatype.h"
 #include "construtor.h"
 #include "guloso.h"
 #include "showsolution.h"
@@ -10,7 +11,9 @@
 #include "n2.h"
 #include "n3.h"
 #include "n4.h"
-#include "datatype.h"
+#include "vnd.h"
+
+
 using namespace std;
 
 
@@ -26,7 +29,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance4.txt");
+    dados = read_file("n9k5_A.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -59,28 +62,32 @@ int main(void){
     printSolution(result);
 
 
-    /*
-    //busca exaustiva N1 para cada rota
-    cout << "EXECUTANDO N1" <<endl;
-    buscaExaustivaN1(c, result.routes, &result.totalCost);
-    printSolution(result);
-
-    //busca exaustiva N2 para cada rota
-    cout << "EXECUTANDO N2" <<endl;
-    buscaExaustivaN2(result.routes, &result.totalCost, Q, d, c, p, result.rota_dem);
-    printSolution(result);
     
-    //melhora_rotas(Q, L , d, p , c, result.routes[1], result.terceirizados, 3, &result.terc_size, &result.total_clientes, &result.totalCost, &result.rota_dem[1]);
-    cout << "EXECUTANDO N3" <<endl;
-    buscaExaustivaN3(Q, L, &result.totalCost, &result.terc_size, &result.total_clientes, d, p, c, result.routes, result.terceirizados, result.rota_dem);
-    printSolution(result);
-    */
-    cout << "EXECUTANDO N4" <<endl;
-    buscaExaustivaN4(L, &result.totalCost, &result.terc_size, &result.total_clientes, d, p, c, result.routes, result.terceirizados, result.rota_dem, result.route_size);
-    printSolution(result);
+    //busca exaustiva N1 para cada rota
+    //cout << "EXECUTANDO N1" <<endl;
+    //Solution result2 = buscaExaustivaN1(result, c);
+    //printSo/ution(result2);
 
-    cout << "Executando N4 novamente"<<endl;
-    buscaExaustivaN4(L, &result.totalCost, &result.terc_size, &result.total_clientes, d, p, c, result.routes, result.terceirizados, result.rota_dem, result.route_size);
-    printSolution(result);
+    
+    //busca exaustiva N2 para cada rota
+    //cout << "EXECUTANDO N2" <<endl;
+    //Solution result3 = buscaExaustivaN2(result, Q, d, p, c);
+    //printSolution(result3);
+    
+    //cout << "EXECUTANDO N3" << endl;
+    //Solution result4 = buscaExaustivaN3(result, Q, L, d, p, c);
+    //printSolution(result4);
+    
+
+    //cout << "EXECUTANDO N4" <<endl;
+    //Solution result5 = buscaExaustivaN4(result, L, p, d, c);
+    //printSolution(result5);
+
+ 
+    cout << "EXECUTANDO O VND" << endl;
+    Solution result6 = vnd(result, Q, L, d, p, c);
+    printSolution(result6);
+
+
     return 0;
 }

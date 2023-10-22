@@ -2,15 +2,10 @@
 #define VND_H
 #include "datatype.h"
 
-int best_neighbor_structure1(solution);
-int best_neighbor_structure1(solution);
-int best_neighbor_structure1(solution);
-int best_neighbor_structure1(solution);
+bool is_better(Solution solution1, Solution solution2);
 
-bool is_better(solution1, solution2);
+Solution best_neighbor(Solution vizinha , int key, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c);
 
-int best_neighbor(solution, k);
-
-int vnd(initial_solution);
+Solution vnd(Solution initial_solution, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c);
 
 #endif

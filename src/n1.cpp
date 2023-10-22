@@ -5,12 +5,13 @@
 #include "showsolution.h"
 #include "datatype.h"
 
+
 using namespace std;
 
 
-int custoSwap(int *custo_atual, vector<vector<int>> c, vector<int> &v, int i, int j){
+int custoSwap(int custo_atual, vector<vector<int>> c, vector<int> &v, int i, int j){
 
-    int novo_custo = *custo_atual;
+    int novo_custo = custo_atual;
     int ant_i = v[i-1];
     int prox_i = v[i+1];
     int ant_j = v[j-1];
@@ -79,25 +80,29 @@ void swapInside(vector<int> &v, int i, int j){
 }
 
 
-void buscaExaustivaN1(vector<vector<int>> c, vector<vector<int>> &rotas, int *total_cost){
+Solution buscaExaustivaN1(Solution initial_solution, vector<vector<int>> c){
 
-    int num_rotas = rotas.size();
-    cout << "Numero de rotas = " << num_rotas << endl;
+    Solution vizinha = initial_solution;
 
-    int min_custo_global = *total_cost;
+    int num_rotas = vizinha.routes.size();
+    //cout << "Numero de rotas = " << num_rotas << endl;
+
+    //Variáveis para auxiliar a encontrar o minimo
+    int min_custo_global = initial_solution.totalCost;
     int min_rota_idx = -1;
     int min_i_global = -1;
     int min_j_global = -1;
 
 
+    //Refazendo todo o laço
     for (int k = 0; k < num_rotas; k++){
-        cout << "ROTA " << k+1 << endl;
-        for (int i = 1 ; i < rotas[k].size()-1; i++){
-            for (int j = i+1; j < rotas[k].size()-1; j++){ //Alteração de j = i
+        //cout << "ROTA " << k+1 << endl;
+        for (int i = 1; i < vizinha.routes[k].size()-1; i++){
+            for (int j = i+1; j < vizinha.routes[k].size()-1; j++){ //Alteração de j = i
 
-                int novo_custo = custoSwap(total_cost, c, rotas[k], i, j);
+                int novo_custo = custoSwap(vizinha.totalCost, c, vizinha.routes[k], i, j);
                 //cout << "Novo custo = " << novo_custo << endl;
-                cout << "Visitei a aresta " << rotas[k][i] << "-" << rotas[k][j] << endl;
+                //cout << "Visitei a aresta " << vizinha.routes[k][i] << "-" << vizinha.routes[k][j] << endl;
 
                 //Se o custo novo for menor que o minimo global, atualiza o minimo global
                 if (novo_custo < min_custo_global){
@@ -105,21 +110,23 @@ void buscaExaustivaN1(vector<vector<int>> c, vector<vector<int>> &rotas, int *to
                     min_rota_idx = k;
                     min_i_global = i;
                     min_j_global = j;
-                    cout << "A aresta " << rotas[k][i] << "-" << rotas[k][j] << " teve uma melhora" << endl;
-                    cout << "O novo custo eh: " << min_custo_global << endl;
+                    //cout << "A aresta " << vizinha.routes[k][i] << "-" << vizinha.routes[k][j] << " teve uma melhora" << endl;
+                    //cout << "O novo custo eh: " << min_custo_global << endl;
                 }
             }
         }
     }
 
-    //Se o custo global foi atualizado, então troca os clientes
     if (min_rota_idx != -1){
-        cout << "O vertice " << rotas[min_rota_idx][min_i_global] << " foi trocado com o vertice " << rotas[min_rota_idx][min_j_global] << endl;
-        cout << "O custo foi atualizado para " << min_custo_global << endl;
-        swapInside(rotas[min_rota_idx], min_i_global, min_j_global);
-        *total_cost = min_custo_global;
+        //cout << "O vertice " << vizinha.routes[min_rota_idx][min_i_global] << " foi trocado com o vertice " << vizinha.routes[min_rota_idx][min_j_global] << endl;
+        //cout << "O custo foi atualizado para " << min_custo_global << endl;
+        //Talvez isso fique no VND
+        swapInside(vizinha.routes[min_rota_idx], min_i_global, min_j_global);
+        vizinha.totalCost = min_custo_global;
     }
     else{
-        cout << "NENHUMA MELHORA ENCONTRADA !!!" << endl;
+        //cout << "NENHUMA MELHORA ENCONTRADA !!!" << endl;
     }
+
+    return vizinha;
 }

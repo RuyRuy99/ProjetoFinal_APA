@@ -6,98 +6,99 @@
 
 using namespace std;
 
-int melhora_rotas(int Q ,int L, vector<int> d, vector<vector<int>> c, vector<int> &v, int i, vector<int> &terc, int j, int *terc_size, int *total_cost, int *rota_demanda){
-
+int melhora_rotas(Solution solucao, int k, vector<int> v, int i, vector<int> terc, int j, int Q ,int L, vector<int> d, vector<vector<int>> c){
+    
     int ant_i = v[i-1];
     int prox_i = v[i+1];
 
-    int novo_custo = *total_cost;
-    
-    // Verifica se a lista de terceirados não está vazia para poder fazer o swap
-    if (*terc_size > 0){
-        //print_array(&terc[0], terc.size());
-        // Custo das arestas de ligação do cliente i
+    int novo_custo = solucao.totalCost;
+
+    //Verifica se a lista de terceirizados não está vazia
+    if (solucao.terc_size > 0){
+        //Custo das arestas que ligam i
         int custo_manter_i = c[ant_i][v[i]] + c[v[i]][prox_i];
 
-        // Custo das arestas de ligação do cliente tercerizado
-        int manter_terc_j = c[ant_i][terc[j]] + c[terc[j]][prox_i];
+        //Custo das arestas de ligação do terceirizado
+        int custo_manter_terc = c[ant_i][terc[j]] + c[terc[j]][prox_i];
 
-        //cout << "Custo de manter o cliente: " << v[i] << " = " << custo_manter_i << endl;
-        //cout << "Custo de manter o terceirizado: " << terc[j] << " = "<< manter_terc_j <<endl;
+        //cout << "Custo de manter i = " << custo_manter_i << endl;
+        //cout << "Custo de manter terc = " << custo_manter_terc << endl;
 
-        // Verifica se quando diminuir a demanda do cliente i e depois adicionar o terceirizado, é <= que a capacidade do carro
-        if ((*rota_demanda - d[v[i]-1]) + d[terc[j]-1] <= Q) {
-            //cout << "Vou fazer o SWAP"<<endl;
-            // Remove o custo de manter o cliente i do custo total
+        //Verifica se cabe colocar o terceirizado no carro
+        if ((solucao.rota_dem[k] - d[v[i]-1]) + d[terc[j]-1] <= Q){
+
+            //cout << "Vou fazer o SWAP" << endl;
+            //Remove o custo do cliente i do custo total
             novo_custo -= custo_manter_i;
-            //cout << "Custo depois de remover i: " << *total_cost << endl;
 
-            // Adiciona o custo de manter o terceirizado no custo total
-            novo_custo += manter_terc_j;         
+            //Adiciona o custo do terceirizado no custo total
+            novo_custo += custo_manter_terc;
 
             // OBS: Como estou fazendo um swap de um terceirizado com rota não precisa decrementar o clientes_att
         }
+
     }
+    //cout << "Novo custo eh = " << novo_custo << endl;
     return novo_custo;
 }
 
-void atualizaValores(vector<int> &v, int i,vector<int> &terc, int j, vector<int> d, int *rota_demanda){
-
-    // Atualiza a demanda da rota
+void atualizaValores(vector<int> &v, int i, vector<int> &terc, int j, vector<int> d, int *rota_demanda){
+    
+    //Atualiza o valor da demanda da rota
     *rota_demanda = *rota_demanda - d[v[i]-1] + d[terc[j]-1];
 
-    //Swap between vectors
+    //Swap dos vetores
     int aux = v[i];
     v[i] = terc[j];
     terc[j] = aux;
-    //Obs: Não preciso atualizar o terc_size pq o tamanho do vetor de terceirizados não muda
 }
 
+Solution buscaExaustivaN3(Solution initial_solution, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
+
+    Solution sol_vizinha = initial_solution;
+
+    int num_rotas = sol_vizinha.routes.size();
+    //cout << "Numero de rotas = " << num_rotas << endl;
 
 
-
-void buscaExaustivaN3(int Q ,int L, int *total_cost, int *terc_size, int *total_clientes, vector<int> d, vector<int> p, vector<vector<int>> c, vector<vector<int>> &routes, vector<int> &terceirizados, vector<int> &rota_dem){
-    
-    int num_rotas = routes.size();
-    cout << "Quantidade de rotas == " << num_rotas << endl;
-
-    int min_custo_global = *total_cost;
+    int min_custo_global = initial_solution.totalCost;
     int min_rota_idx = -1;
     int min_i = -1;
     int min_j = -1;
 
-    for (int k = 0; k < num_rotas; k++){ // Para cada rota
-        int rota_atual_size = routes[k].size();
-        cout << "Rota " << k+1 << endl;
+    for (int k = 0; k < num_rotas; k++){ //Para cada rota
 
-        for (int i = 1; i < rota_atual_size-1; i++){ // Percorrer os vetores da rota
-            for (int j = 0; j < *terc_size; j++){ //Percorre cada elemento terceirizado
+        int rota_atual_size = sol_vizinha.routes[k].size();
+        //cout << "ROTA: " << k+1 << endl;
 
-                //Calcula o novo custo.
-                int novo_custo = melhora_rotas(Q, L, d, c, routes[k], i, terceirizados, j, terc_size, total_cost, &rota_dem[k]);
-                //cout << "Custo novo = " << novo_custo << endl;
-                cout << "Visitei o cliente " << routes[k][i] << " e o terceirizado " << terceirizados[j] << endl;
+        for (int i = 1; i < rota_atual_size-1; i++){ //Para cada elemento da rota
+            for (int j = 0; j < sol_vizinha.terc_size; j++){ //Percorrer os terceirizados
+                
+                //Calcula o novo custo
+                int novo_custo = melhora_rotas(sol_vizinha, k, sol_vizinha.routes[k], i, sol_vizinha.terceirizados, j, Q, L, d, c);
+                //cout << "Novo custo = " << novo_custo << endl;
 
                 if (novo_custo < min_custo_global){
                     min_custo_global = novo_custo;
                     min_rota_idx = k;
                     min_i = i;
                     min_j = j;
-                    cout << "A aresta " << routes[k][i] << "-" << terceirizados[j] << " teve uma melhora" << endl;
-                    cout << "O novo custo eh: " << min_custo_global << endl;
+                    //cout << "Fazendo a troca do cliente " << sol_vizinha.routes[k][i] << " pelo terceirizado " << sol_vizinha.terceirizados[j] << endl;
+                    //cout << "Novo custo: " << min_custo_global << endl;
                 }
             }
         }
     }
 
-    // Se o custo global foi atualizado, então troca os clientes
+    //Se o custo global foi alterado, atualiza os valores
     if (min_rota_idx != -1){
-        cout << "O vertice " << routes[min_rota_idx][min_i] << " foi trocado com terceirizado " << terceirizados[min_j] << endl;
-        cout << "O custo global eh: " << min_custo_global << endl;
-        atualizaValores(routes[min_rota_idx], min_i, terceirizados, min_j, d, &rota_dem[min_rota_idx]);
-        *total_cost = min_custo_global;
+        //cout << "O cliente " << sol_vizinha.routes[min_rota_idx][min_i] << " foi trocado pelo terceirizado " << sol_vizinha.terceirizados[min_j] << endl;
+        atualizaValores(sol_vizinha.routes[min_rota_idx], min_i, sol_vizinha.terceirizados, min_j, d, &sol_vizinha.rota_dem[min_rota_idx]);
+        sol_vizinha.totalCost = min_custo_global;
     }
     else{
-        cout << "Nao houve melhora" << endl;
+        //cout << "Não houve melhora !!!" << endl;
     }
+
+    return sol_vizinha;
 }

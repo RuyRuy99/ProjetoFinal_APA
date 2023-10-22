@@ -6,10 +6,11 @@
 
 using namespace std;
 
-int calculaTerc(vector<int> &v, int i, vector<int> p, int L, int *clientes_att, vector<vector<int>> c, int *total_cost, vector<int> &terc, int *terc_size, int *rota_demanda);
+int calculaTerc(Solution solucao, vector<int> &v, int i, int clientes_atendidos, int L, vector<int> p, vector<vector<int>> c);
 
-void updateRoutes(vector<int> &v, int i, vector<int> d, int *clientes_att, vector<int> &terc, int *rota_demanda, int *terc_size);
+void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_demanda, int *terc_size, vector<int> &terc, vector<int> d);
 
-int buscaExaustivaN4(int L, int *total_cost, int *terc_size, int *total_clientes, vector<int> d, vector<int> p, vector<vector<int>> c, vector<vector<int>> &routes, vector<int> &terceirizados, vector<int> &rota_demanda, vector<int> &routes_size);
+Solution buscaExaustivaN4(Solution initial_solution, int L, vector<int> p, vector<int> d, vector<vector<int>> c);
+
 
 #endif
