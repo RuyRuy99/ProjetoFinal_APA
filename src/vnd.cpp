@@ -27,16 +27,13 @@ Solution best_neighbor(Solution vizinha , int key, int Q, int L, vector<int> d, 
             cout << "EXECUTANDO N3" << endl;
             return buscaExaustivaN3(vizinha, Q, L, d, p, c);
 
-        
         case 3:
             cout << "EXECUTANDO N2" << endl;
             return buscaExaustivaN2(vizinha, Q, d, p, c);
         
-        
         case 4:
             cout << "EXECUTANDO N4" << endl;
             return buscaExaustivaN4(vizinha, L, d, p, c);
-
 
         default:
             return vizinha;
