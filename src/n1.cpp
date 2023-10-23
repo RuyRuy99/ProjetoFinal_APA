@@ -12,9 +12,6 @@ using namespace std;
 int custoSwap(int custo_atual, vector<vector<int>> c, vector<int> &v, int i, int j){
 
     int novo_custo = custo_atual;
-    cout << "novo custo: " << custo_atual << endl;
-    cout << "random_i = " << i << endl;
-    cout << "random_j = " << j << endl;
     int ant_i = v[i-1];
     int prox_i = v[i+1];
     int ant_j = v[j-1];

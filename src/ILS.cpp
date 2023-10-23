@@ -3,8 +3,10 @@
 #include <random>
 #include <ctime>
 #include <cstdlib>
-#include "vnd.h"
+#include "readfile.h"
 #include "datatype.h"
+#include "vnd.h"
+
 #include "n1.h"
 
 using namespace std;
@@ -15,24 +17,27 @@ Solution pertubacao(Solution solucao, vector<vector<int>> c){
     srand((unsigned) time(0));
     
     int num_rotas = solucao.routes.size(); //Colocar na struct a quantidade de rotas
-    cout << "Numero de rotas: " << num_rotas << endl;
+    //cout << "Numero de rotas: " << num_rotas << endl;
     int custo_inicial = solucao.totalCost;
 
-    //Para cada rota
-    for (int k = 0; k < num_rotas; k++){
-
+    cout << "Custo inicial: " << custo_inicial << endl;
+    
+    for (int k = 0; k < num_rotas; k++){//Para cada rota
 
         // Escolhe um cliente aleatório da rota
-        int random_i = rand() % (solucao.route_size[k]-2) + 1;
-        int random_j = rand() % (solucao.route_size[k]-2) + 1;
+        int random_i = rand() % (solucao.route_size[k]-2) + 1; //Subtrai 2 por causa do deposito
+        int random_j = rand() % (solucao.route_size[k]-2) + 1; //Subtrai 2 por causa do deposito
 
-        cout << "Indices randomicos: " << random_i << " " << random_j << endl;
-        //swapInside(solucao.routes[k], random_i, random_j);
-
+        //cout << "Indices randomicos: " << random_i << " " << random_j << endl;
+        
+        //Calcula o novo custo da função objetivo
         int novo_custo = custoSwap(solucao.totalCost, c, solucao.routes[k], random_i, random_j);
-        cout << "Custo inicial: " << custo_inicial << endl;
-        cout << "Novo custo: " << novo_custo << endl;
+        //Atualiza o custo
+        solucao.totalCost = novo_custo;
+        //Atualiza o vetor de rotas
+        swapInside(solucao.routes[k], random_i, random_j);
 
+        cout << "Novo custo: " << solucao.totalCost << endl;
     }
     
     return solucao;

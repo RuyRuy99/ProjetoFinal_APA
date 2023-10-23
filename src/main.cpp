@@ -31,7 +31,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance1.txt");
+    dados = read_file("instance4.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -62,8 +62,6 @@ int main(void){
     
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
     printSolution(result);
-    cout << "Demanda de cada rotas: ";
-    print_array(&result.rota_dem[0], result.rota_dem.size());
 
     //busca exaustiva N1 para cada rota
     //cout << "EXECUTANDO N1" <<endl;
@@ -97,7 +95,8 @@ int main(void){
     print_array(&result6.rota_dem[0], result6.rota_dem.size());
     */
 
-   pertubacao(result, c);
+    Solution pert_solution = pertubacao(result, c);
+    printSolution(pert_solution);
 
     return 0;
 }
