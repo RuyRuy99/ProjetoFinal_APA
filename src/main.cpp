@@ -11,6 +11,7 @@
 #include "n2.h"
 #include "n3.h"
 #include "n4.h"
+#include "n5.h"
 #include "vnd.h"
 
 
@@ -35,8 +36,8 @@ int main(void){
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
 
     //print do vetor d
-    //cout << "VECTOR D FORA DA FUNCAO: ";
-    //print_array(&d[0], d.size());
+    cout << "VECTOR D FORA DA FUNCAO: ";
+    print_array(&d[0], d.size());
 
     //print do vetor p
     //cout << "VECTOR P FORA DA FUNCAO: ";
@@ -51,18 +52,18 @@ int main(void){
     cout << endl;
     */
     //print das variaveis após a função
-    //cout << "n = " << n << endl;
-    //cout << "k = " << k << endl;
-    //cout << "Q = " << Q << endl;
-    //cout << "L = " << L << endl;
-    //cout << "r = " << r << endl;
-    //cout << endl;
+    cout << "n = " << n << endl;
+    cout << "k = " << k << endl;
+    cout << "Q = " << Q << endl;
+    cout << "L = " << L << endl;
+    cout << "r = " << r << endl;
+    cout << endl;
     
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
     printSolution(result);
+    cout << "Demanda de cada rotas: ";
+    print_array(&result.rota_dem[0], result.rota_dem.size());
 
-
-    
     //busca exaustiva N1 para cada rota
     //cout << "EXECUTANDO N1" <<endl;
     //Solution result2 = buscaExaustivaN1(result, c);
@@ -83,10 +84,15 @@ int main(void){
     //Solution result5 = buscaExaustivaN4(result, L, p, d, c);
     //printSolution(result5);
 
+    //cout << "EXECUTANDO N5" <<endl;
+    //Solution result7 = buscaExaustivaN5(result, Q, d, p, c);
+    //printSolution(result7);
  
     cout << "EXECUTANDO O VND" << endl;
     Solution result6 = vnd(result, Q, L, d, p, c);
     printSolution(result6);
+    cout << "Demanda de cada rotas: ";
+    print_array(&result6.rota_dem[0], result6.rota_dem.size());
 
 
     return 0;

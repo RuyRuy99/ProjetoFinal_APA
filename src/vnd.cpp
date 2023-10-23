@@ -7,6 +7,7 @@
 #include "n2.h"
 #include "n3.h"
 #include "n4.h"
+#include "n5.h"
 
 
 
@@ -20,20 +21,29 @@ Solution best_neighbor(Solution vizinha , int key, int Q, int L, vector<int> d, 
 
     switch (key){
         case 1:
-            cout << "EXECUTANDO N1" << endl;
+            cout << "EXECUTANDO N1, SOLUCAO ANTES: " << endl;
+            printSolution(vizinha);
             return buscaExaustivaN1(vizinha, c);
 
         case 2:
-            cout << "EXECUTANDO N3" << endl;
+            cout << "EXECUTANDO N3, SOLUCAO ANTES: " << endl;
+            printSolution(vizinha);
             return buscaExaustivaN3(vizinha, Q, L, d, p, c);
 
+        //case 5:
+        //    cout << "EXECUTANDO N2, SOLUCAO ANTES: " << endl;
+        //    printSolution(vizinha);
+        //    return buscaExaustivaN2(vizinha, Q, d, p, c);
+        
         case 3:
-            cout << "EXECUTANDO N2" << endl;
-            return buscaExaustivaN2(vizinha, Q, d, p, c);
+            cout << "EXECUTANDO N4, SOLUCAO ANTES: " << endl;
+            printSolution(vizinha);
+            return buscaExaustivaN4(vizinha, L, d, p, c);
         
         case 4:
-            cout << "EXECUTANDO N4" << endl;
-            return buscaExaustivaN4(vizinha, L, d, p, c);
+            cout << "EXECUTANDO N5, SOLUCAO ANTES: " << endl;
+            printSolution(vizinha);
+            return buscaExaustivaN5(vizinha, Q, d, p, c);
 
         default:
             return vizinha;

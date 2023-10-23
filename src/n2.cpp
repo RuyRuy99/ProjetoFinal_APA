@@ -58,7 +58,7 @@ SwapResult custoSwapRoutes(int total_cost, int Q, vector<int> d, vector<int> p, 
     //Calcula o custo para realizar a troca do cliente i com o cliente j e diz se a troca é viável ou não (se a demanda total da rota não ultrapassa a capacidade do carro)
     int n1 = findMaxCostVertex(v1, c); // Encontra o vértice de maior custo da rota 1
     int n2 = findMaxCostVertex(v2, c); // Encontra o vértice de maior custo da rota 2
-
+    
     //Cria a estrutura do swap, setando os parâmetros	
     SwapResult result;
     result.total_cost = total_cost;
