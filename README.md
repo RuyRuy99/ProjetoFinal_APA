@@ -24,28 +24,3 @@ O algoritmo é baseado em uma abordagem gulosa, que pode não garantir a soluç�
 2. Arquivo de saída
 3. Criar a tabela
 4. Criar uma pasta com os arquivos de saída gerados durante os testes com cada instância
-
-
-> ILS
-
-Função ILS(maxIteracoes):
-    MelhorSolucao <- GereUmaSolucaoInicial()  # Gere uma solução inicial aleatória
-    MelhorCusto <- CalculeCusto(MelhorSolucao)  # Calcule o custo da melhor solução inicial
-
-    Para iteracao de 1 até maxIteracoes:
-        SolucaoVizinhanca <- RealizeBuscaLocal(MelhorSolucao)  # Aplique busca local para melhorar a solução
-        PerturbeSolucao(SolucaoVizinhanca)  # Introduza perturbações na solução
-
-        CustoVizinhanca <- CalculeCusto(SolucaoVizinhanca)
-
-        Se CustoVizinhanca < MelhorCusto:
-            MelhorSolucao <- SolucaoVizinhanca
-            MelhorCusto <- CustoVizinhanca
-
-    Retorne MelhorSolucao e MelhorCusto
-
-maxIteracoes é o número máximo de iterações a serem executadas.
-GereUmaSolucaoInicial() é uma função que gera uma solução inicial aleatória.
-CalculeCusto(Solucao) é uma função que calcula o custo da solução.
-RealizeBuscaLocal(Solucao) é uma função que aplica busca local para melhorar a solução.
-PerturbeSolucao(Solucao) é uma função que introduz perturbações na solução, por exemplo, realizando trocas aleatórias.
