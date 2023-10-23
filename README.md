@@ -15,91 +15,16 @@ O algoritmo é baseado em uma abordagem gulosa, que pode não garantir a soluç�
 
 > BUSCA EXAUSTIVA
 
-Testar todas as possibilidades das estruturas de vizinhança e verificar qual é a melhor
-
 > ESTRUTURAS DE VIZINHANÇA
-
-- A primeira deve realizar movimentos envolvendo uma única rota
-
-Swap(Troca de clientes): Consiste em trocar clientes de posição na mesma rota e recalcular o custo
-
-- A segunda deve realizar movimenos envolvedo múltiplas rotas
-
-Swap(Troca de clientes entre rotas)
-
-- A terceira deve ser capaz de lidar com entregas terceirizadas
 
 > VND
 
-- Dúvidas:
-
-1. É dentro do VND que eu vou colocar a busca exaustiva ?
-2. Se eu pegar a solução do algoritmo guloso e jogar na busca exaustiva e ela fizer 3 swap dentro da mesma rota(trocou 3 vertices de posição no vetor), ela é considerada uma solução vizinha à inicial(do guloso) ?
-3. Quando a estrutura de vizinhança mudar(não houver melhora), vamos pegar a solução que saiu do guloso, ou a que foi melhorada pela estrutura de vizinhança ?
-4. A Struct de solução está correta ?
-5. Busca exaustiva específica para cada estrutura de vizinhança ou uma genérica pra cada um ?
-
 - To Do:
-1. codar busca exaustiva pra cada estrutura de vizinhança...
-2. Tentar implementar o VND
+1. Implementar o ILS (opcional)
+2. Arquivo de saída
+3. Criar a tabela
+4. Criar uma pasta com os arquivos de saída gerados durante os testes com cada instância
 
--Pseudocode:
-def vnd(initial_solution):
-    k = 1
-    k_max = 3  # Suponha que temos 3 estruturas de vizinhança.
-    current_solution = initial_solution
-
-    while k <= k_max:
-        neighbor = best_neighbor(current_solution, k)
-
-        # Se a solução vizinha é melhor, atualizamos a solução atual.
-        if is_better(neighbor, current_solution):
-            current_solution = neighbor
-            k = 1  # Resetamos o contador de vizinhança.
-        else:
-            k += 1  # Passamos para a próxima estrutura de vizinhança.
-
-    return current_solution
-
-
-def best_neighbor(solution, k):
-    """ Retorna a melhor solução vizinha para uma dada estrutura de vizinhança k. """
-    # Supondo que temos funções para gerar a melhor solução vizinha para cada estrutura de vizinhança.
-    # Aqui, vamos usar um switch case (com if-elif) para selecionar a estrutura de vizinhança.
-
-    if k == 1:
-        return best_neighbor_structure1(solution)
-    elif k == 2:
-        return best_neighbor_structure2(solution)
-    elif k == 3:
-        return best_neighbor_structure3(solution)
-
-
-def is_better(solution1, solution2):
-    """ Retorna verdadeiro se solution1 é melhor que solution2. """
-    # Implemente a lógica de comparação aqui. Por exemplo, para problemas de minimização:
-    return cost(solution1) < cost(solution2)
-
-
-def best_neighbor_structure1(solution):
-    # Implemente a busca pela melhor solução vizinha usando a estrutura de vizinhança 1.
-    pass
-
-
-def best_neighbor_structure2(solution):
-    # Implemente a busca pela melhor solução vizinha usando a estrutura de vizinhança 2.
-    pass
-
-
-def best_neighbor_structure3(solution):
-    # Implemente a busca pela melhor solução vizinha usando a estrutura de vizinhança 3.
-    pass
-
-
-def cost(solution):
-    """ Calcule o custo (ou valor) de uma solução. """
-    # Implemente a função de custo (ou avaliação) para o seu problema.
-    pass
 
 > ILS
 
