@@ -17,6 +17,7 @@ int custoSwap(int custo_atual, vector<vector<int>> c, vector<int> &v, int i, int
     int ant_j = v[j-1];
     int prox_j = v[j+1];
 
+    cout << "novo custo: " << endl;
     //remove o custo de quem estava ligado em i
     novo_custo -= c[ant_i][v[i]];
     novo_custo -= c[v[i]][prox_i];
@@ -68,7 +69,7 @@ int custoSwap(int custo_atual, vector<vector<int>> c, vector<int> &v, int i, int
         }
 
     }
-
+    
     return novo_custo;
 }
 

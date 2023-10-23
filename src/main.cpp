@@ -13,6 +13,7 @@
 #include "n4.h"
 #include "n5.h"
 #include "vnd.h"
+#include "ILS.h"
 
 
 using namespace std;
@@ -30,7 +31,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance4.txt");
+    dados = read_file("instance1.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -87,13 +88,16 @@ int main(void){
     //cout << "EXECUTANDO N5" <<endl;
     //Solution result7 = buscaExaustivaN5(result, Q, d, p, c);
     //printSolution(result7);
- 
+    
+    /*
     cout << "EXECUTANDO O VND" << endl;
     Solution result6 = vnd(result, Q, L, d, p, c);
     printSolution(result6);
     cout << "Demanda de cada rotas: ";
     print_array(&result6.rota_dem[0], result6.rota_dem.size());
+    */
 
+   pertubacao(result, c);
 
     return 0;
 }
