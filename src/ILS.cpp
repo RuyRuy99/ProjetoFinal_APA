@@ -23,3 +23,7 @@ RealizeBuscaLocal(Solucao) é uma função que aplica busca local para melhorar 
 PerturbeSolucao(Solucao) é uma função que introduz perturbações na solução, por exemplo, realizando trocas aleatórias.
 
 */
+
+// Pertubação não se preocupa com os valores, só mexe na solução
+// Busca Local é o próprio vnd
+// Criterio de parada pode ser até 10 vezes sem achar uma melhor solução ou um tempo máximo
