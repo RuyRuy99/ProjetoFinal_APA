@@ -21,6 +21,7 @@ Solution pertubacao(Solution solucao, vector<vector<int>> c){
     //swapInside(solucao.routes[0], random_i, random_j);
     int novo_custo = custoSwap(solucao.totalCost, c, solucao.routes[0], random_i, random_j);
     cout << "custo: " << solucao.totalCost << endl;
+    return solucao;
 }
 
 Solution ILS(Solution solucao_inicial, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
