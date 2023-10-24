@@ -17,7 +17,7 @@ bool is_better(Solution solution1, Solution solution2){
 }
     
 // Retorna a melhor solução vizinha para uma das estruturas de vizinhança k
-Solution best_neighbor(Solution vizinha , int key, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
+Solution best_neighbor(Solution vizinha , int r, int key, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
 
     switch (key){
         case 1:
@@ -38,7 +38,7 @@ Solution best_neighbor(Solution vizinha , int key, int Q, int L, vector<int> d, 
         case 3:
             cout << "EXECUTANDO N4, SOLUCAO ANTES: " << endl;
             printSolution(vizinha);
-            return buscaExaustivaN4(vizinha, L, d, p, c);
+            return buscaExaustivaN4(vizinha, r, L, d, p, c);
         
         case 4:
             cout << "EXECUTANDO N5, SOLUCAO ANTES: " << endl;
@@ -50,7 +50,7 @@ Solution best_neighbor(Solution vizinha , int key, int Q, int L, vector<int> d, 
     }
 }
 
-Solution vnd(Solution initial_solution, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
+Solution vnd(Solution initial_solution, int r, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
 
     int k = 1; // Contador de vizinhança
     int k_max = 4;  // Quantidade de estruturas de vizinhança
@@ -63,7 +63,7 @@ Solution vnd(Solution initial_solution, int Q, int L, vector<int> d, vector<int>
 
 
         //cout << "Estrutura de vizinhanca: " << k << endl;
-        Solution sol_vizinha = best_neighbor(current_solution, k, Q, L, d, p, c);
+        Solution sol_vizinha = best_neighbor(current_solution, r, k, Q, L, d, p, c);
 
         //Verifica se a solução vizinha é melhor que a solução atual
         if (is_better(current_solution, sol_vizinha) == true){

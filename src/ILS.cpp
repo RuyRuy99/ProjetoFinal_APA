@@ -43,16 +43,16 @@ Solution pertubacao(Solution solucao, vector<vector<int>> c){
     return solucao;
 }
 
-Solution ILS(Solution solucao_inicial, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
+Solution ILS(Solution solucao_inicial, int r, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
 
     Solution S0  = solucao_inicial;
-    Solution S = vnd(S0, Q, L, d, p, c); // Busca local
+    Solution S = vnd(S0, r, Q, L, d, p, c); // Busca local
     int cont= 0;
 
     while(cont <= 10){ // Pode ser até 10 vezes sem achar uma melhor solução ou um tempo máximo
         
         Solution S1 = pertubacao(S,c); // Fazer perturbações na solução
-        Solution S2 = vnd(S1, Q, L, d, p, c); // Busca local
+        Solution S2 = vnd(S1, r, Q, L, d, p, c); // Busca local
 
         // Critério de Aceitação
         if(S2.totalCost < S.totalCost){

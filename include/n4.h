@@ -8,9 +8,8 @@ using namespace std;
 
 int calculaTerc(Solution solucao, vector<int> &v, int i, int clientes_atendidos, int L, vector<int> p, vector<vector<int>> c);
 
-void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_demanda, int *terc_size, vector<int> &terc, vector<int> d);
+void updateRoutes(Solution solucao, int k,vector<int> &v, int i, int r, int *clientes_atendidos, int *rota_demanda, int *terc_size,vector<int> &terc, vector<int> d);
 
-Solution buscaExaustivaN4(Solution initial_solution, int L, vector<int> p, vector<int> d, vector<vector<int>> c);
-
+Solution buscaExaustivaN4(Solution initial_solution, int r, int L, vector<int> d, vector<int> p, vector<vector<int>> c);
 
 #endif

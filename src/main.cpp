@@ -31,14 +31,14 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance4.txt");
+    dados = read_file("instance3.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
 
     //print do vetor d
-    cout << "VECTOR D FORA DA FUNCAO: ";
-    print_array(&d[0], d.size());
+    //cout << "VECTOR D FORA DA FUNCAO: ";
+    //print_array(&d[0], d.size());
 
     //print do vetor p
     //cout << "VECTOR P FORA DA FUNCAO: ";
@@ -53,15 +53,17 @@ int main(void){
     cout << endl;
     */
     //print das variaveis após a função
-    cout << "n = " << n << endl;
-    cout << "k = " << k << endl;
-    cout << "Q = " << Q << endl;
-    cout << "L = " << L << endl;
-    cout << "r = " << r << endl;
-    cout << endl;
+    //cout << "n = " << n << endl;
+    //cout << "k = " << k << endl;
+    //cout << "Q = " << Q << endl;
+    //cout << "L = " << L << endl;
+    //cout << "r = " << r << endl;
+    //cout << endl;
     
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
     printSolution(result);
+    cout << "Tamanho de cada rota: ";
+    print_array(&result.route_size[0], result.route_size.size());
 
     //busca exaustiva N1 para cada rota
     //cout << "EXECUTANDO N1" <<endl;
@@ -87,16 +89,16 @@ int main(void){
     //Solution result7 = buscaExaustivaN5(result, Q, d, p, c);
     //printSolution(result7);
     
-    /*
+    
     cout << "EXECUTANDO O VND" << endl;
-    Solution result6 = vnd(result, Q, L, d, p, c);
+    Solution result6 = vnd(result, r, Q, L, d, p, c);
     printSolution(result6);
-    cout << "Demanda de cada rotas: ";
-    print_array(&result6.rota_dem[0], result6.rota_dem.size());
-    */
+    cout << "Tamanho de cada rota: ";
+    print_array(&result6.route_size[0], result6.route_size.size());
+    
 
-    Solution pert_solution = pertubacao(result, c);
-    printSolution(pert_solution);
+    //Solution pert_solution = pertubacao(result, c);
+    //printSolution(pert_solution);
 
     return 0;
 }
