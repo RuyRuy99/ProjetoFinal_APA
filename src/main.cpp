@@ -15,6 +15,7 @@
 #include "vnd.h"
 #include "ILS.h"
 #include "file_exit.h"
+#include "checksolution.h"
 
 
 using namespace std;
@@ -63,13 +64,15 @@ int main(void){
     
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
     printSolution(result);
-    cout << "Tamanho de cada rota: ";
-    print_array(&result.route_size[0], result.route_size.size());
+    //cout << "Tamanho de cada rota: ";
+    //print_array(&result.route_size[0], result.route_size.size());
 
     //busca exaustiva N1 para cada rota
-    //cout << "EXECUTANDO N1" <<endl;
-    //Solution result2 = buscaExaustivaN1(result, c);
-    //printSo/ution(result2);
+    cout << "EXECUTANDO N1" <<endl;
+    Solution result2 = buscaExaustivaN1(result, c);
+    printSolution(result2);
+
+    doublecheck(result2, Q, L, r, d, p, c);
 
     
     //busca exaustiva N2 para cada rota
@@ -101,8 +104,8 @@ int main(void){
     printSolution(pert_solution);
    */
 
-    Solution ils = ILS(result, r, Q, L, d, p, c);
-    printSolution(ils);
+    //Solution ils = ILS(result, r, Q, L, d, p, c);
+    //printSolution(ils);
 
     //file_exit(r, c, p, result6);
 
