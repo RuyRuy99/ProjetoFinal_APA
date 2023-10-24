@@ -21,6 +21,5 @@ O algoritmo é baseado em uma abordagem gulosa, que pode não garantir a soluç�
 
 - To Do:
 1. Implementar o ILS (opcional)
-2. Arquivo de saída
 3. Criar a tabela
 4. Criar uma pasta com os arquivos de saída gerados durante os testes com cada instância

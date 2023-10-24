@@ -5,42 +5,33 @@
 
 using namespace std;
 
-/*
-  Modelo do arquivo:
-
-    <Valor total da solução>
-    <custo de roteamento>
-    <custo associado a utilização dos veículos>
-    <custo de terceirização>
-
-    <Lista de clientes terceirizados>
-
-    <Número de rotas>
-    <Rota 1>
-    <Rota 2>
-    ...
-
-*/
-
+// Função para calcular o custa da terceirização
 int cost_terc(vector<int> p, vector<int> &terceirizados, int *terc_size){
 
     int custo = 0;
     for(int i = 0; i < *terc_size; i++){
-        custo += p[terceirizados[i]];
+        custo += p[terceirizados[i]-1];
     }
 
     return custo;
 }
 
-int cost_rotas(){
-
+// Função para calcular o custo da rota
+int calcularCustoRota(vector<vector<int>> routes, vector<vector<int>> c, vector<int> &route_size){
+    
     int custo = 0;
-
+    for(int i=0; i < route_size.size(); i++){
+        for(int j = 0; j < routes[i].size()-1; j++){
+            int origem = routes[i][j];
+            int destino = routes[i][j + 1];
+            custo += c[origem][destino];
+        }
+    }
 
     return custo;
 }
 
-void file_exit(int r, vector<vector<int>> &routes, vector<int> &terceirizados, vector<int> &route_size, int *totalCost, int *total_clientes, int *terc_size) {
+void file_exit(int r, vector<vector<int>> c, vector<int> p, Solution solucao){
 
     // Nome do arquivo de saida
     const char* exit = "saida.txt";
@@ -53,18 +44,31 @@ void file_exit(int r, vector<vector<int>> &routes, vector<int> &terceirizados, v
         cerr << "Erro ao abrir o arquivo de saida." << endl;
         return;
     
-    }else{
+    }else{ // Escrevendo no arquivo
 
-        arquivoSaida << " " << *totalCost << endl; // Valor total da solução
+        arquivoSaida << "" << solucao.totalCost << endl; // Valor total da solução
+        arquivoSaida << "" << calcularCustoRota(solucao.routes, c, solucao.route_size) << endl; // custo de roteamento
+        arquivoSaida << "" << solucao.route_size.size() * r << endl; // custo associado a utilização dos veículos
+        arquivoSaida << "" << cost_terc(p, solucao.terceirizados, &solucao.terc_size) << endl; //custo de terceirização
+        
+        arquivoSaida << endl; // Pular linha
 
-        arquivoSaida << " " << route_size.size() * r << endl; // custo associado a utilização dos veículos
-
-        arquivoSaida << " " << route_size.size() << endl; // Número de rotas
+        for (const int& elemento : solucao.terceirizados){
+            arquivoSaida << elemento << " ";
+        }arquivoSaida << endl;
+        
+        arquivoSaida << endl; // Pular linha
+ 
+        arquivoSaida << "" << solucao.route_size.size(); // Número de rotas
 
         // Adicionar as rotas
-        for(int i=0; i < route_size.size(); i++){
-            arquivoSaida << " " << &routes[i] << endl; 
-        }
+        for(int i=0; i < solucao.route_size.size(); i++){
+            arquivoSaida << endl;
+            for (size_t j = 0; j < solucao.routes[i].size(); j++) {
+                arquivoSaida << solucao.routes[i][j] << " ";
+            
+            }
+        }   
 
     }
 

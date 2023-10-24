@@ -14,6 +14,7 @@
 #include "n5.h"
 #include "vnd.h"
 #include "ILS.h"
+#include "file_exit.h"
 
 
 using namespace std;
@@ -31,7 +32,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance3.txt");
+    dados = read_file("instance1.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -89,16 +90,21 @@ int main(void){
     //Solution result7 = buscaExaustivaN5(result, Q, d, p, c);
     //printSolution(result7);
     
-    
+
     cout << "EXECUTANDO O VND" << endl;
     Solution result6 = vnd(result, r, Q, L, d, p, c);
     printSolution(result6);
     cout << "Tamanho de cada rota: ";
     print_array(&result6.route_size[0], result6.route_size.size());
     
+    /*
+    Solution pert_solution = pertubacao(result, c);
+    printSolution(pert_solution);
+    */
 
-    //Solution pert_solution = pertubacao(result, c);
-    //printSolution(pert_solution);
+    file_exit(r, c, p, result6);
+
+
 
     return 0;
 }

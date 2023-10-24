@@ -6,7 +6,6 @@
 #include "readfile.h"
 #include "datatype.h"
 #include "vnd.h"
-
 #include "n1.h"
 
 using namespace std;
@@ -57,8 +56,9 @@ Solution ILS(Solution solucao_inicial, int r, int Q, int L, vector<int> d, vecto
         // Critério de Aceitação
         if(S2.totalCost < S.totalCost){
             S = S2;
+        }else{
+            cont++;
         }
-        cont++;
     }
 
     return S;
