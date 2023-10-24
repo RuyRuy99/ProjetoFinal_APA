@@ -36,7 +36,7 @@ int calculaTerc(Solution solucao, vector<int> &v, int i, int clientes_atendidos,
     return novo_custo;
 }
 
-void updateRoutes(Solution solucao, int k,vector<int> &v, int i, int r, int *clientes_atendidos, int *rota_demanda, int *terc_size,vector<int> &terc, vector<int> d){
+void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_demanda, int *terc_size,vector<int> &terc, vector<int> d){
 
     // Remove a demanda do cliente que vai ser terceirizado
     *rota_demanda = *rota_demanda - d[v[i]-1];
@@ -53,18 +53,6 @@ void updateRoutes(Solution solucao, int k,vector<int> &v, int i, int r, int *cli
 
     // Aumentar o tamanho do vetor de terceirizados
     *terc_size += 1;
-
-    //Remove o custo da rota se a rota ficar vazia, ou a demanda == 0
-    if (*rota_demanda == 0){
-        //cout << "ROTA ZEROU AMEM" << endl;
-        //Remove o custo do uso do carro
-        solucao.totalCost -= r;
-        
-        
-
-
-
-    }
 }
 
 
@@ -104,12 +92,22 @@ Solution buscaExaustivaN4(Solution initial_solution, int r, int L, vector<int> d
     // Depois de verificar todos os clientes em todas as rotas, se uma terceirização benéfica foi encontrada, realizamos essa única operação.
     if (min_rota_index != -1) {
         //cout << "Vou terceirizar o cliente " << sol_vizinha.routes[min_rota_index][min_i] << endl;
-        cout << "Clientes atendidos na rota: " << min_rota_index+1 << " = " << sol_vizinha.route_size[min_rota_index]-1 << endl;
-        //Remoção da quantidade de clientes atendidos na rota
-        sol_vizinha.route_size[min_rota_index] -= 1;
-        updateRoutes(sol_vizinha, min_rota_index, sol_vizinha.routes[min_rota_index], min_i, r, &sol_vizinha.total_clientes,&sol_vizinha.rota_dem[min_rota_index], &sol_vizinha.terc_size, sol_vizinha.terceirizados, d);
+        updateRoutes(sol_vizinha.routes[min_rota_index], min_i, &sol_vizinha.total_clientes,&sol_vizinha.rota_dem[min_rota_index], &sol_vizinha.terc_size, sol_vizinha.terceirizados, d);
+        sol_vizinha.route_size[min_rota_index] -= 1;//Remoção da quantidade de clientes atendidos na rota
         sol_vizinha.totalCost = min_custo_global;
-    }   
+        cout << "Clientes atendidos na rota: " << min_rota_index+1 << " = " << sol_vizinha.route_size[min_rota_index] << endl;
+        //Verifica se a rota ficou vazia
+        if (sol_vizinha.route_size[min_rota_index] == 0){
+            //Remove o custo de um carro
+            sol_vizinha.totalCost -= r;
+            //Remove a rota vazia
+            sol_vizinha.routes.erase(sol_vizinha.routes.begin()+min_rota_index);
+            //Remove o tamanho da rota vazia
+            sol_vizinha.route_size.erase(sol_vizinha.route_size.begin()+min_rota_index);
+            //Remove a demanda da rota vazia
+            sol_vizinha.rota_dem.erase(sol_vizinha.rota_dem.begin()+min_rota_index);
+        }
+    }
     else{
         //cout << "Nenhuma operação de terceirizacao vantajosa foi encontrada." << endl;
     }
