@@ -17,7 +17,7 @@ void doublecheck(Solution solucao, int Q, int L, int r, vector<int> d, vector<in
 
     //Adiciona o custo dos terceirizados
     for (int i = 0; i < solucao.terceirizados.size(); i++){
-        //cout << "Custo de terceirizar o cliente " << solucao.terceirizados[i]-1 << " = " << p[solucao.terceirizados[i]] << endl;
+        //cout << "Custo de terceirizar o cliente " << solucao.terceirizados[i] << " = " << p[solucao.terceirizados[i]-1] << endl;
         custo_real += p[solucao.terceirizados[i]-1];
     }
 

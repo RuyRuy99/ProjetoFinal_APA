@@ -8,7 +8,6 @@
 #include "guloso.h"
 #include "showsolution.h"
 #include "n1.h"
-#include "n2.h"
 #include "n3.h"
 #include "n4.h"
 #include "n5.h"
@@ -67,47 +66,46 @@ int main(void){
     //cout << "Tamanho de cada rota: ";
     //print_array(&result.route_size[0], result.route_size.size());
 
+    /*
     //busca exaustiva N1 para cada rota
     cout << "EXECUTANDO N1" <<endl;
     Solution result2 = buscaExaustivaN1(result, c);
     printSolution(result2);
     doublecheck(result2, Q, L, r, d, p, c);
-
+    */
     
-    //busca exaustiva N2 para cada rota
-    cout << "EXECUTANDO N2" <<endl;
-    Solution result3 = buscaExaustivaN2(result, Q, d, p, c);
-    printSolution(result3);
-    doublecheck(result3, Q, L, r, d, p, c);
 
-    
+    /*    
     cout << "EXECUTANDO N3" << endl;
     Solution result4 = buscaExaustivaN3(result, Q, L, d, p, c);
     printSolution(result4);
     doublecheck(result4, Q, L, r, d, p, c);
-    
+    */
 
-    //cout << "EXECUTANDO N4" <<endl;
-    //Solution result5 = buscaExaustivaN4(result, L, p, d, c);
-    //printSolution(result5);
+    /*
+    cout << "EXECUTANDO N4" <<endl;
+    Solution result5 = buscaExaustivaN4(result, r, L, d, p, c);
+    printSolution(result5);
+    doublecheck(result5, Q, L, r, d, p, c);
+    */
 
-    //cout << "EXECUTANDO N5" <<endl;
-    //Solution result7 = buscaExaustivaN5(result, Q, d, p, c);
-    //printSolution(result7);
-    
+    /*
+    cout << "EXECUTANDO N5" <<endl;
+    Solution result7 = buscaExaustivaN5(result, Q, d, p, c);
+    printSolution(result7);
+    doublecheck(result7, Q, L, r, d, p, c);
+    */
+
     /*
     cout << "EXECUTANDO O VND" << endl;
     Solution result6 = vnd(result, r, Q, L, d, p, c);
     printSolution(result6);
-    cout << "Tamanho de cada rota: ";
-    print_array(&result6.route_size[0], result6.route_size.size());
-    
-    Solution pert_solution = pertubacao(result, c);
-    printSolution(pert_solution);
-   */
+    doublecheck(result6, Q, L, r, d, p, c);
+    */
 
-    //Solution ils = ILS(result, r, Q, L, d, p, c);
-    //printSolution(ils);
+    Solution ils = ILS(result, r, Q, L, d, p, c);
+    printSolution(ils);
+    doublecheck(ils, Q, L, r, d, p, c);
 
     //file_exit(r, c, p, result6);
 

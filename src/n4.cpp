@@ -18,6 +18,8 @@ int calculaTerc(Solution solucao, vector<int> &v, int i, int clientes_atendidos,
     if (clientes_atendidos-1 >= L){
 
         int custo_manter_i = c[ant_i][v[i]] + c[v[i]][prox_i];
+        
+        
         //cout << "Custo de manter " << v[i] << " = " << custo_manter_i << endl;
 
         // Remove o custo de manter o cliente i do custo total
@@ -26,12 +28,12 @@ int calculaTerc(Solution solucao, vector<int> &v, int i, int clientes_atendidos,
 
         // Adiciona o custo da aresta de ligação
         novo_custo += c[ant_i][prox_i];
-        //cout << "Custo da ligacao sem i = " << c[ant_i][prox_i] << endl;
         //cout << "Custo sem o cliente na rota = " << novo_custo << endl;
 
         // Adiciona o custo de terceirizar o cliente i no custo total
         novo_custo += p[v[i]-1];
         //cout << "Custo total com i terceirizado = " << novo_custo << endl;
+        //cout << "Novo custo: " << novo_custo << endl;
     }
     return novo_custo;
 }
@@ -40,9 +42,10 @@ void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_dema
 
     // Remove a demanda do cliente que vai ser terceirizado
     *rota_demanda = *rota_demanda - d[v[i]-1];
-    cout << "Demanda da rota = " << *rota_demanda << endl;
+    //cout << "Demanda da rota = " << *rota_demanda << endl;
         
     // Adiciona o cliente i na lista de terceirizados
+    //cout << "Vou terceirizar o cliente " << v[i] << endl;
     terc.push_back(v[i]);
 
     // Remove o cliente i da rota
@@ -60,13 +63,13 @@ Solution buscaExaustivaN4(Solution initial_solution, int r, int L, vector<int> d
     //Inicia a solução vizinha...
     Solution sol_vizinha = initial_solution;
 
-    int num_rotas = sol_vizinha.routes.size();
-    //cout << "Numero de rotas = " << num_rotas << endl;
-
     // Inicializar variáveis para rastrear a melhor operação de terceirização.
     int min_custo_global = initial_solution.totalCost;
     int min_rota_index = -1;
     int min_i = -1;
+
+    int num_rotas = sol_vizinha.routes.size();
+    //cout << "Numero de rotas = " << num_rotas << endl;
 
     for (int k = 0; k < num_rotas; k++){
         //cout << "ROTA: " << k+1 << endl;

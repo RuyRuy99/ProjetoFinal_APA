@@ -112,7 +112,7 @@ Solution buscaExaustivaN5(Solution initial_solution, int Q, vector<int> d, vecto
     int initial_cost = initial_solution.totalCost;
 
     for (int i = 0; i < num_rotas; i++){//Para cada rota i
-        for (int j= i+1; j < num_rotas; j++){ //Para cada rota j
+        for (int j = i+1; j < num_rotas; j++){ //Para cada rota j
             //cout << "\n" << endl;
             //cout << "CUSTO ATUAL: " << min_custo_global << endl;
             //cout << "SWAP DA ROTA " << i+1 << " COM A ROTA "<< j+1 << endl;
