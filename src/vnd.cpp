@@ -9,8 +9,6 @@
 #include "n4.h"
 #include "n5.h"
 
-
-
 // Comparar o custo da solution1 com o custo da solution2 e retornar quem é melhor (true)
 bool is_better(Solution solution1, Solution solution2){
     return solution1.totalCost > solution2.totalCost;
@@ -21,13 +19,13 @@ Solution best_neighbor(Solution vizinha , int r, int key, int Q, int L, vector<i
 
     switch (key){
         case 1:
-            cout << "EXECUTANDO N1, SOLUCAO ANTES: " << endl;
-            printSolution(vizinha);
+            //cout << "EXECUTANDO N1, SOLUCAO ANTES: " << endl;
+            //printSolution(vizinha);
             return buscaExaustivaN1(vizinha, c);
 
         case 2:
-            cout << "EXECUTANDO N3, SOLUCAO ANTES: " << endl;
-            printSolution(vizinha);
+            //cout << "EXECUTANDO N3, SOLUCAO ANTES: " << endl;
+            //printSolution(vizinha);
             return buscaExaustivaN3(vizinha, Q, L, d, p, c);
 
         //case 5:
@@ -36,13 +34,13 @@ Solution best_neighbor(Solution vizinha , int r, int key, int Q, int L, vector<i
         //    return buscaExaustivaN2(vizinha, Q, d, p, c);
         
         case 3:
-            cout << "EXECUTANDO N4, SOLUCAO ANTES: " << endl;
-            printSolution(vizinha);
+            //cout << "EXECUTANDO N4, SOLUCAO ANTES: " << endl;
+            //printSolution(vizinha);
             return buscaExaustivaN4(vizinha, r, L, d, p, c);
         
         case 4:
-            cout << "EXECUTANDO N5, SOLUCAO ANTES: " << endl;
-            printSolution(vizinha);
+            //cout << "EXECUTANDO N5, SOLUCAO ANTES: " << endl;
+            //printSolution(vizinha);
             return buscaExaustivaN5(vizinha, Q, d, p, c);
 
         default:
@@ -67,8 +65,8 @@ Solution vnd(Solution initial_solution, int r, int Q, int L, vector<int> d, vect
 
         //Verifica se a solução vizinha é melhor que a solução atual
         if (is_better(current_solution, sol_vizinha) == true){
-            cout << "Melhorou a solucao" << endl;
-            cout << "Novo melhor custo: " << sol_vizinha.totalCost << endl;
+            //cout << "Melhorou a solucao" << endl;
+            //cout << "Novo melhor custo: " << sol_vizinha.totalCost << endl;
             current_solution = sol_vizinha;
             k = 1;
         }
