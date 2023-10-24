@@ -94,6 +94,7 @@ void swapRoutes2(vector<int> &v1, vector<int> &v2, int n1, int n2, int i, int j,
     //Atualiza a demanda total da rota j
     d_routs[j] -= d[cliente2-1];
     d_routs[j] += d[cliente1-1];
+    cout << "Fiz o SWAP" << endl;
 
 }
 

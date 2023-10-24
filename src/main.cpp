@@ -103,9 +103,11 @@ int main(void){
     doublecheck(result6, Q, L, r, d, p, c);
     */
 
-    Solution ils = ILS(result, r, Q, L, d, p, c);
-    printSolution(ils);
-    doublecheck(ils, Q, L, r, d, p, c);
+    //Solution ils = ILS(result, r, Q, L, d, p, c);
+    //printSolution(ils);
+    //doublecheck(ils, Q, L, r, d, p, c);
+
+    pertubacao(result, Q, d, c);
 
     //file_exit(r, c, p, result6);
 
