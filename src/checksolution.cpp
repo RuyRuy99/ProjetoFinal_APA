@@ -13,18 +13,21 @@ void doublecheck(Solution solucao, int Q, int L, int r, vector<int> d, vector<in
 
     //Adiciona o custo de cada carro
     custo_real += solucao.routes.size() * r;
+    //cout << "qtd de rotas * r = " << solucao.routes.size() * r << endl;
 
     //Adiciona o custo dos terceirizados
     for (int i = 0; i < solucao.terceirizados.size(); i++){
-        custo_real += p[solucao.terceirizados[i]];
+        //cout << "Custo de terceirizar o cliente " << solucao.terceirizados[i]-1 << " = " << p[solucao.terceirizados[i]] << endl;
+        custo_real += p[solucao.terceirizados[i]-1];
     }
 
     //Adiciona o custo de cada rota
     for (int k = 0 ; k < solucao.routes.size(); k++){
         for (int i = 0; i < solucao.routes[k].size()-1; i++){
+            //cout << "Custo da aresta " << solucao.routes[k][i] << " -> " << solucao.routes[k][i+1] << " = " << c[solucao.routes[k][i]][solucao.routes[k][i+1]] << endl;
             custo_real += c[solucao.routes[k][i]][solucao.routes[k][i+1]];
         }
     }
 
-    cout << "O valor da função objetivo é: " << custo_real << endl;
+    cout << "CUSTO REAL: " << custo_real << endl;
 }

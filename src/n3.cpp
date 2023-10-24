@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int melhora_rotas(Solution solucao, int k, vector<int> v, int i, vector<int> terc, int j, int Q ,int L, vector<int> d, vector<vector<int>> c){
+int melhora_rotas(Solution solucao, int k, vector<int> v, int i, vector<int> terc, int j, int Q ,int L, vector<int> d, vector<int> p, vector<vector<int>> c){
     
     int ant_i = v[i-1];
     int prox_i = v[i+1];
@@ -30,9 +30,13 @@ int melhora_rotas(Solution solucao, int k, vector<int> v, int i, vector<int> ter
             //cout << "Vou fazer o SWAP" << endl;
             //Remove o custo do cliente i do custo total
             novo_custo -= custo_manter_i;
+            //Adicionar o custo de terceirizar esse cliente
+            novo_custo += p[v[i]-1];
 
             //Adiciona o custo do terceirizado no custo total
             novo_custo += custo_manter_terc;
+            //Remover o custo de terceirizar esse cliente
+            novo_custo -= p[terc[j]-1];
 
             // OBS: Como estou fazendo um swap de um terceirizado com rota não precisa decrementar o clientes_att
         }
@@ -75,7 +79,7 @@ Solution buscaExaustivaN3(Solution initial_solution, int Q, int L, vector<int> d
             for (int j = 0; j < sol_vizinha.terc_size; j++){ //Percorrer os terceirizados
                 
                 //Calcula o novo custo
-                int novo_custo = melhora_rotas(sol_vizinha, k, sol_vizinha.routes[k], i, sol_vizinha.terceirizados, j, Q, L, d, c);
+                int novo_custo = melhora_rotas(sol_vizinha, k, sol_vizinha.routes[k], i, sol_vizinha.terceirizados, j, Q, L, d, p, c);
                 //cout << "Novo custo = " << novo_custo << endl;
 
                 if (novo_custo < min_custo_global){

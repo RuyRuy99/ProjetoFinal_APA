@@ -33,7 +33,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance3.txt");
+    dados = read_file("instance4.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -71,18 +71,20 @@ int main(void){
     cout << "EXECUTANDO N1" <<endl;
     Solution result2 = buscaExaustivaN1(result, c);
     printSolution(result2);
-
     doublecheck(result2, Q, L, r, d, p, c);
 
     
     //busca exaustiva N2 para cada rota
-    //cout << "EXECUTANDO N2" <<endl;
-    //Solution result3 = buscaExaustivaN2(result, Q, d, p, c);
-    //printSolution(result3);
+    cout << "EXECUTANDO N2" <<endl;
+    Solution result3 = buscaExaustivaN2(result, Q, d, p, c);
+    printSolution(result3);
+    doublecheck(result3, Q, L, r, d, p, c);
+
     
-    //cout << "EXECUTANDO N3" << endl;
-    //Solution result4 = buscaExaustivaN3(result, Q, L, d, p, c);
-    //printSolution(result4);
+    cout << "EXECUTANDO N3" << endl;
+    Solution result4 = buscaExaustivaN3(result, Q, L, d, p, c);
+    printSolution(result4);
+    doublecheck(result4, Q, L, r, d, p, c);
     
 
     //cout << "EXECUTANDO N4" <<endl;
