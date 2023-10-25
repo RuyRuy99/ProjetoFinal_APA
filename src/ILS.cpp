@@ -14,6 +14,12 @@
 
 using namespace std;
 
+struct SwapResult { // Struct  para retornar o resultado do swap
+    int total_cost; // Custo total
+    int idx_cliente1; // Indice do cliente 1
+    int idx_cliente2; // Indice do cliente 2
+};
+
 Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> c){
 
     // Inicializa o gerador de números aleátorios com o relógio
@@ -23,10 +29,10 @@ Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> 
     //cout << "Numero de rotas: " << num_rotas << endl;
     int custo_inicial = solucao.totalCost;
 
-    for (int k = 0; k < num_rotas; k++){//Para cada rota
+    for (int k = 0; k < 2; k++){//Para cada rota
 
 
-        for (int i = 0; i < 10; i++){ //Realiza 10 perturbações
+        for (int i = 0; i < 1; i++){ //Realiza 10 perturbações
 
             //10 SWAP entre rotas N5
 
@@ -34,29 +40,39 @@ Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> 
             int r1 = rand() % num_rotas;
             int r2 = rand() % num_rotas;
 
-            int cliente_1 = rand() % (solucao.route_size[r1]) + 1; 
-            int cliente_2 = rand() % (solucao.route_size[r2]) + 1;
+            int indice_cliente1 = rand() % (solucao.route_size[r1]) + 1; 
+            int indice_cliente2 = rand() % (solucao.route_size[r2]) + 1;
 
-            //check if is possible to swap
+            if(r1 != r2){
+                int cliente_1 = solucao.routes[r1][indice_cliente1];
+                int cliente_2 = solucao.routes[r2][indice_cliente2];
 
-            bool verifica = checkSwap2(Q,d, solucao.routes[r1], solucao.routes[r2], solucao.rota_dem, r1, r2, cliente_1,cliente_2);
-            if (verifica){
-            //Faz o swap Inter rotas
+                cout << "\n" << endl;
+                cout << "Verificando o swap da rota " << r1 << " com a rota " << r2 << endl;
+                cout << "Os cliente analisados: " << cliente_1 << " e " << cliente_2 << endl;
 
-            //cria a structswapresult
-            SwapResult result = custoSwapRoutes2(solucao.totalCost, Q, d, c, solucao.routes[r1], solucao.routes[r2], solucao.rota_dem, r1, r2);
-            solucao.totalCost = result.total_cost;
-            swapRoutes2(solucao.routes[r1], solucao.routes[r2], result.n1, result.n2, r1, r2, solucao.rota_dem, d);
+                bool verifica = checkSwap(Q, d, solucao.rota_dem, r1, r2, cliente_1, cliente_2);
 
+                cout << "Status: " << verifica << endl;
 
+                if (verifica){
+                //Faz o swap Inter rotas
+                //cria a structswapresult
+                    cout << "\n" << endl;
+                    cout << "Fazendo o swap entre as rotas: " << r1 << " e " << r2 << endl;
+                    //cout << "Os clientes escolhidos foram: " << cliente_1 << " e " << cliente_2 << endl;
+                    cout << "Antes de perturbar: "<< solucao.totalCost <<endl;
+                    solucao.totalCost = CaculaCustoSwap(solucao.totalCost, c, solucao.routes[r1], solucao.routes[r1], indice_cliente1, indice_cliente2);
+                    swapRoutes(solucao.rota_dem, d, solucao.routes[r1], solucao.routes[r2], indice_cliente1, indice_cliente2, r1, r2);
+                    cout << "Depois de perturbar: "<< solucao.totalCost <<endl;
+                }
+                else{
+                    cout << "\n" << endl;
+                    cout << "Não pode fazer o swap entre as rotas: " << r1 << " e " << r2 << endl;
+                    //cout << "Os clientes escolhidos foram: " << cliente_1 << " e " << cliente_2 << endl;
+                }
             }
-
-
-
-
-
-
-
+            //check if is possible to swap
             /*  
             // Escolhe um cliente aleatório da rota
             //cout << "Tamanho da rotas: " << solucao.route_size[k] << endl;

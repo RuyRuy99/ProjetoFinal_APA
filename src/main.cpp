@@ -8,6 +8,7 @@
 #include "guloso.h"
 #include "showsolution.h"
 #include "n1.h"
+#include "n2.h"
 #include "n3.h"
 #include "n4.h"
 #include "n5.h"
@@ -32,7 +33,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instance4.txt");
+    dados = read_file("instances/inputs/n64k9_A.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -96,20 +97,33 @@ int main(void){
     doublecheck(result7, Q, L, r, d, p, c);
     */
 
-    /*
+    
     cout << "EXECUTANDO O VND" << endl;
     Solution result6 = vnd(result, r, Q, L, d, p, c);
     printSolution(result6);
     doublecheck(result6, Q, L, r, d, p, c);
-    */
+    
 
     //Solution ils = ILS(result, r, Q, L, d, p, c);
     //printSolution(ils);
     //doublecheck(ils, Q, L, r, d, p, c);
-
-    pertubacao(result, Q, d, c);
-
+    /*
+    Solution teste = pertubacao(result, Q, d, c);
+    cout << "\n" << endl;
+    printSolution(teste);
+    doublecheck(teste, Q, L, r, d, p, c);
+    */
     //file_exit(r, c, p, result6);
 
+    /*
+    pertubacao(result, c);
+    int i = 1;
+    int j = 3;
+    cout << "Status check: " << checkReinsertion(Q, d, result.rota_dem, result.routes[0], 0, 2, i)<< endl;
+    costReinsertion(&result.totalCost, c, result.routes[0], result.routes[2], i, j); //eu posso tirar entre as posições 1 e 3
+    Reinsertion(c, result.routes[0], result.routes[2], i, j); //eu posso tirar entre as posições 1 e 3
+    cout << "\n" << endl;
+    printSolution(result);
+    */
     return 0;
 }
