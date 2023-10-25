@@ -34,7 +34,7 @@ int calcularCustoRota(vector<vector<int>> routes, vector<vector<int>> c, vector<
 void file_exit(int r, vector<vector<int>> c, vector<int> p, Solution solucao){
 
     // Nome do arquivo de saida
-    const char* exit = "saida.txt";
+    const char* exit = "Outputs/n14k5_A.txt";
 
     // Objeto de fluxo de saída (ofstream)
     ofstream arquivoSaida(exit);
