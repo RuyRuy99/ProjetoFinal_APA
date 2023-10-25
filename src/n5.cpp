@@ -42,8 +42,10 @@ int CaculaCustoSwap(int total_cost, vector<vector<int>> c, vector<int> &rota1, v
     int prox_cliente_i = rota1[idx_cliente_i + 1];
     int ant_cliente_j = rota2[idx_cliente_j - 1];
     int prox_cliente_j = rota2[idx_cliente_j + 1];
-    /*
+    
     cout<<"\n"<<endl;
+    cout<< "cliente i: " << cliente_i << ", indice: " << idx_cliente_i << endl;
+    cout<< "cliente j: " << cliente_j << ", indice: " << idx_cliente_j << endl;
     cout<< "Custo da aresta removida ( " << ant_cliente_i << ", " << cliente_i << "): " << c[ant_cliente_i][cliente_i] << endl;
     cout<< "Custo da aresta removida ( " << cliente_i << ", " << prox_cliente_i << "): " << c[cliente_i][prox_cliente_i] << endl;
     cout<< "Custo da aresta removida ( " << ant_cliente_j << ", " << cliente_j << "): " << c[ant_cliente_j][cliente_j] << endl;
@@ -52,7 +54,7 @@ int CaculaCustoSwap(int total_cost, vector<vector<int>> c, vector<int> &rota1, v
     cout<< "Custo da aresta adicionada ( " << cliente_j << ", " << prox_cliente_i << "): " << c[cliente_j][prox_cliente_i] << endl;
     cout<< "Custo da aresta adicionada ( " << ant_cliente_j << ", " << cliente_i << "): " << c[ant_cliente_j][cliente_i] << endl;
     cout<< "Custo da aresta adicionada ( " << cliente_i << ", " << prox_cliente_j << "): " << c[cliente_i][prox_cliente_j] << endl;
-    */
+    
     int remocoes = c[ant_cliente_i][cliente_i] + c[cliente_i][prox_cliente_i] + c[ant_cliente_j][cliente_j] + c[cliente_j][prox_cliente_j];
     int adicoes = c[ant_cliente_i][cliente_j] + c[cliente_j][prox_cliente_i] + c[ant_cliente_j][cliente_i] + c[cliente_i][prox_cliente_j];
     

@@ -33,7 +33,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("instances/inputs/n64k9_A.txt");
+    dados = read_file("instances/inputs/n14k5_A.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -97,22 +97,22 @@ int main(void){
     doublecheck(result7, Q, L, r, d, p, c);
     */
 
-    
+    /*
     cout << "EXECUTANDO O VND" << endl;
     Solution result6 = vnd(result, r, Q, L, d, p, c);
     printSolution(result6);
     doublecheck(result6, Q, L, r, d, p, c);
-    
+    */
 
     //Solution ils = ILS(result, r, Q, L, d, p, c);
     //printSolution(ils);
     //doublecheck(ils, Q, L, r, d, p, c);
-    /*
+    
     Solution teste = pertubacao(result, Q, d, c);
     cout << "\n" << endl;
     printSolution(teste);
     doublecheck(teste, Q, L, r, d, p, c);
-    */
+    
     //file_exit(r, c, p, result6);
 
     /*

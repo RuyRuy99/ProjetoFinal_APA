@@ -29,26 +29,27 @@ Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> 
     //cout << "Numero de rotas: " << num_rotas << endl;
     int custo_inicial = solucao.totalCost;
 
-    for (int k = 0; k < 2; k++){//Para cada rota
+    for (int k = 0; k < num_rotas; k++){//Para cada rota
 
 
-        for (int i = 0; i < 1; i++){ //Realiza 10 perturbações
+        for (int i = 0; i < 10; i++){ //Realiza 10 perturbações
 
             //10 SWAP entre rotas N5
 
             // Escolhe uma rota aleatória
+
             int r1 = rand() % num_rotas;
             int r2 = rand() % num_rotas;
 
             int indice_cliente1 = rand() % (solucao.route_size[r1]) + 1; 
             int indice_cliente2 = rand() % (solucao.route_size[r2]) + 1;
-
+            
             if(r1 != r2){
                 int cliente_1 = solucao.routes[r1][indice_cliente1];
                 int cliente_2 = solucao.routes[r2][indice_cliente2];
 
                 cout << "\n" << endl;
-                cout << "Verificando o swap da rota " << r1 << " com a rota " << r2 << endl;
+                cout << "Verificando o swap da rota " << r1 +1<< " com a rota " << r2+1 << endl;
                 cout << "Os cliente analisados: " << cliente_1 << " e " << cliente_2 << endl;
 
                 bool verifica = checkSwap(Q, d, solucao.rota_dem, r1, r2, cliente_1, cliente_2);
@@ -59,10 +60,11 @@ Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> 
                 //Faz o swap Inter rotas
                 //cria a structswapresult
                     cout << "\n" << endl;
-                    cout << "Fazendo o swap entre as rotas: " << r1 << " e " << r2 << endl;
-                    //cout << "Os clientes escolhidos foram: " << cliente_1 << " e " << cliente_2 << endl;
+                    cout << "Fazendo o swap entre as rotas: " << r1+1 << " e " << r2+1 << endl;
+                    cout << "Os clientes escolhidos foram: " << cliente_1 << " e " << cliente_2 << endl;
+                    cout << "Os indices escolhidos foram: " << indice_cliente1 << " e " << indice_cliente2 << endl;
                     cout << "Antes de perturbar: "<< solucao.totalCost <<endl;
-                    solucao.totalCost = CaculaCustoSwap(solucao.totalCost, c, solucao.routes[r1], solucao.routes[r1], indice_cliente1, indice_cliente2);
+                    solucao.totalCost = CaculaCustoSwap(solucao.totalCost, c, solucao.routes[r1], solucao.routes[r2], indice_cliente1, indice_cliente2);
                     swapRoutes(solucao.rota_dem, d, solucao.routes[r1], solucao.routes[r2], indice_cliente1, indice_cliente2, r1, r2);
                     cout << "Depois de perturbar: "<< solucao.totalCost <<endl;
                 }
