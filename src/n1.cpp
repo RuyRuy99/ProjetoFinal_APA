@@ -84,15 +84,14 @@ Solution buscaExaustivaN1(Solution initial_solution, vector<vector<int>> c){
 
     Solution vizinha = initial_solution;
 
-    int num_rotas = vizinha.routes.size();
-    //cout << "Numero de rotas = " << num_rotas << endl;
-
     //Variáveis para auxiliar a encontrar o minimo
     int min_custo_global = initial_solution.totalCost;
     int min_rota_idx = -1;
     int min_i_global = -1;
     int min_j_global = -1;
 
+    int num_rotas = vizinha.routes.size();
+    //cout << "Numero de rotas = " << num_rotas << endl;
 
     //Refazendo todo o laço
     for (int k = 0; k < num_rotas; k++){
@@ -120,7 +119,6 @@ Solution buscaExaustivaN1(Solution initial_solution, vector<vector<int>> c){
     if (min_rota_idx != -1){
         //cout << "O vertice " << vizinha.routes[min_rota_idx][min_i_global] << " foi trocado com o vertice " << vizinha.routes[min_rota_idx][min_j_global] << endl;
         //cout << "O custo foi atualizado para " << min_custo_global << endl;
-        //Talvez isso fique no VND
         swapInside(vizinha.routes[min_rota_idx], min_i_global, min_j_global);
         vizinha.totalCost = min_custo_global;
     }

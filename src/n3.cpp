@@ -14,7 +14,7 @@ int melhora_rotas(Solution solucao, int k, vector<int> v, int i, vector<int> ter
     int novo_custo = solucao.totalCost;
 
     //Verifica se a lista de terceirizados não está vazia
-    if (solucao.terc_size > 0){
+    if (solucao.terceirizados.size() > 0){
         //Custo das arestas que ligam i
         int custo_manter_i = c[ant_i][v[i]] + c[v[i]][prox_i];
 
@@ -61,22 +61,19 @@ Solution buscaExaustivaN3(Solution initial_solution, int Q, int L, vector<int> d
 
     Solution sol_vizinha = initial_solution;
 
-    int num_rotas = sol_vizinha.routes.size();
-    //cout << "Numero de rotas = " << num_rotas << endl;
-
-
     int min_custo_global = initial_solution.totalCost;
     int min_rota_idx = -1;
     int min_i = -1;
     int min_j = -1;
 
-    for (int k = 0; k < num_rotas; k++){ //Para cada rota
+    int num_rotas = sol_vizinha.routes.size();
+    //cout << "Numero de rotas = " << num_rotas << endl;
 
-        int rota_atual_size = sol_vizinha.routes[k].size();
+    for (int k = 0; k < num_rotas; k++){ //Para cada rota
         //cout << "ROTA: " << k+1 << endl;
 
-        for (int i = 1; i < rota_atual_size-1; i++){ //Para cada elemento da rota
-            for (int j = 0; j < sol_vizinha.terc_size; j++){ //Percorrer os terceirizados
+        for (int i = 1; i < sol_vizinha.routes[k].size()-1; i++){ //Para cada elemento da rota
+            for (int j = 0; j < sol_vizinha.terceirizados.size(); j++){ //Percorrer os terceirizados
                 
                 //Calcula o novo custo
                 int novo_custo = melhora_rotas(sol_vizinha, k, sol_vizinha.routes[k], i, sol_vizinha.terceirizados, j, Q, L, d, p, c);

@@ -77,8 +77,6 @@ Solution buscaExaustivaN5(Solution initial_solution, int Q, vector<int> d, vecto
 
     Solution sol_vizinha = initial_solution;
 
-    int num_rotas = sol_vizinha.routes.size();
-
     //Variáveis auxiliares
     int best_cliente_i = -1;
     int best_cliente_j = -1;
@@ -86,6 +84,9 @@ Solution buscaExaustivaN5(Solution initial_solution, int Q, vector<int> d, vecto
     int rota_j_idx = -1;
     int min_custo_global = initial_solution.totalCost;
     int initial_cost = initial_solution.totalCost;
+
+    int num_rotas = sol_vizinha.routes.size();
+    //cout << "Tamanho de rotas: " << num_rotas <<endl;
 
     for (int rota_i = 0; rota_i < num_rotas; rota_i++){//Para cada rota i
         for (int rota_j = rota_i + 1; rota_j < num_rotas; rota_j++){ //Para cada rota j

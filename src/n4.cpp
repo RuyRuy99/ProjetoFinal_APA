@@ -38,7 +38,7 @@ int calculaTerc(Solution solucao, vector<int> &v, int i, int clientes_atendidos,
     return novo_custo;
 }
 
-void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_demanda, int *terc_size,vector<int> &terc, vector<int> d){
+void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_demanda,vector<int> &terc, vector<int> d){
 
     // Remove a demanda do cliente que vai ser terceirizado
     *rota_demanda = *rota_demanda - d[v[i]-1];
@@ -53,9 +53,6 @@ void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_dema
 
     // Diminuir a variavel client_att pq eu tirei um cliente da rota, logo não atendi ele
     *clientes_atendidos -= 1;
-
-    // Aumentar o tamanho do vetor de terceirizados
-    *terc_size += 1;
 }
 
 
@@ -73,9 +70,8 @@ Solution buscaExaustivaN4(Solution initial_solution, int r, int L, vector<int> d
 
     for (int k = 0; k < num_rotas; k++){
         //cout << "ROTA: " << k+1 << endl;
-        int rota_atual_size = sol_vizinha.routes[k].size();
-
-        for (int i = 1; i < rota_atual_size-1; i++){
+        
+        for (int i = 1; i < sol_vizinha.routes[k].size()-1; i++){
 
             // Calcular o custo resultante de terceirizar o cliente
             int novo_custo = calculaTerc(sol_vizinha, sol_vizinha.routes[k], i, sol_vizinha.total_clientes, L, p, c);
@@ -95,18 +91,16 @@ Solution buscaExaustivaN4(Solution initial_solution, int r, int L, vector<int> d
     // Depois de verificar todos os clientes em todas as rotas, se uma terceirização benéfica foi encontrada, realizamos essa única operação.
     if (min_rota_index != -1) {
         //cout << "Vou terceirizar o cliente " << sol_vizinha.routes[min_rota_index][min_i] << endl;
-        updateRoutes(sol_vizinha.routes[min_rota_index], min_i, &sol_vizinha.total_clientes,&sol_vizinha.rota_dem[min_rota_index], &sol_vizinha.terc_size, sol_vizinha.terceirizados, d);
-        sol_vizinha.route_size[min_rota_index] -= 1;//Remoção da quantidade de clientes atendidos na rota
-        sol_vizinha.totalCost = min_custo_global;
-        cout << "Clientes atendidos na rota: " << min_rota_index+1 << " = " << sol_vizinha.route_size[min_rota_index] << endl;
+        updateRoutes(sol_vizinha.routes[min_rota_index], min_i, &sol_vizinha.total_clientes,&sol_vizinha.rota_dem[min_rota_index], sol_vizinha.terceirizados, d);
+
+        sol_vizinha.totalCost = min_custo_global; //Atualiza o cust da FO
+        cout << "Clientes atendidos na rota: " << min_rota_index+1 << " = " << sol_vizinha.routes[min_rota_index].size() << endl;
         //Verifica se a rota ficou vazia
-        if (sol_vizinha.route_size[min_rota_index] == 0){
+        if (sol_vizinha.routes[min_rota_index].size() == 0){
             //Remove o custo de um carro
             sol_vizinha.totalCost -= r;
             //Remove a rota vazia
             sol_vizinha.routes.erase(sol_vizinha.routes.begin()+min_rota_index);
-            //Remove o tamanho da rota vazia
-            sol_vizinha.route_size.erase(sol_vizinha.route_size.begin()+min_rota_index);
             //Remove a demanda da rota vazia
             sol_vizinha.rota_dem.erase(sol_vizinha.rota_dem.begin()+min_rota_index);
         }

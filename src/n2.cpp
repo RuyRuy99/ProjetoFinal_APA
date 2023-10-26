@@ -53,16 +53,18 @@ int costReinsertion(int total_cost, vector<vector<int>> c, vector<int> &rota, in
 }
 
 Solution buscaExaustivaN2(Solution initial_solution, vector<vector<int>> c){
-    Solution vizinha = initial_solution;
 
-    int num_rotas = vizinha.routes.size();
-    //cout << "Numero de rotas = " << num_rotas << endl;
+
+    Solution vizinha = initial_solution;
 
     //Variáveis para auxiliar a encontrar o minimo
     int min_custo_global = initial_solution.totalCost;
     int min_rota_idx = -1;
     int min_i_global = -1;
     int min_j_global = -1;
+
+    int num_rotas = vizinha.routes.size();
+    //cout << "Numero de rotas = " << num_rotas << endl;
 
     for (int k = 0; k < num_rotas; k++){
         for (int i = 1; i < vizinha.routes[k].size()-1; i++){
@@ -77,7 +79,8 @@ Solution buscaExaustivaN2(Solution initial_solution, vector<vector<int>> c){
             }
         }
     }
-    if(min_rota_idx != -1 && min_i_global != -1 && min_j_global != -1){
+    
+    if(min_rota_idx != -1){
         ReinsertionFunc(c, vizinha.routes[min_rota_idx], min_i_global, min_j_global);
         vizinha.totalCost = min_custo_global;
         return vizinha;
