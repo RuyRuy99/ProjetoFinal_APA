@@ -48,50 +48,16 @@ Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> 
                 int cliente_1 = solucao.routes[r1][indice_cliente1];
                 int cliente_2 = solucao.routes[r2][indice_cliente2];
 
-                cout << "\n" << endl;
-                cout << "Verificando o swap da rota " << r1 +1<< " com a rota " << r2+1 << endl;
-                cout << "Os cliente analisados: " << cliente_1 << " e " << cliente_2 << endl;
-
                 bool verifica = checkSwap(Q, d, solucao.rota_dem, r1, r2, cliente_1, cliente_2);
-
-                cout << "Status: " << verifica << endl;
 
                 if (verifica){
                 //Faz o swap Inter rotas
                 //cria a structswapresult
-                    cout << "\n" << endl;
-                    cout << "Fazendo o swap entre as rotas: " << r1+1 << " e " << r2+1 << endl;
-                    cout << "Os clientes escolhidos foram: " << cliente_1 << " e " << cliente_2 << endl;
-                    cout << "Os indices escolhidos foram: " << indice_cliente1 << " e " << indice_cliente2 << endl;
-                    cout << "Antes de perturbar: "<< solucao.totalCost <<endl;
                     solucao.totalCost = CaculaCustoSwap(solucao.totalCost, c, solucao.routes[r1], solucao.routes[r2], indice_cliente1, indice_cliente2);
                     swapRoutes(solucao.rota_dem, d, solucao.routes[r1], solucao.routes[r2], indice_cliente1, indice_cliente2, r1, r2);
-                    cout << "Depois de perturbar: "<< solucao.totalCost <<endl;
-                }
-                else{
-                    cout << "\n" << endl;
-                    cout << "Não pode fazer o swap entre as rotas: " << r1 << " e " << r2 << endl;
-                    //cout << "Os clientes escolhidos foram: " << cliente_1 << " e " << cliente_2 << endl;
+                    //cout << "Depois de perturbar: "<< solucao.totalCost <<endl;
                 }
             }
-            //check if is possible to swap
-            /*  
-            // Escolhe um cliente aleatório da rota
-            //cout << "Tamanho da rotas: " << solucao.route_size[k] << endl;
-            int random_i = rand() % (solucao.route_size[k]) + 1; //Subtrai 2 por causa do deposito
-            int random_j = rand() % (solucao.route_size[k]) + 1; //Subtrai 2 por causa do deposito
-
-            //cout << "Indices randomicos: " << random_i << " " << random_j << endl;
-            
-            //Calcula o novo custo da função objetivo
-            int novo_custo = custoSwap(solucao.totalCost, c, solucao.routes[k], random_i, random_j);
-
-            //Atualiza o custo
-            solucao.totalCost = novo_custo;
-
-            //Atualiza o vetor de rotas
-            swapInside(solucao.routes[k], random_i, random_j);
-            */
         }
     }
     

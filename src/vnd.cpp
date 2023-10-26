@@ -4,6 +4,7 @@
 #include "construtor.h"
 #include "showsolution.h"
 #include "n1.h"
+#include "n2.h"
 #include "n3.h"
 #include "n4.h"
 #include "n5.h"
@@ -18,22 +19,27 @@ Solution best_neighbor(Solution vizinha , int r, int key, int Q, int L, vector<i
 
     switch (key){
         case 1:
-            cout << "EXECUTANDO N1, SOLUCAO ANTES: " << endl;
+            cout << "EXECUTANDO N1" << endl;
             //printSolution(vizinha);
             return buscaExaustivaN1(vizinha, c);
 
         case 2:
-            cout << "EXECUTANDO N5, SOLUCAO ANTES: " << endl;
+            cout << "EXECUTANDO N2" << endl;
+            //printSolution(vizinha);
+            return buscaExaustivaN2(vizinha, c);
+
+        case 3:
+            cout << "EXECUTANDO N5" << endl;
             //printSolution(vizinha);
             return buscaExaustivaN5(vizinha, Q, d, p, c);
 
-        case 3:
-            cout << "EXECUTANDO N3, SOLUCAO ANTES: " << endl;
-            printSolution(vizinha);
+        case 4:
+            cout << "EXECUTANDO N3" << endl;
+            //printSolution(vizinha);
             return buscaExaustivaN3(vizinha, Q, L, d, p, c);
         
-        case 4:
-            cout << "EXECUTANDO N4, SOLUCAO ANTES: " << endl;
+        case 5:
+            cout << "EXECUTANDO N4" << endl;
             //printSolution(vizinha);
             return buscaExaustivaN4(vizinha, r, L, d, p, c);
         
@@ -47,7 +53,7 @@ Solution best_neighbor(Solution vizinha , int r, int key, int Q, int L, vector<i
 Solution vnd(Solution initial_solution, int r, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
 
     int k = 1; // Contador de vizinhança
-    int k_max = 4;  // Quantidade de estruturas de vizinhança
+    int k_max = 5;  // Quantidade de estruturas de vizinhança
     
     Solution current_solution = initial_solution;
 
@@ -61,8 +67,8 @@ Solution vnd(Solution initial_solution, int r, int Q, int L, vector<int> d, vect
 
         //Verifica se a solução vizinha é melhor que a solução atual
         if (is_better(current_solution, sol_vizinha) == true){
-            //cout << "Melhorou a solucao" << endl;
-            //cout << "Novo melhor custo: " << sol_vizinha.totalCost << endl;
+            cout << "Melhorou a solucao" << endl;
+            cout << "Novo melhor custo: " << sol_vizinha.totalCost << endl;
             current_solution = sol_vizinha;
             k = 1;
         }

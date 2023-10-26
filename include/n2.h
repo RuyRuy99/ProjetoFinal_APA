@@ -3,10 +3,9 @@
 
 using namespace std;
 
-void ReinsertionFunc(vector<vector<int>> c, vector<int> &rota1, vector<int> &rota2, int i, int j);
+void ReinsertionFunc(vector<vector<int>> c, vector<int> &rota1, int i, int j);
 
-void costReinsertion(int *total_cost, vector<vector<int>> c, vector<int> &rota1, vector<int> &rota2, int i, int j);
+int costReinsertion(int total_cost, vector<vector<int>> c, vector<int> &rota, int i, int j);
 
-bool checkReinsertion(int Q, vector<int> d, vector<int> &d_routs, vector<int> &rota1, int rota_i, int rota_j, int i);
-
+Solution buscaExaustivaN2(Solution initial_solution, vector<vector<int>> c);
 #endif

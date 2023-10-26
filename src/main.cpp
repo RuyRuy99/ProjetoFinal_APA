@@ -33,7 +33,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("Inputs/n14k5_A.txt");
+    dados = read_file("Inputs/n31k5_A.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -66,7 +66,24 @@ int main(void){
     printSolution(result);
     //cout << "Tamanho de cada rota: ";
     //print_array(&result.route_size[0], result.route_size.size());
+    
+    /*
+    int i = 3;
+    int j = 1;
+    int a = costReinsertion(result.totalCost, c, result.routes[0], i, j);
+    ReinsertionFunc(c, result.routes[0], i, j);
+    result.totalCost = a;
+    printSolution(result);
+    doublecheck(result, Q, L, r, d, p, c);
+    */
 
+    /* 
+    cout << "EXECUTANDO N2" << endl;
+    Solution result2 = buscaExaustivaN2(result, c);
+    printSolution(result2);
+    doublecheck(result2, Q, L, r, d, p, c);
+    */
+    
     /*
     //busca exaustiva N1 para cada rota
     cout << "EXECUTANDO N1" <<endl;
@@ -104,15 +121,18 @@ int main(void){
     doublecheck(result6, Q, L, r, d, p, c);
     */
 
-    //Solution ils = ILS(result, r, Q, L, d, p, c);
-    //printSolution(ils);
-    //doublecheck(ils, Q, L, r, d, p, c);
     
+    Solution ils = ILS(result, r, Q, L, d, p, c);
+    printSolution(ils);
+    doublecheck(ils, Q, L, r, d, p, c);
+    
+   
+    /*
     Solution teste = pertubacao(result, Q, d, c);
     cout << "\n" << endl;
     printSolution(teste);
     doublecheck(teste, Q, L, r, d, p, c);
-    
+    */
     //file_exit(r, c, p, result6);
 
     /*

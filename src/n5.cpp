@@ -42,19 +42,7 @@ int CaculaCustoSwap(int total_cost, vector<vector<int>> c, vector<int> &rota1, v
     int prox_cliente_i = rota1[idx_cliente_i + 1];
     int ant_cliente_j = rota2[idx_cliente_j - 1];
     int prox_cliente_j = rota2[idx_cliente_j + 1];
-    
-    cout<<"\n"<<endl;
-    cout<< "cliente i: " << cliente_i << ", indice: " << idx_cliente_i << endl;
-    cout<< "cliente j: " << cliente_j << ", indice: " << idx_cliente_j << endl;
-    cout<< "Custo da aresta removida ( " << ant_cliente_i << ", " << cliente_i << "): " << c[ant_cliente_i][cliente_i] << endl;
-    cout<< "Custo da aresta removida ( " << cliente_i << ", " << prox_cliente_i << "): " << c[cliente_i][prox_cliente_i] << endl;
-    cout<< "Custo da aresta removida ( " << ant_cliente_j << ", " << cliente_j << "): " << c[ant_cliente_j][cliente_j] << endl;
-    cout<< "Custo da aresta removida ( " << cliente_j << ", " << prox_cliente_j << "): " << c[cliente_j][prox_cliente_j] << endl;
-    cout<< "Custo da aresta adicionada ( " << ant_cliente_i << ", " << cliente_j << "): " << c[ant_cliente_i][cliente_j] << endl;
-    cout<< "Custo da aresta adicionada ( " << cliente_j << ", " << prox_cliente_i << "): " << c[cliente_j][prox_cliente_i] << endl;
-    cout<< "Custo da aresta adicionada ( " << ant_cliente_j << ", " << cliente_i << "): " << c[ant_cliente_j][cliente_i] << endl;
-    cout<< "Custo da aresta adicionada ( " << cliente_i << ", " << prox_cliente_j << "): " << c[cliente_i][prox_cliente_j] << endl;
-    
+
     int remocoes = c[ant_cliente_i][cliente_i] + c[cliente_i][prox_cliente_i] + c[ant_cliente_j][cliente_j] + c[cliente_j][prox_cliente_j];
     int adicoes = c[ant_cliente_i][cliente_j] + c[cliente_j][prox_cliente_i] + c[ant_cliente_j][cliente_i] + c[cliente_i][prox_cliente_j];
     
@@ -108,8 +96,8 @@ Solution buscaExaustivaN5(Solution initial_solution, int Q, vector<int> d, vecto
                         int custo_aux = CaculaCustoSwap(initial_cost, c, sol_vizinha.routes[rota_i], sol_vizinha.routes[rota_j], idx_cliente_i, idx_cliente_j);
                         
                         if(custo_aux < min_custo_global){
-                            cout << "Atualizando o melhor swap" << endl;
-                            cout << "Valor do swap: " << custo_aux << endl;
+                            //cout << "Atualizando o melhor swap" << endl;
+                            //cout << "Valor do swap: " << custo_aux << endl;
                             best_cliente_i = idx_cliente_i;
                             best_cliente_j = idx_cliente_j;
                             rota_i_idx = rota_i;
@@ -124,8 +112,8 @@ Solution buscaExaustivaN5(Solution initial_solution, int Q, vector<int> d, vecto
 
     //Atualizando os valores
     if (best_cliente_i != -1 && best_cliente_j != -1){
-        cout << "O melhor swap foi da rota "<< rota_i_idx+1 << " com a rota " << rota_j_idx+1 << endl;
-        cout << "Os clientes " << sol_vizinha.routes[rota_i_idx][best_cliente_i] << " e " << sol_vizinha.routes[rota_j_idx][best_cliente_j] << " foram trocados" << endl;
+        //cout << "O melhor swap foi da rota "<< rota_i_idx+1 << " com a rota " << rota_j_idx+1 << endl;
+        //cout << "Os clientes " << sol_vizinha.routes[rota_i_idx][best_cliente_i] << " e " << sol_vizinha.routes[rota_j_idx][best_cliente_j] << " foram trocados" << endl;
         swapRoutes(sol_vizinha.rota_dem, d, sol_vizinha.routes[rota_i_idx], sol_vizinha.routes[rota_j_idx], best_cliente_i, best_cliente_j, rota_i_idx, rota_j_idx);
         sol_vizinha.totalCost = min_custo_global;
     }
