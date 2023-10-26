@@ -41,8 +41,8 @@ Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> 
             int r1 = rand() % num_rotas;
             int r2 = rand() % num_rotas;
 
-            int indice_cliente1 = rand() % (solucao.route_size[r1]) + 1; 
-            int indice_cliente2 = rand() % (solucao.route_size[r2]) + 1;
+            int indice_cliente1 = rand() % (solucao.routes[r1].size() - 2) + 1; // Escolhe um cliente aleátorio execto o depósito
+            int indice_cliente2 = rand() % (solucao.routes[r2].size() - 2) + 1; // Escolhe um cliente aleátorio execto o depósito
             
             if(r1 != r2){
                 int cliente_1 = solucao.routes[r1][indice_cliente1];

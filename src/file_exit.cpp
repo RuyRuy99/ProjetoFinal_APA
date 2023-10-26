@@ -34,7 +34,7 @@ int calcularCustoRota(vector<vector<int>> routes, vector<vector<int>> c, vector<
 void file_exit(int r, vector<vector<int>> c, vector<int> p, Solution solucao){
 
     // Nome do arquivo de saida
-    const char* exit = "Outputs/n14k5_A.txt";
+    const char* exit = "saida.txt";
 
     // Objeto de fluxo de saída (ofstream)
     ofstream arquivoSaida(exit);
@@ -49,15 +49,11 @@ void file_exit(int r, vector<vector<int>> c, vector<int> p, Solution solucao){
         arquivoSaida << "" << solucao.totalCost << endl; // Valor total da solução
         arquivoSaida << "" << calcularCustoRota(solucao.routes, c, solucao.route_size) << endl; // custo de roteamento
         arquivoSaida << "" << solucao.route_size.size() * r << endl; // custo associado a utilização dos veículos
-        arquivoSaida << "" << cost_terc(p, solucao.terceirizados, &solucao.terc_size) << endl; //custo de terceirização
-        
-        arquivoSaida << endl; // Pular linha
+        arquivoSaida << "" << cost_terc(p, solucao.terceirizados, &solucao.terc_size) << "\n" << endl; //custo de terceirização
 
         for (const int& elemento : solucao.terceirizados){
             arquivoSaida << elemento << " ";
-        }arquivoSaida << endl;
-        
-        arquivoSaida << endl; // Pular linha
+        }arquivoSaida << "\n" << endl;
  
         arquivoSaida << "" << solucao.route_size.size(); // Número de rotas
 
