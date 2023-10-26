@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int cost_terc(vector<int> p, vector<int> &terceirizados, int *terc_size);
+int cost_terc(vector<int> p, vector<int> &terceirizados);
 
 int calcularCustoRota(vector<vector<int>> routes, vector<vector<int>> c, vector<int> &route_size);
 

@@ -88,8 +88,8 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
     bestSolution.total_clientes = clintes_att;
 
     //adiciona o tamanho do vetor de terceirizados
-    int terc_size = n - clintes_att;
-    bestSolution.terc_size = terc_size;
+    //int terc_size = n - clintes_att;
+    //bestSolution.terc_size = terc_size;
 
     // Percorre a lista de clientes não atendidos e dá push na solução em terceirizados
     for(int i=0; i<list_clientes.size(); i++){

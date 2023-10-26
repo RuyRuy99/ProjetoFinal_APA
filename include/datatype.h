@@ -15,7 +15,7 @@ struct Solution{
     vector<int> route_size; // Um vetor que armazena o tamanho de cada rota
     int totalCost; // Custo total da solução
     int total_clientes; 
-    int terc_size;
+    
 };
 
 #endif

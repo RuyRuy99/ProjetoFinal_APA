@@ -6,10 +6,10 @@
 using namespace std;
 
 // Função para calcular o custa da terceirização
-int cost_terc(vector<int> p, vector<int> &terceirizados, int *terc_size){
+int cost_terc(vector<int> p, vector<int> &terceirizados){
 
     int custo = 0;
-    for(int i = 0; i < *terc_size; i++){
+    for(int i = 0; i < terceirizados.size(); i++){
         custo += p[terceirizados[i]-1];
     }
 
@@ -49,7 +49,7 @@ void file_exit(int r, vector<vector<int>> c, vector<int> p, Solution solucao){
         arquivoSaida << "" << solucao.totalCost << endl; // Valor total da solução
         arquivoSaida << "" << calcularCustoRota(solucao.routes, c, solucao.route_size) << endl; // custo de roteamento
         arquivoSaida << "" << solucao.route_size.size() * r << endl; // custo associado a utilização dos veículos
-        arquivoSaida << "" << cost_terc(p, solucao.terceirizados, &solucao.terc_size) << "\n" << endl; //custo de terceirização
+        arquivoSaida << "" << cost_terc(p, solucao.terceirizados) << "\n" << endl; //custo de terceirização
 
         for (const int& elemento : solucao.terceirizados){
             arquivoSaida << elemento << " ";

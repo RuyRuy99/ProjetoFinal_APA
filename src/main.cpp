@@ -33,7 +33,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("Inputs/n9k5_C.txt");
+    dados = read_file("Inputs/n22k3_B.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -125,8 +125,9 @@ int main(void){
     Solution ils = ILS(result, r, Q, L, d, p, c);
     printSolution(ils);
     doublecheck(ils, Q, L, r, d, p, c);
-    
    
+    
+    cout << "OI" << endl;
     /*
     Solution teste = pertubacao(result, Q, d, c);
     cout << "\n" << endl;
