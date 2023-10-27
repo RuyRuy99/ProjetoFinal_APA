@@ -7,12 +7,6 @@
 
 using namespace std;
 
-struct SwapResult { // Struct  para retornar o resultado do swap
-    int total_cost; // Custo total
-    int idx_cliente1; // Indice do cliente 1
-    int idx_cliente2; // Indice do cliente 2
-};
-
 bool checkSwap(int Q, vector<int> d, vector<int> &rota_dem, int rota_i, int rota_j, int cliente1, int cliente2){
 
     // Demana do cliente 1 e 2

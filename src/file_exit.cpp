@@ -31,13 +31,14 @@ int calcularCustoRota(vector<vector<int>> routes, vector<vector<int>> c){
     return custo;
 }
 
-void file_exit(int r, vector<vector<int>> c, vector<int> p, Solution solucao){
+void file_exit(string instance,int r, vector<vector<int>> c, vector<int> p, Solution solucao){
 
     // Nome do arquivo de saida
-    const char* exit = "saida.txt";
+    string output_dir = "outputs/";
+    output_dir += instance;
 
     // Objeto de fluxo de saída (ofstream)
-    ofstream arquivoSaida(exit);
+    ofstream arquivoSaida(output_dir);
 
     // Verificando se o arquivo foi aberto com sucesso
     if (!arquivoSaida.is_open()) {

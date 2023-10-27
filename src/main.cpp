@@ -39,8 +39,14 @@ int main(void){
     // Matriz de custo de transporte entre os clientes
     vector<vector<int>> c;
 
-    // Leitura do arquivo
-    dados = read_file("Inputs/n22k3_A.txt");
+
+    //Input file
+    string input = "inputs/";
+    //Nome do arquivo
+    string instance = "n9k5_A.txt";
+    input += instance;
+
+    dados = read_file(input);
 
     // Extração dos dados
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -160,7 +166,7 @@ int main(void){
     printSolution(teste);
     doublecheck(teste, Q, L, r, d, p, c);
     */
-    //file_exit(r, c, p, result6);
+    file_exit(instance, r, c, p, result);
 
     /*
     pertubacao(result, c);

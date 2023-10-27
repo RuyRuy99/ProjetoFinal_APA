@@ -5,7 +5,7 @@
 
 using namespace std;
 
-vector<int> read_file(const char* file){
+vector<int> read_file(string file){
 
     // Abrindo o arquivo
     ifstream File(file);
