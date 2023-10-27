@@ -14,7 +14,7 @@ vector<int> read_file(const char* file){
         return {};
     }
 
-    //Usando um vetor de inteiros para armazenar os valores convertidos
+    // Usando um vetor de inteiros para armazenar os valores convertidos
     vector<int> valores;
     int inteiro;
     while(File >> inteiro){

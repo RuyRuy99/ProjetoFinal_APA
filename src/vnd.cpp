@@ -19,32 +19,20 @@ Solution best_neighbor(Solution vizinha , int r, int key, int Q, int L, vector<i
 
     switch (key){
         case 1:
-            cout << "EXECUTANDO N1" << endl;
-            //printSolution(vizinha);
             return buscaExaustivaN1(vizinha, c);
 
         case 2:
-            cout << "EXECUTANDO N2" << endl;
-            //printSolution(vizinha);
             return buscaExaustivaN2(vizinha, c);
 
         case 3:
-            cout << "EXECUTANDO N5" << endl;
-            //printSolution(vizinha);
             return buscaExaustivaN5(vizinha, Q, d, p, c);
 
         case 4:
-            cout << "EXECUTANDO N3" << endl;
-            //printSolution(vizinha);
             return buscaExaustivaN3(vizinha, Q, L, d, p, c);
         
         case 5:
-            cout << "EXECUTANDO N4" << endl;
-            //printSolution(vizinha);
             return buscaExaustivaN4(vizinha, r, L, d, p, c);
         
-
-
         default:
             return vizinha;
     }
@@ -52,31 +40,28 @@ Solution best_neighbor(Solution vizinha , int r, int key, int Q, int L, vector<i
 
 Solution vnd(Solution initial_solution, int r, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
 
-    int k = 1; // Contador de vizinhança
-    int k_max = 5;  // Quantidade de estruturas de vizinhança
+    // Contador de vizinhança
+    int k = 1;
+
+    // Quantidade de estruturas de vizinhança
+    int k_max = 5;
     
     Solution current_solution = initial_solution;
 
-    printSolution(current_solution);
-
     while(k <= k_max){
 
-
-        //cout << "Estrutura de vizinhanca: " << k << endl;
         Solution sol_vizinha = best_neighbor(current_solution, r, k, Q, L, d, p, c);
 
-        //Verifica se a solução vizinha é melhor que a solução atual
+        // Verifica se a solução vizinha é melhor que a solução atual
         if (is_better(current_solution, sol_vizinha) == true){
-            cout << "Melhorou a solucao" << endl;
-            cout << "Novo melhor custo: " << sol_vizinha.totalCost << endl;
             current_solution = sol_vizinha;
             k = 1;
-        }
-        else{
-            //Proxima estrutura
+        
+        }else{ // Proxima estrutura de vizinhança
+        
             k += 1;
         }
     }
-    cout << "FIM VND" << endl;
+
     return current_solution;
 }

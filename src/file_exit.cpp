@@ -44,28 +44,32 @@ void file_exit(int r, vector<vector<int>> c, vector<int> p, Solution solucao){
         cerr << "Erro ao abrir o arquivo de saida." << endl;
         return;
     
-    }else{ // Escrevendo no arquivo
+    }else{
 
-        arquivoSaida << "" << solucao.totalCost << endl; // Valor total da solução
-        arquivoSaida << "" << calcularCustoRota(solucao.routes, c) << endl; // custo de roteamento
-        arquivoSaida << "" << solucao.routes.size() * r << endl; // custo associado a utilização dos veículos
-        arquivoSaida << "" << cost_terc(p, solucao.terceirizados) << "\n" << endl; //custo de terceirização
+        // Valor total da solução
+        arquivoSaida << "" << solucao.totalCost << endl;
+        // custo de roteamento
+        arquivoSaida << "" << calcularCustoRota(solucao.routes, c) << endl;
+        // custo associado a utilização dos veículos 
+        arquivoSaida << "" << solucao.routes.size() * r << endl; 
+        //custo de terceirização
+        arquivoSaida << "" << cost_terc(p, solucao.terceirizados) << "\n" << endl;
 
+        // Lista de clientes terceirizados
         for (const int& elemento : solucao.terceirizados){
             arquivoSaida << elemento << " ";
         }arquivoSaida << "\n" << endl;
- 
-        arquivoSaida << "" << solucao.routes.size() << endl; // Quantidade de rotas
+
+        // Quantidade de rotas
+        arquivoSaida << "" << solucao.routes.size() << endl;
 
         // Adicionar as rotas
         for(int i=0; i < solucao.routes.size(); i++){
             arquivoSaida << endl;
             for (size_t j = 0; j < solucao.routes[i].size(); j++) {
-                arquivoSaida << solucao.routes[i][j] << " ";
-            
+                arquivoSaida << solucao.routes[i][j] << " "; 
             }
         }   
-
     }
 
     // Fechar o arquivo

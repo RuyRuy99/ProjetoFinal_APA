@@ -27,38 +27,41 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
     int uso_carro = 0;
     vector<int> rotas;
 
-    while(k > 0 and list_clientes.empty() == false){ // Verifica se ainda possui carro disponível e se a lista de clientes não está vazia
+    // Verifica se ainda possui carro disponível e se a lista de clientes não está vazia
+    while(k > 0 and list_clientes.empty() == false){
 
         int capacidade_carro = 0;
         int demanda_rota = 0;
         rotas.push_back(0);
 
-        while(list_clientes.empty() == false && capacidade_carro <= Q){ // Verifica se a lista de clientes está vazia e o carro possui capacidade
+        // Verifica se a lista de clientes está vazia e o carro possui capacidade
+        while(list_clientes.empty() == false && capacidade_carro <= Q){
             
             int viz_prox,viz_idx;
-            tie(viz_prox, viz_idx) = guloso(cliente_atual, c, list_clientes); // Encontra o vizinho mais próximo
+            // Encontra o vizinho mais próximo
+            tie(viz_prox, viz_idx) = guloso(cliente_atual, c, list_clientes);
 
-            if(capacidade_carro + d[viz_prox-1] <= Q){ // Verifica se a demanda do cliente não ultrapassa a capacidade do carro
+            // Verifica se a demanda do cliente não ultrapassa a capacidade do carro
+            if(capacidade_carro + d[viz_prox-1] <= Q){
     
-                //Adiciona o cliente na rota
+                // Adiciona o cliente na rota
                 rotas.push_back(viz_prox);
-                //Adiciona o custo da rota
+                // Adiciona o custo da rota
                 bestSolution.totalCost += c[cliente_atual][viz_prox];
-                //Atualiza a capacidade do carro atual
+                // Atualiza a capacidade do carro atual
                 capacidade_carro += d[viz_prox-1];
-                //Atualiza o cliente atual
+                // Atualiza o cliente atual
                 cliente_atual = viz_prox;
-                //Atualiza flag de uso do carro
+                // Atualiza flag de uso do carro
                 uso_carro = 1;
-                //Atualiza a demanda da rota
+                // Atualiza a demanda da rota
                 demanda_rota += d[viz_prox-1];
-                //remove o cliente visitado
+                // Remove o cliente visitado
                 list_clientes.erase(list_clientes.begin() + viz_idx);
-                //Atualiza var de clientes atendidos pelos carros
+                // Atualiza var de clientes atendidos pelos carros
                 clintes_att++;
             
-            }
-            else{
+            }else{
                 break; // Saída do loop
             }
         }
@@ -68,32 +71,28 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
             bestSolution.totalCost += r;
         }
 
-        //Adiciona a demanda de cada rota no vetor
+        // Adiciona a demanda de cada rota no vetor
         bestSolution.rota_dem.push_back(demanda_rota);        
-        //Adiciona o custo de retornar ao deposito
+        // Adiciona o custo de retornar ao deposito
         bestSolution.totalCost += c[cliente_atual][0];
-        //Adiciona o deposito no final da rota
+        // Adiciona o deposito no final da rota
         rotas.push_back(0);
-        //Reseta o cliente atual
+        // Reseta o cliente atual
         cliente_atual = 0;
-        //Reseta a capacidade do carro
+        // Reseta a capacidade do carro
         capacidade_carro = 0;
-        //Adiciona a rota no vetor de rotas
+        // Adiciona a rota no vetor de rotas
         bestSolution.routes.push_back(rotas);
         // Limpa o vetor de rotas
         rotas.clear();
-        //Reseta a flag de uso do carro
+        // Reseta a flag de uso do carro
         uso_carro = 0;
-        //Atualiza o numero de carros disponiveis
+        // Atualiza o numero de carros disponiveis
         k--;
     }
 
-    //adiciona a quantidade total de clientes atendidos na solução
+    // Adiciona a quantidade total de clientes atendidos na solução
     bestSolution.total_clientes = clintes_att;
-
-    //adiciona o tamanho do vetor de terceirizados
-    //int terc_size = n - clintes_att;
-    //bestSolution.terc_size = terc_size;
 
     // Percorre a lista de clientes não atendidos e dá push na solução em terceirizados
     for(int i=0; i<list_clientes.size(); i++){

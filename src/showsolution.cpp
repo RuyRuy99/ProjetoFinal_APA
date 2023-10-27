@@ -12,11 +12,13 @@ void printSolution(Solution solucao){
 
     cout << "Solucao: " << endl;
 
-    int rotaNumber = 1; // contador para identificar o número da rota
+    // Contador para identificar o número da rota
+    int rotaNumber = 1;
+
     for (int i = 0; i < solucao.routes.size();i++) {
+
         cout << "Rota " << rotaNumber << ": ";
         print_array(&solucao.routes[i][0], solucao.routes[i].size());
-        //cout << "Demanda da rota: " << solucao.rota_dem[i] << endl;
         rotaNumber++;
     }
 
@@ -25,7 +27,5 @@ void printSolution(Solution solucao){
 
     cout <<"Total de clientes atendidos: " << solucao.total_clientes << endl;
 
-
-    cout << "Custo total: " << solucao.totalCost << endl;
-    cout <<endl;
+    cout << "Custo total: " << solucao.totalCost << "\n" << endl;
 }

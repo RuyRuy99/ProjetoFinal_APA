@@ -30,13 +30,19 @@ int main(void){
     int L; // Quantidade mínima de entrega sem terceirização
     int r; // Custo de cada veículo
 
+    // Vetores para armazenar os dados
     vector<int> dados;
+    // Vetor de demandas dos clientes
     vector<int> d;
+    // Vetor de custo de terceirização dos clientes
     vector<int> p;
+    // Matriz de custo de transporte entre os clientes
     vector<vector<int>> c;
-    dados = read_file("Inputs/n199k17_A.txt");
-    //cout << "Size of dados = " << dados.size() << endl;
 
+    // Leitura do arquivo
+    dados = read_file("Inputs/n22k3_A.txt");
+
+    // Extração dos dados
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
 
     //print do vetor d
@@ -63,13 +69,13 @@ int main(void){
     //cout << "r = " << r << endl;
     //cout << endl;
     
-    //relogio start
+    // Relógio start
     auto start = chrono::steady_clock::now();
-    //Heuristica construtiva
+    // Heuristica construtiva
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
-    //relogio stop
+    // Relógio stop
     auto stop = chrono::steady_clock::now();
-    //tempo de execução
+    // Tempo de execução
     cout << "TEMPO EXECUCAO GULOSO: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << " ms" << endl;
     printSolution(result);
     
@@ -121,15 +127,16 @@ int main(void){
     */
 
     
-    //relogio start
+    // Relógio start
     auto start2 = chrono::steady_clock::now();
     cout << "EXECUTANDO O VND" << endl;
     Solution result6 = vnd(result, r, Q, L, d, p, c);
-    //relogio stop
+    // Relógio stop
     auto stop2 = chrono::steady_clock::now();
-    //tempo de execução
+    // Tempo de execução
     cout << "TEMPO EXECUCAO VND: " << chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count() << " ms" << endl;
-    printSolution(result6);
+    //printSolution(result6);
+    cout << "Custo total:" << result6.totalCost << endl;
     doublecheck(result6, Q, L, r, d, p, c);
     
 
