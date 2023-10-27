@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <chrono>
 #include "readfile.h"
 #include "datatype.h"
 #include "construtor.h"
@@ -33,7 +34,7 @@ int main(void){
     vector<int> d;
     vector<int> p;
     vector<vector<int>> c;
-    dados = read_file("Inputs/n22k3_B.txt");
+    dados = read_file("Inputs/n199k17_A.txt");
     //cout << "Size of dados = " << dados.size() << endl;
 
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
@@ -62,9 +63,15 @@ int main(void){
     //cout << "r = " << r << endl;
     //cout << endl;
     
+    //relogio start
+    auto start = chrono::steady_clock::now();
+    //Heuristica construtiva
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
+    //relogio stop
+    auto stop = chrono::steady_clock::now();
+    //tempo de execução
+    cout << "TEMPO EXECUCAO GULOSO: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << " ms" << endl;
     printSolution(result);
-    //cout << "Tamanho de cada rota: ";
     
     /*
     int i = 3;
@@ -114,17 +121,30 @@ int main(void){
     */
 
     /*
+    //relogio start
+    auto start2 = chrono::steady_clock::now();
     cout << "EXECUTANDO O VND" << endl;
     Solution result6 = vnd(result, r, Q, L, d, p, c);
+    //relogio stop
+    auto stop2 = chrono::steady_clock::now();
+    //tempo de execução
+    cout << "TEMPO EXECUCAO VND: " << chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count() << " ms" << endl;
     printSolution(result6);
     doublecheck(result6, Q, L, r, d, p, c);
     */
 
+    /*
+    //relogio start
+    auto start3 = chrono::steady_clock::now();
     cout << "EXECUTANDO O ILS" << endl;
     Solution ils = ILS(result, r, Q, L, d, p, c);
+    //relogio stop
+    auto stop3 = chrono::steady_clock::now();
+    //tempo de execução
+    cout << "TEMPO EXECUCAO ILS: " << chrono::duration_cast<chrono::milliseconds>(stop3 - start3).count() << " ms" << endl;
     printSolution(ils);
     doublecheck(ils, Q, L, r, d, p, c);
-   
+    */
     
     cout << "OBRIGADO MEU DEUS !!!" << endl;
     /*
