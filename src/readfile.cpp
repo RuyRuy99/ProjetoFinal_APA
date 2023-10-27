@@ -7,6 +7,9 @@ using namespace std;
 
 vector<int> read_file(string file){
 
+    // path file
+    file = "Inputs/" + file;
+
     // Abrindo o arquivo
     ifstream File(file);
     if(!File.is_open()){

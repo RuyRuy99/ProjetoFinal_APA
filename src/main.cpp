@@ -39,41 +39,12 @@ int main(void){
     // Matriz de custo de transporte entre os clientes
     vector<vector<int>> c;
 
-
-    //Input file
-    string input = "inputs/";
     //Nome do arquivo
     string instance = "n64k9_C.txt";
-    input += instance;
-
-    dados = read_file(input);
+    dados = read_file(instance);
 
     // Extração dos dados
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
-
-    //print do vetor d
-    //cout << "VECTOR D FORA DA FUNCAO: ";
-    //print_array(&d[0], d.size());
-
-    //print do vetor p
-    //cout << "VECTOR P FORA DA FUNCAO: ";
-    //print_array(&p[0], p.size());
-
-    //print da matriz c
-    /*
-    cout << "MATRIZ C FORA DA FUNCAO: " << endl;
-    for (int i = 0; i < c.size(); i++){
-        print_array(&c[i][0], c[i].size());
-    }
-    cout << endl;
-    */
-    //print das variaveis após a função
-    //cout << "n = " << n << endl;
-    //cout << "k = " << k << endl;
-    //cout << "Q = " << Q << endl;
-    //cout << "L = " << L << endl;
-    //cout << "r = " << r << endl;
-    //cout << endl;
     
     // Relógio start
     auto start = chrono::steady_clock::now();
@@ -146,7 +117,7 @@ int main(void){
     doublecheck(result6, Q, L, r, d, p, c);
     
 
-    /*
+    
     //relogio start
     auto start3 = chrono::steady_clock::now();
     cout << "EXECUTANDO O ILS" << endl;
@@ -157,7 +128,7 @@ int main(void){
     cout << "TEMPO EXECUCAO ILS: " << chrono::duration_cast<chrono::milliseconds>(stop3 - start3).count() << " ms" << endl;
     printSolution(ils);
     doublecheck(ils, Q, L, r, d, p, c);
-    */
+
     
     cout << "OBRIGADO MEU DEUS !!!" << endl;
     /*
