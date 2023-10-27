@@ -66,10 +66,9 @@ void file_exit(string instance,int r, vector<vector<int>> c, vector<int> p, Solu
 
         // Adicionar as rotas
         for(int i=0; i < solucao.routes.size(); i++){
-            arquivoSaida << endl;
             for (size_t j = 0; j < solucao.routes[i].size(); j++) {
                 arquivoSaida << solucao.routes[i][j] << " "; 
-            }
+            }arquivoSaida << endl;
         }   
     }
 

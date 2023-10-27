@@ -43,7 +43,7 @@ int main(void){
     //Input file
     string input = "inputs/";
     //Nome do arquivo
-    string instance = "n9k5_A.txt";
+    string instance = "n64k9_C.txt";
     input += instance;
 
     dados = read_file(input);
