@@ -40,16 +40,21 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
 
             if(capacidade_carro + d[viz_prox-1] <= Q){ // Verifica se a demanda do cliente não ultrapassa a capacidade do carro
     
+                //Adiciona o cliente na rota
                 rotas.push_back(viz_prox);
+                //Adiciona o custo da rota
                 bestSolution.totalCost += c[cliente_atual][viz_prox];
+                //Atualiza a capacidade do carro atual
                 capacidade_carro += d[viz_prox-1];
+                //Atualiza o cliente atual
                 cliente_atual = viz_prox;
+                //Atualiza flag de uso do carro
                 uso_carro = 1;
+                //Atualiza a demanda da rota
                 demanda_rota += d[viz_prox-1];
-
-
                 //remove o cliente visitado
                 list_clientes.erase(list_clientes.begin() + viz_idx);
+                //Atualiza var de clientes atendidos pelos carros
                 clintes_att++;
             
             }
@@ -58,25 +63,29 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
             }
         }
 
-        //Adiciona a demanda de cada rota no vetor
-        bestSolution.rota_dem.push_back(demanda_rota);
-
         // Adicionando o custo do carro
         if(uso_carro == 1){
             bestSolution.totalCost += r;
         }
 
-        
+        //Adiciona a demanda de cada rota no vetor
+        bestSolution.rota_dem.push_back(demanda_rota);        
+        //Adiciona o custo de retornar ao deposito
         bestSolution.totalCost += c[cliente_atual][0];
+        //Adiciona o deposito no final da rota
         rotas.push_back(0);
+        //Reseta o cliente atual
         cliente_atual = 0;
+        //Reseta a capacidade do carro
         capacidade_carro = 0;
+        //Adiciona a rota no vetor de rotas
         bestSolution.routes.push_back(rotas);
-
         // Limpa o vetor de rotas
         rotas.clear();
-        k--;
+        //Reseta a flag de uso do carro
         uso_carro = 0;
+        //Atualiza o numero de carros disponiveis
+        k--;
     }
 
     //adiciona a quantidade total de clientes atendidos na solução

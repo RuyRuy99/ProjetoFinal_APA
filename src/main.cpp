@@ -120,7 +120,7 @@ int main(void){
     doublecheck(result7, Q, L, r, d, p, c);
     */
 
-    /*
+    
     //relogio start
     auto start2 = chrono::steady_clock::now();
     cout << "EXECUTANDO O VND" << endl;
@@ -131,7 +131,7 @@ int main(void){
     cout << "TEMPO EXECUCAO VND: " << chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count() << " ms" << endl;
     printSolution(result6);
     doublecheck(result6, Q, L, r, d, p, c);
-    */
+    
 
     /*
     //relogio start
