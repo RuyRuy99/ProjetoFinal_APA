@@ -40,12 +40,14 @@ int main(void){
     vector<vector<int>> c;
 
     //Nome do arquivo
-    string instance = "n64k9_C.txt";
+    string instance = "n9k5_C.txt";
     dados = read_file(instance);
 
     // Extração dos dados
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
     
+    // -- CONSTRUTOR --
+
     // Relógio start
     auto start = chrono::steady_clock::now();
     // Heuristica construtiva
@@ -54,56 +56,10 @@ int main(void){
     auto stop = chrono::steady_clock::now();
     // Tempo de execução
     cout << "TEMPO EXECUCAO GULOSO: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << " ms" << endl;
-    printSolution(result);
+    //printSolution(result);
     
-    /*
-    int i = 3;
-    int j = 1;
-    int a = costReinsertion(result.totalCost, c, result.routes[0], i, j);
-    ReinsertionFunc(c, result.routes[0], i, j);
-    result.totalCost = a;
-    printSolution(result);
-    doublecheck(result, Q, L, r, d, p, c);
-    */
+    // -- VND --
 
-    /* 
-    cout << "EXECUTANDO N2" << endl;
-    Solution result2 = buscaExaustivaN2(result, c);
-    printSolution(result2);
-    doublecheck(result2, Q, L, r, d, p, c);
-    */
-    
-    /*
-    //busca exaustiva N1 para cada rota
-    cout << "EXECUTANDO N1" <<endl;
-    Solution result2 = buscaExaustivaN1(result, c);
-    printSolution(result2);
-    doublecheck(result2, Q, L, r, d, p, c);
-    */
-    
-
-    /*    
-    cout << "EXECUTANDO N3" << endl;
-    Solution result4 = buscaExaustivaN3(result, Q, L, d, p, c);
-    printSolution(result4);
-    doublecheck(result4, Q, L, r, d, p, c);
-    */
-
-    /*
-    cout << "EXECUTANDO N4" <<endl;
-    Solution result5 = buscaExaustivaN4(result, r, L, d, p, c);
-    printSolution(result5);
-    doublecheck(result5, Q, L, r, d, p, c);
-    */
-
-    /*
-    cout << "EXECUTANDO N5" <<endl;
-    Solution result7 = buscaExaustivaN5(result, Q, d, p, c);
-    printSolution(result7);
-    doublecheck(result7, Q, L, r, d, p, c);
-    */
-
-    
     // Relógio start
     auto start2 = chrono::steady_clock::now();
     cout << "EXECUTANDO O VND" << endl;
@@ -114,10 +70,10 @@ int main(void){
     cout << "TEMPO EXECUCAO VND: " << chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count() << " ms" << endl;
     //printSolution(result6);
     cout << "Custo total:" << result6.totalCost << endl;
-    doublecheck(result6, Q, L, r, d, p, c);
+    //doublecheck(result6, Q, L, r, d, p, c);
     
+    // -- ILS --
 
-    
     //relogio start
     auto start3 = chrono::steady_clock::now();
     cout << "EXECUTANDO O ILS" << endl;
@@ -126,28 +82,12 @@ int main(void){
     auto stop3 = chrono::steady_clock::now();
     //tempo de execução
     cout << "TEMPO EXECUCAO ILS: " << chrono::duration_cast<chrono::milliseconds>(stop3 - start3).count() << " ms" << endl;
-    printSolution(ils);
-    doublecheck(ils, Q, L, r, d, p, c);
+    //printSolution(ils);
+    cout << "Custo total:" << ils.totalCost << endl;
+    //doublecheck(ils, Q, L, r, d, p, c);
 
-    
-    cout << "OBRIGADO MEU DEUS !!!" << endl;
-    /*
-    Solution teste = pertubacao(result, Q, d, c);
-    cout << "\n" << endl;
-    printSolution(teste);
-    doublecheck(teste, Q, L, r, d, p, c);
-    */
+    // Arquivo de saída
     file_exit(instance, r, c, p, result);
 
-    /*
-    pertubacao(result, c);
-    int i = 1;
-    int j = 3;
-    cout << "Status check: " << checkReinsertion(Q, d, result.rota_dem, result.routes[0], 0, 2, i)<< endl;
-    costReinsertion(&result.totalCost, c, result.routes[0], result.routes[2], i, j); //eu posso tirar entre as posições 1 e 3
-    Reinsertion(c, result.routes[0], result.routes[2], i, j); //eu posso tirar entre as posições 1 e 3
-    cout << "\n" << endl;
-    printSolution(result);
-    */
     return 0;
 }
