@@ -65,7 +65,6 @@ int main(void){
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
     printSolution(result);
     //cout << "Tamanho de cada rota: ";
-    //print_array(&result.route_size[0], result.route_size.size());
     
     /*
     int i = 3;
@@ -121,13 +120,13 @@ int main(void){
     doublecheck(result6, Q, L, r, d, p, c);
     */
 
-    
+    cout << "EXECUTANDO O ILS" << endl;
     Solution ils = ILS(result, r, Q, L, d, p, c);
     printSolution(ils);
     doublecheck(ils, Q, L, r, d, p, c);
    
     
-    cout << "OI" << endl;
+    cout << "OBRIGADO MEU DEUS !!!" << endl;
     /*
     Solution teste = pertubacao(result, Q, d, c);
     cout << "\n" << endl;

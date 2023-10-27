@@ -25,7 +25,6 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
     int clintes_att = 0;
     int cliente_atual = 0;
     int uso_carro = 0;
-    int count_client = 0;
     vector<int> rotas;
 
     while(k > 0 and list_clientes.empty() == false){ // Verifica se ainda possui carro disponível e se a lista de clientes não está vazia
@@ -47,8 +46,7 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
                 cliente_atual = viz_prox;
                 uso_carro = 1;
                 demanda_rota += d[viz_prox-1];
-                //incrementa a quantidade de cliente atendidos Struct Solution
-                count_client++;  
+
 
                 //remove o cliente visitado
                 list_clientes.erase(list_clientes.begin() + viz_idx);
@@ -60,8 +58,6 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
             }
         }
 
-        // Adiciona o tamanho da rota no vetor
-        bestSolution.route_size.push_back(count_client);
         //Adiciona a demanda de cada rota no vetor
         bestSolution.rota_dem.push_back(demanda_rota);
 
@@ -71,7 +67,6 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
         }
 
         
-        count_client = 0; //Zera a quantidade de clientes para nova rota.    
         bestSolution.totalCost += c[cliente_atual][0];
         rotas.push_back(0);
         cliente_atual = 0;

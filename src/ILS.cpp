@@ -7,7 +7,6 @@
 #include "datatype.h"
 #include "vnd.h"
 #include "n1.h"
-#include "n2.h"
 #include "n3.h"
 #include "n4.h"
 #include "n5.h"
@@ -74,7 +73,7 @@ Solution ILS(Solution solucao_inicial, int r, int Q, int L, vector<int> d, vecto
 
     cout << "Inicio do ILS" << endl;
 
-    while(cont <= 150){ // Pode ser até 10 vezes sem achar uma melhor solução ou um tempo máximo
+    while(cont <= 10){ // Pode ser até 10 vezes sem achar uma melhor solução ou um tempo máximo
         
         cout << "cont: " << cont << endl;
         Solution S1 = pertubacao(S, Q, d, c); // Fazer perturbações na solução

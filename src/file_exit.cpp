@@ -17,10 +17,10 @@ int cost_terc(vector<int> p, vector<int> &terceirizados){
 }
 
 // Função para calcular o custo da rota
-int calcularCustoRota(vector<vector<int>> routes, vector<vector<int>> c, vector<int> &route_size){
+int calcularCustoRota(vector<vector<int>> routes, vector<vector<int>> c){
     
     int custo = 0;
-    for(int i=0; i < route_size.size(); i++){
+    for(int i=0; i < routes.size(); i++){
         for(int j = 0; j < routes[i].size()-1; j++){
             int origem = routes[i][j];
             int destino = routes[i][j + 1];
@@ -47,18 +47,18 @@ void file_exit(int r, vector<vector<int>> c, vector<int> p, Solution solucao){
     }else{ // Escrevendo no arquivo
 
         arquivoSaida << "" << solucao.totalCost << endl; // Valor total da solução
-        arquivoSaida << "" << calcularCustoRota(solucao.routes, c, solucao.route_size) << endl; // custo de roteamento
-        arquivoSaida << "" << solucao.route_size.size() * r << endl; // custo associado a utilização dos veículos
+        arquivoSaida << "" << calcularCustoRota(solucao.routes, c) << endl; // custo de roteamento
+        arquivoSaida << "" << solucao.routes.size() * r << endl; // custo associado a utilização dos veículos
         arquivoSaida << "" << cost_terc(p, solucao.terceirizados) << "\n" << endl; //custo de terceirização
 
         for (const int& elemento : solucao.terceirizados){
             arquivoSaida << elemento << " ";
         }arquivoSaida << "\n" << endl;
  
-        arquivoSaida << "" << solucao.route_size.size(); // Número de rotas
+        arquivoSaida << "" << solucao.routes.size() << endl; // Quantidade de rotas
 
         // Adicionar as rotas
-        for(int i=0; i < solucao.route_size.size(); i++){
+        for(int i=0; i < solucao.routes.size(); i++){
             arquivoSaida << endl;
             for (size_t j = 0; j < solucao.routes[i].size(); j++) {
                 arquivoSaida << solucao.routes[i][j] << " ";
