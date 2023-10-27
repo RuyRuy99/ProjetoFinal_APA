@@ -39,8 +39,8 @@ int main(void){
     // Matriz de custo de transporte entre os clientes
     vector<vector<int>> c;
 
-    //Nome do arquivo
-    string instance = "n9k5_C.txt";
+    // Nome do arquivo
+    string instance = "n64k9_A.txt";
     dados = read_file(instance);
 
     // Extração dos dados
@@ -56,7 +56,6 @@ int main(void){
     auto stop = chrono::steady_clock::now();
     // Tempo de execução
     cout << "TEMPO EXECUCAO GULOSO: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << " ms" << endl;
-    //printSolution(result);
     
     // -- VND --
 
@@ -74,17 +73,16 @@ int main(void){
     
     // -- ILS --
 
-    //relogio start
+    // Relógio start
     auto start3 = chrono::steady_clock::now();
     cout << "EXECUTANDO O ILS" << endl;
     Solution ils = ILS(result, r, Q, L, d, p, c);
-    //relogio stop
+    // Relógio stop
     auto stop3 = chrono::steady_clock::now();
-    //tempo de execução
+    // Tempo de execução
     cout << "TEMPO EXECUCAO ILS: " << chrono::duration_cast<chrono::milliseconds>(stop3 - start3).count() << " ms" << endl;
     //printSolution(ils);
     cout << "Custo total:" << ils.totalCost << endl;
-    //doublecheck(ils, Q, L, r, d, p, c);
 
     // Arquivo de saída
     file_exit(instance, r, c, p, result);

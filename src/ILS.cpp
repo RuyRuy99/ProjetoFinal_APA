@@ -14,12 +14,6 @@
 
 using namespace std;
 
-struct SwapResult { // Struct  para retornar o resultado do swap
-    int total_cost; // Custo total
-    int idx_cliente1; // Indice do cliente 1
-    int idx_cliente2; // Indice do cliente 2
-};
-
 Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> c){
 
     // Inicializa o gerador de números aleátorios com o relógio
@@ -35,18 +29,19 @@ Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> 
         for (int i = 0; i < 10; i++){
 
             // Escolhe uma rota aleatória
-            int r1 = rand() % num_rotas;
-            int r2 = rand() % num_rotas;
+            int r1 = rand() % (num_rotas - 1) + 0;
+            int r2 = rand() % (num_rotas - 1) + 0;
 
             // Escolhe um cliente aleátorio execeto o depósito
             int indice_cliente1 = rand() % (solucao.routes[r1].size() - 2) + 1; 
-            int indice_cliente2 = rand() % (solucao.routes[r2].size() - 2) + 1; 
+            int indice_cliente2 = rand() % (solucao.routes[r2].size() - 2) + 1;
             
             if(r1 != r2){
                 
                 int cliente_1 = solucao.routes[r1][indice_cliente1];
                 int cliente_2 = solucao.routes[r2][indice_cliente2];
-
+                
+                // Verifica se o swap é possível
                 bool verifica = checkSwap(Q, d, solucao.rota_dem, r1, r2, cliente_1, cliente_2);
 
                 if (verifica){
@@ -68,7 +63,7 @@ Solution ILS(Solution solucao_inicial, int r, int Q, int L, vector<int> d, vecto
     Solution S = vnd(S0, r, Q, L, d, p, c);
     int cont = 0;
 
-    while(cont <= 10){ // Pode ser até 10 vezes sem achar uma melhor solução ou um tempo máximo
+    while(cont <= 0){ // Pode ser até 10 vezes sem achar uma melhor solução ou um tempo máximo
         
         // Fazer perturbações na solução
         Solution S1 = pertubacao(S, Q, d, c);
