@@ -39,8 +39,8 @@ int main(void){
     // Matriz de custo de transporte entre os clientes
     vector<vector<int>> c;
 
-    // Nome do arquivo
-    string instance = "n64k9_A.txt";
+    //Nome do arquivo
+    string instance = "n120k7_C.txt";
     dados = read_file(instance);
 
     // Extração dos dados
@@ -54,35 +54,40 @@ int main(void){
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
     // Relógio stop
     auto stop = chrono::steady_clock::now();
-    // Tempo de execução
+    
+    //printSolution(result);
     cout << "TEMPO EXECUCAO GULOSO: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << " ms" << endl;
+    cout << "custo: " << result.totalCost << endl;
+    
     
     // -- VND --
-
+    
     // Relógio start
     auto start2 = chrono::steady_clock::now();
     cout << "EXECUTANDO O VND" << endl;
-    Solution result6 = vnd(result, r, Q, L, d, p, c);
+    Solution result_vnd = vnd(result, r, Q, L, d, p, c);
     // Relógio stop
     auto stop2 = chrono::steady_clock::now();
-    // Tempo de execução
+    //printSolution(result_vnd);
     cout << "TEMPO EXECUCAO VND: " << chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count() << " ms" << endl;
-    //printSolution(result6);
-    cout << "Custo total:" << result6.totalCost << endl;
-    //doublecheck(result6, Q, L, r, d, p, c);
+    cout << "custo: " << result_vnd.totalCost << endl;
     
-    // -- ILS --
 
-    // Relógio start
+    // -- ILS --
+    
+    //relogio start
     auto start3 = chrono::steady_clock::now();
-    cout << "EXECUTANDO O ILS" << endl;
-    Solution ils = ILS(result, r, Q, L, d, p, c);
-    // Relógio stop
+    Solution ils = ILS(result_vnd, r, Q, L, d, p, c);
+    //relogio stop
     auto stop3 = chrono::steady_clock::now();
-    // Tempo de execução
+    //tempo de execução
     cout << "TEMPO EXECUCAO ILS: " << chrono::duration_cast<chrono::milliseconds>(stop3 - start3).count() << " ms" << endl;
     //printSolution(ils);
     cout << "Custo total:" << ils.totalCost << endl;
+    //doublecheck(ils, Q, L, r, d, p, c);
+    
+
+
 
     // Arquivo de saída
     file_exit(instance, r, c, p, result);

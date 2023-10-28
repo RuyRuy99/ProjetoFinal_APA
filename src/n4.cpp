@@ -82,8 +82,8 @@ Solution buscaExaustivaN4(Solution initial_solution, int r, int L, vector<int> d
         // Atualiza o custo total da solução
         sol_vizinha.totalCost = min_custo_global;
         
-        // Verifica se a rota ficou vazia
-        if(sol_vizinha.routes[min_rota_index].size() == 0){
+        // Verifica se a demanda da rota é 0, se for, remove a rota
+        if(sol_vizinha.rota_dem[min_rota_index] == 0){
 
             // Remove o custo de um carro
             sol_vizinha.totalCost -= r;
