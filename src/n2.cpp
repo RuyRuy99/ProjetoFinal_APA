@@ -49,7 +49,7 @@ int costReinsertion(int total_cost, vector<vector<int>> c, vector<int> &rota, in
     }
 }
 
-Solution buscaExaustivaN2(Solution initial_solution, vector<vector<int>> c){
+Solution N2(Solution initial_solution, vector<vector<int>> c){
 
     //Inicializa a solução vizinha com a solução inicial
     Solution vizinha = initial_solution;

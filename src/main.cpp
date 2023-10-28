@@ -40,55 +40,33 @@ int main(void){
     vector<vector<int>> c;
 
     //Nome do arquivo
-    string instance = "n199k17_D.txt";
+    string instance = "n9k5_A.txt";
     dados = read_file(instance);
 
     // Extração dos dados
     extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
     
     // -- CONSTRUTOR --
-
-    // Relógio start
     auto start = chrono::steady_clock::now();
-    // Heuristica construtiva
     Solution result = buildSolution(n, k, r, Q, L, c, d, p);
-    // Relógio stop
     auto stop = chrono::steady_clock::now();
-    
-    //printSolution(result);
     cout << "\nTEMPO EXECUCAO GULOSO: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << " ms" << endl;
     cout << "CUSTO: " << result.totalCost << endl;
     
-    
     // -- VND --
-    
-    // Relógio start
     auto start2 = chrono::steady_clock::now();
-    //cout << "EXECUTANDO O VND" << endl;
     Solution result_vnd = vnd(result, r, Q, L, d, p, c);
-    // Relógio stop
     auto stop2 = chrono::steady_clock::now();
-    //printSolution(result_vnd);
     cout << "\nTEMPO EXECUCAO VND: " << chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count() << " ms" << endl;
     cout << "CUSTO: " << result_vnd.totalCost << endl;
-    
 
     // -- ILS --
-    
-    //relogio start
     auto start3 = chrono::steady_clock::now();
     Solution ils = ILS(result, r, Q, L, d, p, c);
-    //relogio stop
     auto stop3 = chrono::steady_clock::now();
-    //tempo de execução
     cout << "\nTEMPO EXECUCAO ILS: " << chrono::duration_cast<chrono::milliseconds>(stop3 - start3).count() << " ms" << endl;
-    //printSolution(ils);
     cout << "CUSTO: " << ils.totalCost << endl;
-    //doublecheck(ils, Q, L, r, d, p, c);
     
-
-
-
     // Arquivo de saída
     file_exit(instance, r, c, p, ils);
 

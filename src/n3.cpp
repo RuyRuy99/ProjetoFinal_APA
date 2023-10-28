@@ -52,7 +52,7 @@ void atualizaValores(vector<int> &v, int i, vector<int> &terc, int j, vector<int
     terc[j] = aux;
 }
 
-Solution buscaExaustivaN3(Solution initial_solution, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
+Solution N3(Solution initial_solution, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
 
     Solution sol_vizinha = initial_solution;
 

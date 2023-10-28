@@ -19,19 +19,19 @@ Solution best_neighbor(Solution vizinha , int r, int key, int Q, int L, vector<i
 
     switch (key){
         case 1:
-            return buscaExaustivaN1(vizinha, c);
+            return N1(vizinha, c);
 
         case 2:
-            return buscaExaustivaN2(vizinha, c);
+            return N2(vizinha, c);
 
         case 3:
-            return buscaExaustivaN5(vizinha, Q, d, p, c);
+            return N5(vizinha, Q, d, p, c);
 
         case 4:
-            return buscaExaustivaN3(vizinha, Q, L, d, p, c);
+            return N3(vizinha, Q, L, d, p, c);
         
         case 5:
-            return buscaExaustivaN4(vizinha, r, L, d, p, c);
+            return N4(vizinha, r, L, d, p, c);
         
         default:
             return vizinha;

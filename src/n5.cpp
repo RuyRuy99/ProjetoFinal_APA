@@ -75,7 +75,7 @@ void swapRoutes(vector<int> &rota_dem, vector<int> d, vector<int> &v1, vector<in
 }
 
 
-Solution buscaExaustivaN5(Solution initial_solution, int Q, vector<int> d, vector<int> p, vector<vector<int>> c){
+Solution N5(Solution initial_solution, int Q, vector<int> d, vector<int> p, vector<vector<int>> c){
 
     Solution sol_vizinha = initial_solution;
 
