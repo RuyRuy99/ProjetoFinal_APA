@@ -40,7 +40,7 @@ int main(void){
     vector<vector<int>> c;
 
     //Nome do arquivo
-    string instance = "n120k7_C.txt";
+    string instance = "n9k5_A.txt";
     dados = read_file(instance);
 
     // Extração dos dados
