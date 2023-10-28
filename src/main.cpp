@@ -40,7 +40,7 @@ int main(void){
     vector<vector<int>> c;
 
     //Nome do arquivo
-    string instance = "n9k5_A.txt";
+    string instance = "n199k17_B.txt";
     dados = read_file(instance);
 
     // Extração dos dados
@@ -56,41 +56,41 @@ int main(void){
     auto stop = chrono::steady_clock::now();
     
     //printSolution(result);
-    cout << "TEMPO EXECUCAO GULOSO: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << " ms" << endl;
-    cout << "custo: " << result.totalCost << endl;
+    cout << "\nTEMPO EXECUCAO GULOSO: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << " ms" << endl;
+    cout << "CUSTO: " << result.totalCost << endl;
     
     
     // -- VND --
     
     // Relógio start
     auto start2 = chrono::steady_clock::now();
-    cout << "EXECUTANDO O VND" << endl;
+    //cout << "EXECUTANDO O VND" << endl;
     Solution result_vnd = vnd(result, r, Q, L, d, p, c);
     // Relógio stop
     auto stop2 = chrono::steady_clock::now();
     //printSolution(result_vnd);
-    cout << "TEMPO EXECUCAO VND: " << chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count() << " ms" << endl;
-    cout << "custo: " << result_vnd.totalCost << endl;
+    cout << "\nTEMPO EXECUCAO VND: " << chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count() << " ms" << endl;
+    cout << "CUSTO: " << result_vnd.totalCost << endl;
     
 
     // -- ILS --
     
     //relogio start
     auto start3 = chrono::steady_clock::now();
-    Solution ils = ILS(result_vnd, r, Q, L, d, p, c);
+    Solution ils = ILS(result, r, Q, L, d, p, c);
     //relogio stop
     auto stop3 = chrono::steady_clock::now();
     //tempo de execução
-    cout << "TEMPO EXECUCAO ILS: " << chrono::duration_cast<chrono::milliseconds>(stop3 - start3).count() << " ms" << endl;
+    cout << "\nTEMPO EXECUCAO ILS: " << chrono::duration_cast<chrono::milliseconds>(stop3 - start3).count() << " ms" << endl;
     //printSolution(ils);
-    cout << "Custo total:" << ils.totalCost << endl;
+    cout << "CUSTO: " << ils.totalCost << endl;
     //doublecheck(ils, Q, L, r, d, p, c);
     
 
 
 
     // Arquivo de saída
-    file_exit(instance, r, c, p, result);
+    file_exit(instance, r, c, p, ils);
 
     return 0;
 }
