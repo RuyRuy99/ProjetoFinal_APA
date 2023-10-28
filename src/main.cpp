@@ -16,7 +16,6 @@
 #include "vnd.h"
 #include "ILS.h"
 #include "file_exit.h"
-#include "checksolution.h"
 
 
 using namespace std;
@@ -40,7 +39,7 @@ int main(void){
     vector<vector<int>> c;
 
     //Nome do arquivo
-    string instance = "n9k5_A.txt";
+    string instance = "n31k5_A.txt";
     dados = read_file(instance);
 
     // Extração dos dados

@@ -4,7 +4,6 @@
 #include <ctime>
 #include <cstdlib>
 #include "readfile.h"
-#include "checksolution.h"
 #include "datatype.h"
 #include "vnd.h"
 #include "n1.h"
