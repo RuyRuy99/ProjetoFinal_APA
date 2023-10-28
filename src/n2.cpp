@@ -65,9 +65,10 @@ Solution Reinsertion(Solution initial_solution, vector<vector<int>> c){
     //Faz a busca exaustiva em cada rota
     for (int k = 0; k < num_rotas; k++){
         //Verificando todas as possibilidades de reinserção na rota k
-        for (int i = 1; i < vizinha.routes[k].size()-1; i++){
-            for (int j = 1; j < vizinha.routes[k].size()-1; j++){
-                 //Calcula o custo da reinserção do cliente i na posição j da rota k
+        for (int i = 1; i < vizinha.routes[k].size()-1; i++){ //O(n)
+            for (int j = 1; j < vizinha.routes[k].size()-1; j++){ //O(n)
+                // O(n^2)
+                //Calcula o custo da reinserção do cliente i na posição j da rota k
                 int custo_aux = costReinsertion(vizinha.totalCost, c, vizinha.routes[k], i, j);
                 //Se o custo da reinserção for menor que o custo da solução atual, atualiza a solução vizinha
                 if(custo_aux < min_custo_global){

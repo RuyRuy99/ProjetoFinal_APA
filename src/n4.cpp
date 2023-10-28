@@ -36,10 +36,10 @@ void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_dema
     *rota_demanda = *rota_demanda - d[v[i]-1];
         
     // Adiciona o cliente i na lista de terceirizados
-    terc.push_back(v[i]);
+    terc.push_back(v[i]); //O(1)
 
     // Remove o cliente i da rota
-    v.erase(v.begin()+i);
+    v.erase(v.begin()+i); //O(n) remove and shift
 
     // Diminuir a variavel client_att pq eu tirei um cliente da rota, logo não atendi ele
     *clientes_atendidos -= 1;
@@ -59,8 +59,8 @@ Solution Remove(Solution initial_solution, int r, int L, vector<int> d, vector<i
     int num_rotas = sol_vizinha.routes.size();
 
     for (int k = 0; k < num_rotas; k++){  
-        for (int i = 1; i < sol_vizinha.routes[k].size()-1; i++){
-
+        for (int i = 1; i < sol_vizinha.routes[k].size()-1; i++){ //O(n)
+            // O(n)
             // Calcular o custo resultante de terceirizar o cliente
             int novo_custo = calculaTerc(sol_vizinha, sol_vizinha.routes[k], i, sol_vizinha.total_clientes, L, p, c);
 
@@ -82,15 +82,15 @@ Solution Remove(Solution initial_solution, int r, int L, vector<int> d, vector<i
         // Atualiza o custo total da solução
         sol_vizinha.totalCost = min_custo_global;
         
-        // Verifica se a demanda da rota é 0, se for, remove a rota
+        // Verifica se a demanda da rota é 0, se for, remove a rota (não há clientes)
         if(sol_vizinha.rota_dem[min_rota_index] == 0){
 
             // Remove o custo de um carro
             sol_vizinha.totalCost -= r;
             // Remove a rota vazia
-            sol_vizinha.routes.erase(sol_vizinha.routes.begin()+min_rota_index);
+            sol_vizinha.routes.erase(sol_vizinha.routes.begin()+min_rota_index); //O(n) remove and shift
             // Remove a demanda da rota vazia
-            sol_vizinha.rota_dem.erase(sol_vizinha.rota_dem.begin()+min_rota_index);
+            sol_vizinha.rota_dem.erase(sol_vizinha.rota_dem.begin()+min_rota_index); //O(n) remove and shift
         }
     }
 

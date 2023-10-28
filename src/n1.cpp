@@ -79,9 +79,9 @@ Solution SwapIntra(Solution initial_solution, vector<vector<int>> c){
 
     // Refazendo todo o laço
     for (int k = 0; k < num_rotas; k++){
-        for (int i = 1; i < vizinha.routes[k].size()-1; i++){
-            for (int j = i+1; j < vizinha.routes[k].size()-1; j++){ 
-
+        for (int i = 1; i < vizinha.routes[k].size()-1; i++){ // O(n)
+            for (int j = i+1; j < vizinha.routes[k].size()-1; j++){ // O(n)
+                //O(n^2)
                 int novo_custo = custoSwap(vizinha.totalCost, c, vizinha.routes[k], i, j);
 
                 // Se o custo novo for menor que o minimo global, atualiza o minimo global

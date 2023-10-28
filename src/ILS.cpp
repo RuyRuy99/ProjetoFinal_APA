@@ -23,7 +23,7 @@ Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> 
     //cout << "Numero de rotas: " << num_rotas << endl;
     int custo_inicial = solucao.totalCost;
 
-    for (int i = 0; i < 20; i++){ //Realiza 10 perturbações
+    for (int i = 0; i < 20; i++){ //Realiza 10 perturbações O(1)
 
         //10 SWAP entre rotas N5
 

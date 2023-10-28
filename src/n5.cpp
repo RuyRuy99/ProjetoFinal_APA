@@ -91,12 +91,13 @@ Solution SwapInter(Solution initial_solution, int Q, vector<int> d, vector<int> 
     //cout << "Tamanho de rotas: " << num_rotas <<endl;
 
     //Para cada par i e j de rotas
-    for (int rota_i = 0; rota_i < num_rotas; rota_i++){
-        for (int rota_j = rota_i + 1; rota_j < num_rotas; rota_j++){
+    for (int rota_i = 0; rota_i < num_rotas; rota_i++){ //O(k)
+        for (int rota_j = rota_i + 1; rota_j < num_rotas; rota_j++){ //O(k)
             //Para cada cliente i e j, nas rotas i e j
-            for(int idx_cliente_i = 1; idx_cliente_i < sol_vizinha.routes[rota_i].size() - 1; idx_cliente_i++){ //Para cada cliente i
-                for(int idx_cliente_j = 1; idx_cliente_j < sol_vizinha.routes[rota_j].size() - 1; idx_cliente_j++){ //Para cada cliente j
+            for(int idx_cliente_i = 1; idx_cliente_i < sol_vizinha.routes[rota_i].size() - 1; idx_cliente_i++){ //Para cada cliente i O(n)
+                for(int idx_cliente_j = 1; idx_cliente_j < sol_vizinha.routes[rota_j].size() - 1; idx_cliente_j++){ //Para cada cliente j O(n)
                     //Verifica se é possível fazer o swap
+                    //O(k^2 * n^2)
                     bool check = checkSwap(Q, d, sol_vizinha.rota_dem, rota_i, rota_j, sol_vizinha.routes[rota_i][idx_cliente_i], sol_vizinha.routes[rota_j][idx_cliente_j]);
                     
                     //Se for possível fazer o swap, calcula o custo do swap
