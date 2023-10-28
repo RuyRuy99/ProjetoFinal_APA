@@ -9,6 +9,6 @@ void swapRoutes(vector<int> &rota_dem, vector<int> d, vector<int> &v1, vector<in
 
 int CaculaCustoSwap(int total_cost, vector<vector<int>> c, vector<int> &rota1, vector<int> &rota2, int idx_cliente_i, int idx_cliente_j);
 
-Solution N5(Solution initial_solution, int Q, vector<int> d, vector<int> p, vector<vector<int>> c);
+Solution SwapInter(Solution initial_solution, int Q, vector<int> d, vector<int> p, vector<vector<int>> c);
 
 #endif

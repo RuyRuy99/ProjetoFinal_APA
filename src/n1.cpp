@@ -65,7 +65,7 @@ void swapInside(vector<int> &v, int i, int j){
 }
 
 
-Solution N1(Solution initial_solution, vector<vector<int>> c){
+Solution SwapIntra(Solution initial_solution, vector<vector<int>> c){
 
     Solution vizinha = initial_solution;
 

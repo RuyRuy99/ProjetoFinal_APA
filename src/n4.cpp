@@ -46,7 +46,7 @@ void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_dema
 }
 
 
-Solution N4(Solution initial_solution, int r, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
+Solution Remove(Solution initial_solution, int r, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
     
     // Inicia a solução vizinha
     Solution sol_vizinha = initial_solution;

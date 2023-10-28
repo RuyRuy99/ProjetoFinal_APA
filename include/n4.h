@@ -10,6 +10,6 @@ int calculaTerc(Solution solucao, vector<int> &v, int i, int clientes_atendidos,
 
 void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_demanda,vector<int> &terc, vector<int> d);
 
-Solution N4(Solution initial_solution, int r, int L, vector<int> d, vector<int> p, vector<vector<int>> c);
+Solution Remove(Solution initial_solution, int r, int L, vector<int> d, vector<int> p, vector<vector<int>> c);
 
 #endif

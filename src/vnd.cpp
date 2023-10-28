@@ -19,19 +19,19 @@ Solution best_neighbor(Solution vizinha , int r, int key, int Q, int L, vector<i
 
     switch (key){
         case 1:
-            return N1(vizinha, c);
+            return SwapIntra(vizinha, c);
 
         case 2:
-            return N2(vizinha, c);
+            return Reinsertion(vizinha, c);
 
         case 3:
-            return N5(vizinha, Q, d, p, c);
+            return SwapInter(vizinha, Q, d, p, c);
 
         case 4:
-            return N3(vizinha, Q, L, d, p, c);
+            return SwapTerc(vizinha, Q, L, d, p, c);
         
         case 5:
-            return N4(vizinha, r, L, d, p, c);
+            return Remove(vizinha, r, L, d, p, c);
         
         default:
             return vizinha;

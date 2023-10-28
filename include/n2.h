@@ -7,5 +7,5 @@ void ReinsertionFunc(vector<vector<int>> c, vector<int> &rota1, int i, int j);
 
 int costReinsertion(int total_cost, vector<vector<int>> c, vector<int> &rota, int i, int j);
 
-Solution N2(Solution initial_solution, vector<vector<int>> c);
+Solution Reinsertion(Solution initial_solution, vector<vector<int>> c);
 #endif

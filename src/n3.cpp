@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int melhora_rotas(Solution solucao, int k, vector<int> v, int i, vector<int> terc, int j, int Q ,int L, vector<int> d, vector<int> p, vector<vector<int>> c){
+int calcula_custo(Solution solucao, int k, vector<int> v, int i, vector<int> terc, int j, int Q ,int L, vector<int> d, vector<int> p, vector<vector<int>> c){
     
     int ant_i = v[i-1];
     int prox_i = v[i+1];
@@ -52,7 +52,7 @@ void atualizaValores(vector<int> &v, int i, vector<int> &terc, int j, vector<int
     terc[j] = aux;
 }
 
-Solution N3(Solution initial_solution, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
+Solution SwapTerc(Solution initial_solution, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
 
     Solution sol_vizinha = initial_solution;
 
@@ -71,7 +71,7 @@ Solution N3(Solution initial_solution, int Q, int L, vector<int> d, vector<int> 
             for (int j = 0; j < sol_vizinha.terceirizados.size(); j++){
                 
                 // Calcula o novo custo
-                int novo_custo = melhora_rotas(sol_vizinha, k, sol_vizinha.routes[k], i, sol_vizinha.terceirizados, j, Q, L, d, p, c);
+                int novo_custo = calcula_custo(sol_vizinha, k, sol_vizinha.routes[k], i, sol_vizinha.terceirizados, j, Q, L, d, p, c);
 
                 if (novo_custo < min_custo_global){
 
