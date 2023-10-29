@@ -7,7 +7,7 @@ using namespace std;
 
 vector<int> read_file(string file){
 
-    // path file
+    // Path file
     file = "Inputs/" + file;
 
     // Abrindo o arquivo

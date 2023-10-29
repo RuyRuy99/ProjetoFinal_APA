@@ -32,7 +32,7 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
 
         int capacidade_carro = 0;
         int demanda_rota = 0;
-        rotas.push_back(0); //O(1)
+        rotas.push_back(0); // O(1)
 
         // Verifica se a lista de clientes está vazia e o carro possui capacidade
         while(list_clientes.empty() == false && capacidade_carro <= Q){
@@ -45,7 +45,7 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
             if(capacidade_carro + d[viz_prox-1] <= Q){
     
                 // Adiciona o cliente na rota
-                rotas.push_back(viz_prox); //O(1)
+                rotas.push_back(viz_prox); // O(1)
                 // Adiciona o custo da rota
                 bestSolution.totalCost += c[cliente_atual][viz_prox];
                 // Atualiza a capacidade do carro atual
@@ -57,7 +57,7 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
                 // Atualiza a demanda da rota
                 demanda_rota += d[viz_prox-1];
                 // Remove o cliente visitado
-                list_clientes.erase(list_clientes.begin() + viz_idx); //O(n) remove and shift
+                list_clientes.erase(list_clientes.begin() + viz_idx); // O(n) remove and shift
                 // Atualiza var de clientes atendidos pelos carros
                 clintes_att++;
             
@@ -72,17 +72,17 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
         }
 
         // Adiciona a demanda de cada rota no vetor
-        bestSolution.rota_dem.push_back(demanda_rota);//O(1) just push a number in a vector 
+        bestSolution.rota_dem.push_back(demanda_rota);// O(1) just push a number in a vector 
         // Adiciona o custo de retornar ao deposito
         bestSolution.totalCost += c[cliente_atual][0];
         // Adiciona o deposito no final da rota
-        rotas.push_back(0); //O(1)
+        rotas.push_back(0); // O(1)
         // Reseta o cliente atual
         cliente_atual = 0;
         // Reseta a capacidade do carro
         capacidade_carro = 0;
         // Adiciona a rota no vetor de rotas
-        bestSolution.routes.push_back(rotas); //O(n) , n sendo o tamanho da rota, pois há uma cópia
+        bestSolution.routes.push_back(rotas); // O(n), n sendo o tamanho da rota, pois há uma cópia
         // Limpa o vetor de rotas
         rotas.clear(); //O(n) , destroi os n elementos da rota
         // Reseta a flag de uso do carro
@@ -96,7 +96,7 @@ Solution buildSolution(int n, int k, int r, int Q,  int L, vector<vector<int>> c
 
     // Percorre a lista de clientes não atendidos e dá push na solução em terceirizados
     for(int i=0; i<list_clientes.size(); i++){
-        bestSolution.terceirizados.push_back(list_clientes[i]); //O(1), mas roda n vezes, logo O(n)
+        bestSolution.terceirizados.push_back(list_clientes[i]); // O(1), mas roda n vezes, logo O(n)
     }
 
     //   -- TERCEIRIZAÇÃO --

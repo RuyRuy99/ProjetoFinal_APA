@@ -28,25 +28,24 @@ Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> 
         //10 SWAP entre rotas N5
 
         // Escolhe uma rota aleatória
-
         int r1 = rand() % num_rotas;
         int r2 = rand() % num_rotas;
 
-        int indice_cliente1 = rand() % (solucao.routes[r1].size() - 2) + 1; // Escolhe um cliente aleátorio execto o depósito
-        int indice_cliente2 = rand() % (solucao.routes[r2].size() - 2) + 1; // Escolhe um cliente aleátorio execto o depósito
+        // Escolhe um cliente aleátorio execto o depósito
+        int indice_cliente1 = rand() % (solucao.routes[r1].size() - 2) + 1; 
+        int indice_cliente2 = rand() % (solucao.routes[r2].size() - 2) + 1; 
         
         if(r1 != r2){
+
             int cliente_1 = solucao.routes[r1][indice_cliente1];
             int cliente_2 = solucao.routes[r2][indice_cliente2];
 
             bool verifica = checkSwap(Q, d, solucao.rota_dem, r1, r2, cliente_1, cliente_2);
 
             if (verifica){
-            //Faz o swap Inter rotas
-            //cria a structswapresult
+                //Faz o swap Inter rotas
                 solucao.totalCost = CaculaCustoSwap(solucao.totalCost, c, solucao.routes[r1], solucao.routes[r2], indice_cliente1, indice_cliente2);
                 swapRoutes(solucao.rota_dem, d, solucao.routes[r1], solucao.routes[r2], indice_cliente1, indice_cliente2, r1, r2);
-                //cout << "Depois de perturbar: "<< solucao.totalCost <<endl;
             }
         }
     }
@@ -55,20 +54,28 @@ Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> 
 
 Solution ILS(Solution solucao_inicial, int r, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
 
+    // Solução inicial do guloso
     Solution S0  = solucao_inicial;
-    Solution S = vnd(S0, r, Q, L, d, p, c); // Busca local
+    // Busca local
+    Solution S = vnd(S0, r, Q, L, d, p, c);
     int cont = 0;
 
-    while(cont <= 10){ // Pode ser até 10 vezes sem achar uma melhor solução ou um tempo máximo
-        
-        Solution S1 = pertubacao(S, Q, d, c); // Fazer perturbações na solução
-        Solution S2 = vnd(S1, r, Q, L, d, p, c); // Busca local
+    // Até 10 vezes sem achar uma melhor solução
+    while(cont <= 10){
+
+        // Fazer perturba a solução
+        Solution S1 = pertubacao(S, Q, d, c);
+        // Busca local
+        Solution S2 = vnd(S1, r, Q, L, d, p, c);
+
         // Critério de Aceitação
         if(S2.totalCost < S.totalCost){
             S = S2;
+
         }else{
             cont++;
         }
     }
+    
     return S;
 }

@@ -57,7 +57,7 @@ Solution vnd(Solution initial_solution, int r, int Q, int L, vector<int> d, vect
             current_solution = sol_vizinha;
             k = 1;
         
-        }else{ // Proxima estrutura de vizinhança
+        }else{ // Próxima estrutura de vizinhança
         
             k += 1;
         }

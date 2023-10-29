@@ -17,9 +17,7 @@
 #include "ILS.h"
 #include "file_exit.h"
 
-
 using namespace std;
-
 
 int main(void){
 

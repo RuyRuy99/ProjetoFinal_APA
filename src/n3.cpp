@@ -66,9 +66,9 @@ Solution SwapTerc(Solution initial_solution, int Q, int L, vector<int> d, vector
     // Para cada rota
     for (int k = 0; k < num_rotas; k++){
         // Para cada elemento da rota
-        for (int i = 1; i < sol_vizinha.routes[k].size()-1; i++){ //O(n)
+        for (int i = 1; i < sol_vizinha.routes[k].size()-1; i++){ // O(n)
             // Percorrer os terceirizados
-            for (int j = 0; j < sol_vizinha.terceirizados.size(); j++){ //O(t), sendo t o número de terceirizados
+            for (int j = 0; j < sol_vizinha.terceirizados.size(); j++){ // O(t), sendo t o número de terceirizados
 
                 //O(n*t)
                 
