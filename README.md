@@ -20,12 +20,15 @@ A ideia é fazer troca entre clientes numa mesma rota, evitando problemas de lim
 
  - N2: Reinsertion
 
+Consiste em realizar a remoção de um cliente em uma rota, e reinserí-lo na mesma rota em uma posição melhor, buscando minimizar o custo da solução
+
  - N3: SwapTerc
 
  - N4: Remove
 
  - N5: SwapInter
 
+Consiste em realizar a troca entre um cliente $r_k$
  A ideia é trocar clientes entre duas rotas, de maneira a não ultrapassar a capacidade do carro disponível em cada rota. É a tentativa de que na redestribuição dos custos de ligação possa encontrar um menor valor, impactando no custo final da solução.
 
 > BUSCA EXAUSTIVA
