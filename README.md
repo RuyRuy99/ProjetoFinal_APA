@@ -24,12 +24,15 @@ Consiste em realizar a remoção de um cliente em uma rota, e reinserí-lo na me
 
  - N3: SwapTerc
 
+A ideia é fazer a troca de um cliente em uma rota com um cliente que está na terceirização, respeitando a capacidade do veículo.
+
  - N4: Remove
 
- - N5: SwapInter
+A ideia é remover um cliente que está sendo terceirizado e realocá-lo em uma das rotas de entrega
 
-Consiste em realizar a troca entre um cliente $r_k$
- A ideia é trocar clientes entre duas rotas, de maneira a não ultrapassar a capacidade do carro disponível em cada rota. É a tentativa de que na redestribuição dos custos de ligação possa encontrar um menor valor, impactando no custo final da solução.
+ - N5: SwapInter
+ 
+A ideia é trocar clientes entre duas rotas, de maneira a não ultrapassar a capacidade do carro disponível em cada rota. É a tentativa de que na redestribuição dos custos de ligação possa encontrar um menor valor, impactando no custo final da solução.
 
 > BUSCA EXAUSTIVA
 
