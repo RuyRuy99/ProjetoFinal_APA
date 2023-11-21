@@ -1,71 +1,68 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <string>
-#include <chrono>
-#include "readfile.h"
+#include <vector>
 #include "datatype.h"
-#include "construtor.h"
-#include "guloso.h"
-#include "showsolution.h"
+#include "data_loader.h"
+#include "build_solution.h"
+#include "check_solution.h"
+#include "vnd.h"
+#include "ils.h"
 #include "n1.h"
 #include "n2.h"
 #include "n3.h"
 #include "n4.h"
 #include "n5.h"
-#include "vnd.h"
-#include "ILS.h"
-#include "file_exit.h"
+#include "save_solution.h"
+
 
 using namespace std;
 
 int main(void){
 
-    int n;// Número de clientes
-    int k; // Quantidade de veículos
-    int Q; // Quantidade máxima de cada veículo
-    int L; // Quantidade mínima de entrega sem terceirização
-    int r; // Custo de cada veículo
+    //Nome da instancia
+    string nome_arquivo = "n199k17_A";
 
-    // Vetores para armazenar os dados
-    vector<int> dados;
-    // Vetor de demandas dos clientes
-    vector<int> d;
-    // Vetor de custo de terceirização dos clientes
-    vector<int> p;
-    // Matriz de custo de transporte entre os clientes
-    vector<vector<int>> c;
-
-    //Nome do arquivo
-    string instance = "n64k9_A.txt";
-    dados = read_file(instance);
-
-    // Extração dos dados
-    extrai_dados(&dados[0], &n,&k,&Q,&L,&r ,d, p, c);
+    //Carrega os dados da instancia
+    InstanceData* dados_instancia = readAndExtractData(nome_arquivo);
     
-    // -- CONSTRUTOR --
-    auto start = chrono::steady_clock::now();
-    Solution result = buildSolution(n, k, r, Q, L, c, d, p);
-    auto stop = chrono::steady_clock::now();
-    cout << "\nTEMPO EXECUCAO GULOSO: " << chrono::duration_cast<chrono::milliseconds>(stop - start).count() << " ms" << endl;
-    cout << "CUSTO: " << result.totalCost << endl;
-    
-    // -- VND --
-    auto start2 = chrono::steady_clock::now();
-    Solution result_vnd = vnd(result, r, Q, L, d, p, c);
-    auto stop2 = chrono::steady_clock::now();
-    cout << "\nTEMPO EXECUCAO VND: " << chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count() << " ms" << endl;
-    cout << "CUSTO: " << result_vnd.totalCost << endl;
 
-    // -- ILS --
-    auto start3 = chrono::steady_clock::now();
-    Solution ils = ILS(result, r, Q, L, d, p, c);
-    auto stop3 = chrono::steady_clock::now();
-    cout << "\nTEMPO EXECUCAO ILS: " << chrono::duration_cast<chrono::milliseconds>(stop3 - start3).count() << " ms" << endl;
-    cout << "CUSTO: " << ils.totalCost << endl;
+    //Constrói a solução inicial
+    Solution* solucao_inicial = buildSolution(dados_instancia);
     
-    // Arquivo de saída
-    file_exit(instance, r, c, p, ils);
+    //Imprime a solução inicial
+    //cout << "Solucao Inicial: \n";
+    //Não é preciso desreferenciar mais pois a função agora espera um ponteiro como parâmetro...
+    //doubleCheck(dados_instancia, solucao_inicial);
+
+
+    //VND
+    Solution* afterVND = vnd(solucao_inicial, dados_instancia);
+    //cout << "Solucao depois do VND: \n";
+    //doubleCheck(dados_instancia, afterVND);
+    cout << "Custo da solucao depois do VND: " << afterVND->totalCost << "\n";
+
+    
+
+    //ILS
+    Solution* afterILS = ils(afterVND, dados_instancia);
+    cout << "Solucao depois do ILS: \n";
+    doubleCheck(dados_instancia, afterILS);
+    cout << "Custo da solucao depois do ILS: " << afterILS->totalCost << "\n";
+
+
+    
+    //escreve no arquivo de saída
+    saveSolutionToFile(nome_arquivo, afterILS, dados_instancia);
+
+    //Libera a memória alocada
+    delete dados_instancia;
+    delete afterILS;
+    //delete solucao_inicial; problema de double-free
+    //delete afterVND; problema de double-free
+    
+    
+    cout << "Tudo certo!\n";
 
     return 0;
 }

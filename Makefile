@@ -4,8 +4,8 @@ TARGET = programa
 # Compilador
 CXX = g++
 
-# Flags de compilação
-CXXFLAGS = -Iinclude
+# Flags de compilação (Incluindo a flag de otimização -O3)
+CXXFLAGS = -Iinclude -O3
 
 # Arquivos fonte
 SOURCES = $(wildcard src/*.cpp)
@@ -14,7 +14,7 @@ SOURCES = $(wildcard src/*.cpp)
 OBJECTS = $(addprefix build/, $(notdir $(SOURCES:.cpp=.o)))
 
 all: $(TARGET)
-#Compilação
+# Compilação
 $(TARGET): $(OBJECTS)
 	$(CXX) $(OBJECTS) -o build/$(TARGET)
 

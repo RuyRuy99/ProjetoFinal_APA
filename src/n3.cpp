@@ -1,97 +1,88 @@
 #include <iostream>
 #include <vector>
-#include "construtor.h"
 #include "datatype.h"
-#include "readfile.h"
 
 using namespace std;
 
-int calcula_custo(Solution solucao, int k, vector<int> v, int i, vector<int> terc, int j, int Q ,int L, vector<int> d, vector<int> p, vector<vector<int>> c){
-    
-    int ant_i = v[i-1];
-    int prox_i = v[i+1];
 
-    int novo_custo = solucao.totalCost;
+void reinsertionFunc(const vector<vector<int>>& c, vector<int>& rota1, int i, int j) {
+    // Define o cliente que será removido
+    int cliente = rota1[i];
+    // Remove o cliente na posição i da rota
+    rota1.erase(rota1.begin() + i);
+    // Insere o cliente na posição j da rota
+    rota1.insert(rota1.begin() + j, cliente);
+}
 
-    // Verifica se a lista de terceirizados não está vazia
-    if (solucao.terceirizados.size() > 0){
-        
-        // Custo das arestas que ligam i
-        int custo_manter_i = c[ant_i][v[i]] + c[v[i]][prox_i];
+int costReinsertion(int total_cost, const vector<vector<int>>& c, const vector<int>& rota, int i, int j) {
+    // Define o cliente que será reinserido
+    int cliente = rota[i];
+    // Variável para armazenar o custo das adições
+    int adicoes = 0;
+    // Variável para armazenar o custo das remoções
+    int remocoes = 0;
 
-        // Custo das arestas de ligação do terceirizado
-        int custo_manter_terc = c[ant_i][terc[j]] + c[terc[j]][prox_i];
-
-        // Verifica se cabe colocar o terceirizado no carro
-        if ((solucao.rota_dem[k] - d[v[i]-1]) + d[terc[j]-1] <= Q){
-
-            // Remove o custo do cliente i do custo total
-            novo_custo -= custo_manter_i;
-            // Adicionar o custo de terceirizar esse cliente
-            novo_custo += p[v[i]-1];
-
-            // Adiciona o custo do terceirizado no custo total
-            novo_custo += custo_manter_terc;
-            // Remover o custo de terceirizar esse cliente
-            novo_custo -= p[terc[j]-1];
-        }
-
+    // Se i == j, não precisa fazer reinserção
+    if (i == j) {
+        return total_cost;
+    } else if (i - j == -1) { // Se i - j == -1, inserindo uma posição à frente de onde foi removido
+        // No caso especial de distância 1, as posições i e j têm aresta entre elas, que não precisa ser removida
+        remocoes = c[rota[j]][rota[j + 1]] + c[rota[i]][rota[i - 1]];
+        adicoes = c[rota[i - 1]][rota[j]] + c[rota[i]][rota[j + 1]];
+        total_cost = total_cost - remocoes + adicoes;
+        return total_cost;
+    } else if (i - j == 1) { // Se i - j == 1, inserindo uma posição atrás de onde foi removido
+        // No caso especial de distância 1, as posições i e j têm aresta entre elas, que não precisa ser removida
+        remocoes = c[rota[i]][rota[i + 1]] + c[rota[j]][rota[j - 1]];
+        adicoes = c[rota[j - 1]][rota[i]] + c[rota[j]][rota[i + 1]];
+        total_cost = total_cost - remocoes + adicoes;
+        return total_cost;
+    } else if (i > j) { // Se i > j, inserindo mais de uma posição atrás de onde foi removido
+        remocoes = c[rota[i - 1]][rota[i]] + c[rota[i]][rota[i + 1]] + c[rota[j - 1]][rota[j]];
+        adicoes = c[rota[i - 1]][rota[i + 1]] + c[rota[j]][rota[i]] + c[rota[i]][rota[j - 1]];
+        total_cost = total_cost - remocoes + adicoes;
+        return total_cost;
+    } else { // Se i < j, inserindo mais de uma posição à frente de onde foi removido
+        remocoes = c[rota[i - 1]][rota[i]] + c[rota[i]][rota[i + 1]] + c[rota[j]][rota[j + 1]];
+        adicoes = c[rota[i - 1]][rota[i + 1]] + c[rota[j]][rota[i]] + c[rota[i]][rota[j + 1]];
+        total_cost = total_cost - remocoes + adicoes;
+        return total_cost;
     }
-
-    return novo_custo;
 }
 
-void atualizaValores(vector<int> &v, int i, vector<int> &terc, int j, vector<int> d, int *rota_demanda){
-    
-    // Atualiza o valor da demanda da rota
-    *rota_demanda = *rota_demanda - d[v[i]-1] + d[terc[j]-1];
-
-    // Swap dos vetores
-    int aux = v[i];
-    v[i] = terc[j];
-    terc[j] = aux;
-}
-
-Solution SwapTerc(Solution initial_solution, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
-
-    Solution sol_vizinha = initial_solution;
-
-    int min_custo_global = initial_solution.totalCost;
+Solution* Reinsertion(Solution* current_solution, InstanceData* dados){
+    // Variáveis auxiliares
+    int min_custo_global = current_solution->totalCost;
     int min_rota_idx = -1;
-    int min_i = -1;
-    int min_j = -1;
+    int min_i_global = -1;
+    int min_j_global = -1;
 
-    int num_rotas = sol_vizinha.routes.size();
+    int num_rotas = current_solution->routes.size();
 
-    // Para cada rota
-    for (int k = 0; k < num_rotas; k++){
-        // Para cada elemento da rota
-        for (int i = 1; i < sol_vizinha.routes[k].size()-1; i++){ // O(n)
-            // Percorrer os terceirizados
-            for (int j = 0; j < sol_vizinha.terceirizados.size(); j++){ // O(t), sendo t o número de terceirizados
-
-                //O(n*t)
-                
-                // Calcula o novo custo
-                int novo_custo = calcula_custo(sol_vizinha, k, sol_vizinha.routes[k], i, sol_vizinha.terceirizados, j, Q, L, d, p, c);
-
-                if (novo_custo < min_custo_global){
-
-                    min_custo_global = novo_custo;
+    // Faz a busca exaustiva em cada rota
+    for (int k = 0; k < num_rotas; k++) {
+        // Verificando todas as possibilidades de reinserção na rota k
+        for (int i = 1; i < current_solution->routes[k].size() - 1; i++) {
+            for (int j = 1; j < current_solution->routes[k].size() - 1; j++) {
+                // Calcula o custo da reinserção do cliente i na posição j da rota k
+                int custo_aux = costReinsertion(current_solution->totalCost, dados->c, current_solution->routes[k], i, j);
+                // Se o custo da reinserção for menor que o custo da solução atual, atualiza a solução vizinha
+                if (custo_aux < min_custo_global) {
+                    // Atualiza as variáveis auxiliares, salvando os índices da melhor reinserção
+                    min_custo_global = custo_aux;
                     min_rota_idx = k;
-                    min_i = i;
-                    min_j = j;
+                    min_i_global = i;
+                    min_j_global = j;
                 }
             }
         }
     }
 
-    // Se o custo global foi alterado, atualiza os valores
-    if (min_rota_idx != -1){
-
-        atualizaValores(sol_vizinha.routes[min_rota_idx], min_i, sol_vizinha.terceirizados, min_j, d, &sol_vizinha.rota_dem[min_rota_idx]);
-        sol_vizinha.totalCost = min_custo_global;
+    // Se encontrou uma solução melhor, faz a reinserção
+    if (min_rota_idx != -1 && min_i_global != -1 && min_j_global != -1) {
+        reinsertionFunc(dados->c, current_solution->routes[min_rota_idx], min_i_global, min_j_global);
+        current_solution->totalCost = min_custo_global;
     }
 
-    return sol_vizinha;
+    return current_solution;
 }

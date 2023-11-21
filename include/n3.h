@@ -1,15 +1,16 @@
 #ifndef N3_H_
 #define N3_H_
+
+#include <iostream>
 #include <vector>
 #include "datatype.h"
 
 using namespace std;
 
+void reinsertionFunc(const vector<vector<int>>& c, vector<int>& rota1, int i, int j);
 
-int calcula_custo(Solution solucao, int k, vector<int> v, int i, vector<int> terc, int j, int Q ,int L, vector<int> d, vector<int> p, vector<vector<int>> c);
+int costReinsertion(int total_cost, const vector<vector<int>>& c, const vector<int>& rota, int i, int j);
 
-void atualizaValores(vector<int> &v, int i, vector<int> &terc, int j, vector<int> d, int *rota_demanda);
-
-Solution SwapTerc(Solution initial_solution, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c);
+Solution* Reinsertion(Solution* current_solution, InstanceData* dados);
 
 #endif

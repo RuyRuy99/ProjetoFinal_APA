@@ -1,67 +1,69 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
-#include "datatype.h"
-#include "construtor.h"
-#include "showsolution.h"
 #include "n1.h"
 #include "n2.h"
 #include "n3.h"
 #include "n4.h"
 #include "n5.h"
+#include "datatype.h"
 
-// Comparar o custo da solution1 com o custo da solution2 e retornar quem é melhor (true)
-bool is_better(Solution solution1, Solution solution2){
-    return solution1.totalCost > solution2.totalCost;
-}
-    
-// Retorna a melhor solução vizinha para uma das estruturas de vizinhança k
-Solution best_neighbor(Solution vizinha , int r, int key, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
+using namespace std;
 
-    switch (key){
+
+Solution* best_neighbor(const Solution* current_solution, InstanceData* instanceData, int key) {
+    // Cria uma nova solução baseada na atual
+    Solution* neighbor_solution = new Solution(*current_solution);
+
+    // Aplica a modificação na solução vizinha
+    switch (key) {
         case 1:
-            return SwapIntra(vizinha, c);
-
+            //cout << "N1" << endl;
+            SwapIntra(neighbor_solution, instanceData);  // Altera a solução vizinha
+            break;
         case 2:
-            return Reinsertion(vizinha, c);
-
+            //cout << "N2" << endl;
+            SwapInter(neighbor_solution, instanceData);  // Altera a solução vizinha
+            break;
         case 3:
-            return SwapInter(vizinha, Q, d, p, c);
-
+            //cout << "N3" << endl;
+            Reinsertion(neighbor_solution, instanceData);  // Altera a solução vizinha
+            break;
         case 4:
-            return SwapTerc(vizinha, Q, L, d, p, c);
-        
+            //cout << "N4" << endl;
+            SwapTerc(neighbor_solution, instanceData);  // Altera a solução vizinha
+            break;
         case 5:
-            return Remove(vizinha, r, L, d, p, c);
-        
+            //cout << "N5" << endl;
+            remove(neighbor_solution, instanceData);  // Altera a solução vizinha
+            break;
         default:
-            return vizinha;
+            // Caso não haja uma chave correspondente, retorna a cópia não alterada
+            break;
     }
+
+    // Retorna o ponteiro para a nova solução (já alterada ou não)
+    return neighbor_solution;
 }
 
-Solution vnd(Solution initial_solution, int r, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
 
-    // Contador de vizinhança
+Solution* vnd(Solution* current_solution, InstanceData* instanceData) {
     int k = 1;
-
-    // Quantidade de estruturas de vizinhança
     int k_max = 5;
-    
-    Solution current_solution = initial_solution;
 
-    while(k <= k_max){
+    while (k <= k_max){
+        Solution* neighbor_solution = best_neighbor(current_solution, instanceData, k);
 
-        Solution sol_vizinha = best_neighbor(current_solution, r, k, Q, L, d, p, c);
-
-        // Verifica se a solução vizinha é melhor que a solução atual
-        if (is_better(current_solution, sol_vizinha) == true){
-            current_solution = sol_vizinha;
-            k = 1;
-        
-        }else{ // Próxima estrutura de vizinhança
-        
-            k += 1;
+        // Se a solução vizinha for melhor, atualiza a solução atual
+        if (neighbor_solution->totalCost < current_solution->totalCost) {
+            delete current_solution;  // Libera a memória da solução atual(memória do OBJETO)
+            current_solution = neighbor_solution;  // Atualiza a solução atual para a solução vizinha
+            k = 1;  // Reinicia o processo com a primeira estrutura de vizinhança
+        } else {
+            delete neighbor_solution;  // Libera a memória da solução vizinha
+            k++;  // Avança para a próxima estrutura de vizinhança
         }
     }
 
-    return current_solution;
+    return current_solution;  // Retorna o ponteiro para a solução atualizada
 }

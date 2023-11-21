@@ -3,9 +3,12 @@
 
 using namespace std;
 
-void ReinsertionFunc(vector<vector<int>> c, vector<int> &rota1, int i, int j);
+bool checkSwap(int Q, const vector<int> &d, vector<int> &rota_dem, int rota_i, int rota_j, int cliente1, int cliente2);
 
-int costReinsertion(int total_cost, vector<vector<int>> c, vector<int> &rota, int i, int j);
+int CaculaCustoSwap(int total_cost, const vector<vector<int>> &c, const vector<int> &rota1, const vector<int> &rota2, int idx_cliente_i, int idx_cliente_j);
 
-Solution Reinsertion(Solution initial_solution, vector<vector<int>> c);
+void swapRoutes(vector<int> &rota_dem, vector<int> &d, vector<int> &v1, vector<int> &v2, int idx_cliente1, int idx_cliente2, int rota_i, int rota_j);
+
+Solution* SwapInter(Solution* current_solution, InstanceData* dados);
+
 #endif

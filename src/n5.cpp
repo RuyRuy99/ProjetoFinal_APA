@@ -1,134 +1,86 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
-#include <random>
-#include "construtor.h"
 #include "datatype.h"
-#include <chrono>
 
 using namespace std;
 
-bool checkSwap(int Q, vector<int> d, vector<int> &rota_dem, int rota_i, int rota_j, int cliente1, int cliente2){
-    
-    // Define a demanda dos clientes
-    int d1 = d[cliente1 - 1]; 
-    int d2 = d[cliente2 - 1]; 
+int calculaTerc(Solution* solucao, vector<int>& v, int i, InstanceData* dados) {
+    int ant_i = v[i - 1];
+    int prox_i = v[i + 1];
+    int novo_custo = solucao->totalCost;
 
-    // Define a demanda atualizada das rotas i e j
-    int d_att_i = rota_dem[rota_i] - d1 + d2; 
-    int d_att_j = rota_dem[rota_j] - d2 + d1;
+    // Verifica se pode terceirizar alguém
+    if (solucao->total_clientes - 1 >= dados->L) {
+        int custo_manter_i = dados->c[ant_i][v[i]] + dados->c[v[i]][prox_i];
 
-    // Avalia qual cliente tem demanda maior e se é possível atender a essa demanda
-    if (d1 > d2){
+        // Remove o custo de manter o cliente i do custo total
+        novo_custo -= custo_manter_i;
 
-        if (d_att_j > Q) {
-            return false;
-        }
-    
-    }else if (d2 > d1){
+        // Adiciona o custo da aresta de ligação
+        novo_custo += dados->c[ant_i][prox_i];
 
-        if (d_att_i > Q) {
-            return false;
-        }
+        // Adiciona o custo de terceirizar o cliente i no custo total
+        novo_custo += dados->p[v[i] - 1];
     }
 
-    return true;
+    return novo_custo;
 }
 
+void updateRoutes(vector<int>& v, int i, Solution* solucao, InstanceData* dados) {
+    // Remove a demanda do cliente que vai ser terceirizado
+    solucao->rota_dem[i] -= dados->d[v[i] - 1];
+        
+    // Adiciona o cliente i na lista de terceirizados
+    solucao->terceirizados.push_back(v[i]); // O(1)
 
-int CaculaCustoSwap(int total_cost, vector<vector<int>> c, vector<int> &rota1, vector<int> &rota2, int idx_cliente_i, int idx_cliente_j){
-    
-    // Define os clientes
-    int cliente_i = rota1[idx_cliente_i];
-    int cliente_j = rota2[idx_cliente_j];
-    
-    // Define os clientes adjacentes ao cliente i
-    int ant_cliente_i = rota1[idx_cliente_i - 1];
-    int prox_cliente_i = rota1[idx_cliente_i + 1];
-    
-    // Define os clientes adjacentes ao cliente j
-    int ant_cliente_j = rota2[idx_cliente_j - 1];
-    int prox_cliente_j = rota2[idx_cliente_j + 1];
+    // Remove o cliente i da rota
+    v.erase(v.begin() + i); // O(n) remove and shift
 
-    // Calcula o custo das remoções e das adições
-    int remocoes = c[ant_cliente_i][cliente_i] + c[cliente_i][prox_cliente_i] + c[ant_cliente_j][cliente_j] + c[cliente_j][prox_cliente_j];
-    int adicoes = c[ant_cliente_i][cliente_j] + c[cliente_j][prox_cliente_i] + c[ant_cliente_j][cliente_i] + c[cliente_i][prox_cliente_j];
-    
-    // Retorna o custo total atualizado
-    return total_cost - remocoes + adicoes;
+    // Diminuir a variável total_clientes porque tiramos um cliente da rota, logo não atendemos ele
+    solucao->total_clientes -= 1;
 }
 
+Solution* remove(Solution* current_solution, InstanceData* dados) {
+    // Inicializar variáveis para rastrear a melhor operação de terceirização.
+    int min_custo_global = current_solution->totalCost;
+    int min_rota_index = -1;
+    int min_i = -1;
 
-void swapRoutes(vector<int> &rota_dem, vector<int> d, vector<int> &v1, vector<int> &v2, int idx_cliente1, int idx_cliente2, int rota_i, int rota_j){
+    int num_rotas = current_solution->routes.size();
 
-    // Define os clientes e as variáveis auxiliares
-    int cliente1 = v1[idx_cliente1];
-    int cliente2 = v2[idx_cliente2];
-    int aux1 = cliente1;
-    int aux2 = cliente2;
+    for (int k = 0; k < num_rotas; k++) {
+        for (int i = 1; i < current_solution->routes[k].size() - 1; i++) { // O(n)
+            // O(n)
+            // Calcular o custo resultante de terceirizar o cliente
+            int novo_custo = calculaTerc(current_solution, current_solution->routes[k], i, dados);
 
-    // Atualiza os clientes nas rotas
-    v1[idx_cliente1] = aux2;
-    v2[idx_cliente2] = aux1;
-
-    // Atualiza a demanda total da rota i
-    rota_dem[rota_i] -= d[cliente1-1];
-    rota_dem[rota_i] += d[cliente2-1];
-
-    // Atualiza a demanda total da rota j
-    rota_dem[rota_j] -= d[cliente2-1];
-    rota_dem[rota_j] += d[cliente1-1];
-
-}
-
-Solution SwapInter(Solution initial_solution, int Q, vector<int> d, vector<int> p, vector<vector<int>> c){
-
-    Solution sol_vizinha = initial_solution;
-
-    // Variáveis auxiliares
-    int best_cliente_i = -1;
-    int best_cliente_j = -1;
-    int rota_i_idx = -1;
-    int rota_j_idx = -1;
-    int min_custo_global = initial_solution.totalCost;
-    int initial_cost = initial_solution.totalCost;
-
-    int num_rotas = sol_vizinha.routes.size();
-
-    // Para cada par i e j de rotas
-    for (int rota_i = 0; rota_i < num_rotas; rota_i++){ // O(k)
-        for (int rota_j = rota_i + 1; rota_j < num_rotas; rota_j++){ // O(k)
-            // Para cada cliente i e j, nas rotas i e j
-            for(int idx_cliente_i = 1; idx_cliente_i < sol_vizinha.routes[rota_i].size() - 1; idx_cliente_i++){ //Para cada cliente i O(n)
-                for(int idx_cliente_j = 1; idx_cliente_j < sol_vizinha.routes[rota_j].size() - 1; idx_cliente_j++){ //Para cada cliente j O(n)
-                    // Verifica se é possível fazer o swap
-                    // O(k^2 * n^2)
-                    bool check = checkSwap(Q, d, sol_vizinha.rota_dem, rota_i, rota_j, sol_vizinha.routes[rota_i][idx_cliente_i], sol_vizinha.routes[rota_j][idx_cliente_j]);
-                    
-                    // Se for possível fazer o swap, calcula o custo do swap
-                    if(check){
-                        // Calcula o custo do swap
-                        int custo_aux = CaculaCustoSwap(initial_cost, c, sol_vizinha.routes[rota_i], sol_vizinha.routes[rota_j], idx_cliente_i, idx_cliente_j);
-                        
-                        // Atualiza o melhor custo, e salva os indices do melhor swap
-                        if(custo_aux < min_custo_global){
-                            best_cliente_i = idx_cliente_i;
-                            best_cliente_j = idx_cliente_j;
-                            rota_i_idx = rota_i;
-                            rota_j_idx = rota_j;
-                            min_custo_global = custo_aux;
-                        }
-                    }
-                }
+            // Se esta terceirização reduz o custo, consideramos ela como a melhor até agora.
+            if (novo_custo < min_custo_global) {
+                min_custo_global = novo_custo;
+                min_rota_index = k;
+                min_i = i;
             }
         }
     }
 
-    // Se encontrou uma solução melhor, faz o swap
-    if (best_cliente_i != -1 && best_cliente_j != -1){
+    // Depois de verificar todos os clientes em todas as rotas, se uma terceirização benéfica foi encontrada, realizamos essa única operação.
+    if (min_rota_index != -1) {
+        updateRoutes(current_solution->routes[min_rota_index], min_i, current_solution, dados);
+        // Atualiza o custo total da solução
+        current_solution->totalCost = min_custo_global;
 
-        swapRoutes(sol_vizinha.rota_dem, d, sol_vizinha.routes[rota_i_idx], sol_vizinha.routes[rota_j_idx], best_cliente_i, best_cliente_j, rota_i_idx, rota_j_idx);
-        sol_vizinha.totalCost = min_custo_global;
+        // Verifica se a demanda da rota é 0, se for, remove a rota (não há clientes)
+        if (current_solution->rota_dem[min_rota_index] == 0) {
+            // Remove o custo de um carro
+            current_solution->totalCost -= dados->r;
+            // Remove a rota vazia
+            current_solution->routes.erase(current_solution->routes.begin() + min_rota_index); // O(n) remove and shift
+            // Remove a demanda da rota vazia
+            current_solution->rota_dem.erase(current_solution->rota_dem.begin() + min_rota_index); // O(n) remove and shift
+        }
     }
-    
-    return sol_vizinha; 
+
+    return current_solution;
 }
+

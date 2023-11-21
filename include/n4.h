@@ -1,15 +1,17 @@
-#ifndef N4_H
-#define N4_H
+#ifndef N4_H_
+#define N4_H_
 
 #include <iostream>
+#include <fstream>
 #include <vector>
+#include "datatype.h"
 
 using namespace std;
 
-int calculaTerc(Solution solucao, vector<int> &v, int i, int clientes_atendidos, int L, vector<int> p, vector<vector<int>> c);
+int calcula_custo(const Solution* solucao, int k, const vector<int>& v, int i, const vector<int>& terc, int j, const InstanceData* dados);
 
-void updateRoutes(vector<int> &v, int i, int *clientes_atendidos, int *rota_demanda,vector<int> &terc, vector<int> d);
+void atualizaValores(vector<int>& v, int i, vector<int>& terc, int j, vector<int>& d, int* rota_demanda);
 
-Solution Remove(Solution initial_solution, int r, int L, vector<int> d, vector<int> p, vector<vector<int>> c);
+Solution* SwapTerc(Solution* current_solution, InstanceData* dados);
 
 #endif

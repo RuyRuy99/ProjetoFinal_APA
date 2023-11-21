@@ -1,13 +1,15 @@
 #ifndef ILS_H
 #define ILS_H
+
 #include <iostream>
 #include <vector>
 #include "datatype.h"
+#include "vnd.h"
 
 using namespace std;
 
-Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> c);
+Solution* perturbacao(const Solution* solucao, InstanceData* dados);
 
-Solution ILS(Solution solucao_inicial, int r, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c);
+Solution* ils(Solution* initial_solution, InstanceData* dados);
 
 #endif

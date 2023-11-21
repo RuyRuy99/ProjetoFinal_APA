@@ -1,14 +1,18 @@
 #ifndef N5_H_
 #define N5_H_
 
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include "datatype.h"
+
 using namespace std;
 
-bool checkSwap(int Q, vector<int> d, vector<int> &rota_dem, int rota_i, int rota_j, int cliente1, int cliente2);
 
-void swapRoutes(vector<int> &rota_dem, vector<int> d, vector<int> &v1, vector<int> &v2, int idx_cliente1, int idx_cliente2, int rota_i, int rota_j);
+int calculaTerc(Solution* solucao, vector<int>& v, int i, InstanceData* dados);
 
-int CaculaCustoSwap(int total_cost, vector<vector<int>> c, vector<int> &rota1, vector<int> &rota2, int idx_cliente_i, int idx_cliente_j);
+void updateRoutes(vector<int>& v, int i, Solution* solucao, InstanceData* dados);
 
-Solution SwapInter(Solution initial_solution, int Q, vector<int> d, vector<int> p, vector<vector<int>> c);
+Solution* remove(Solution* current_solution, InstanceData* dados);
 
 #endif

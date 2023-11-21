@@ -2,80 +2,66 @@
 #include <vector>
 #include <random>
 #include <ctime>
-#include <cstdlib>
-#include "readfile.h"
 #include "datatype.h"
 #include "vnd.h"
 #include "n1.h"
-#include "n3.h"
-#include "n4.h"
-#include "n5.h"
-#include "showsolution.h"
+#include "n2.h"
+#include "check_solution.h"
 
 using namespace std;
 
-Solution pertubacao(Solution solucao, int Q, vector<int> d, vector<vector<int>> c){
+Solution* perturbacao(const Solution* solucao, InstanceData* dados) {
+    Solution* new_solution = new Solution(*solucao);  // Cria uma cópia da original
 
-    // Inicializa o gerador de números aleátorios com o relógio
-    srand((unsigned) time(0));
-    
-    int num_rotas = solucao.routes.size(); //Colocar na struct a quantidade de rotas
-    //cout << "Numero de rotas: " << num_rotas << endl;
-    int custo_inicial = solucao.totalCost;
+    int num_rotas = new_solution->routes.size();
 
-    for (int i = 0; i < 20; i++){ //Realiza 10 perturbações O(1)
-
-        //10 SWAP entre rotas N5
-
-        // Escolhe uma rota aleatória
-        int r1 = rand() % num_rotas;
-        int r2 = rand() % num_rotas;
-
-        // Escolhe um cliente aleátorio execto o depósito
-        int indice_cliente1 = rand() % (solucao.routes[r1].size() - 2) + 1; 
-        int indice_cliente2 = rand() % (solucao.routes[r2].size() - 2) + 1; 
+    for (int i = 0; i < 100; i++) {
+        int rota_idx = rand() % num_rotas;
         
-        if(r1 != r2){
+        // Certifica que a rota tem pelo menos 2 clientes (excluindo o depósito)
+        if (new_solution->routes[rota_idx].size() > 2) {
+            int indice_cliente1 = rand() % (new_solution->routes[rota_idx].size() - 2) + 1; 
+            int indice_cliente2 = rand() % (new_solution->routes[rota_idx].size() - 2) + 1;
 
-            int cliente_1 = solucao.routes[r1][indice_cliente1];
-            int cliente_2 = solucao.routes[r2][indice_cliente2];
-
-            bool verifica = checkSwap(Q, d, solucao.rota_dem, r1, r2, cliente_1, cliente_2);
-
-            if (verifica){
-                //Faz o swap Inter rotas
-                solucao.totalCost = CaculaCustoSwap(solucao.totalCost, c, solucao.routes[r1], solucao.routes[r2], indice_cliente1, indice_cliente2);
-                swapRoutes(solucao.rota_dem, d, solucao.routes[r1], solucao.routes[r2], indice_cliente1, indice_cliente2, r1, r2);
+            // Certifica que não são o mesmo cliente
+            while (indice_cliente1 == indice_cliente2) {
+                indice_cliente2 = rand() % (new_solution->routes[rota_idx].size() - 2) + 1;
             }
+            //cout << "Rota: " << rota_idx << " Cliente 1: " << indice_cliente1 << " Cliente 2: " << indice_cliente2 << endl;
+            // Recalcula o custo e faz o swap, pois se fizer o swap primeiro, vai dar bug
+            new_solution->totalCost = custoSwap(new_solution->totalCost, dados->c, new_solution->routes[rota_idx], indice_cliente1, indice_cliente2);
+            swapInside(new_solution->routes[rota_idx], indice_cliente1, indice_cliente2);
+            
         }
     }
-    return solucao;
+
+    return new_solution;  // Retorna a nova solução perturbada
 }
 
-Solution ILS(Solution solucao_inicial, int r, int Q, int L, vector<int> d, vector<int> p, vector<vector<int>> c){
 
-    // Solução inicial do guloso
-    Solution S0  = solucao_inicial;
-    // Busca local
-    Solution S = vnd(S0, r, Q, L, d, p, c);
+
+Solution* ils(Solution* initial_solution, InstanceData* dados) {
+
+    int semente = time(NULL);  // Pega o tempo atual como semente
+    srand(semente);  // Inicializa a semente do gerador de números aleatórios
+    cout << "Semente: " << semente << endl;
+
+    Solution* S = vnd(initial_solution, dados);  // Aplica VND na solução inicial
     int cont = 0;
 
-    // Até 10 vezes sem achar uma melhor solução
-    while(cont <= 10){
+    while(cont <= 1000) {
+        
+        Solution* S1 = vnd(perturbacao(S, dados), dados); //Combina vnd e perturbação
 
-        // Fazer perturba a solução
-        Solution S1 = pertubacao(S, Q, d, c);
-        // Busca local
-        Solution S2 = vnd(S1, r, Q, L, d, p, c);
-
-        // Critério de Aceitação
-        if(S2.totalCost < S.totalCost){
-            S = S2;
-
-        }else{
-            cont++;
+        if (S1->totalCost < S->totalCost) {
+            delete S;  // Libera a memória da solução atual
+            S = S1;    // Atualiza S para ser a solução S1
+        }
+        else{
+            delete S1; // Libera a memória da solução S1, já que não foi melhor
+            cont++;    // Incrementa o contador
         }
     }
-    
-    return S;
+    cout << "FIM DO ILS" << endl;
+    return S;  // Retorna a melhor solução encontrada
 }
